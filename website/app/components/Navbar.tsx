@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Menu, X, Activity } from "lucide-react";
+import type { Session } from "next-auth";
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -11,7 +13,7 @@ const navLinks = [
   { label: "About", href: "#about" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ session }: { session: Session | null }) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -43,18 +45,37 @@ export default function Navbar() {
 
           {/* Desktop CTAs */}
           <div className="hidden md:flex items-center gap-3">
-            <a
-              href="#waitlist"
-              className="text-sm font-medium text-slate-600 hover:text-blue-700 transition-colors"
-            >
-              Sign In
-            </a>
-            <a
-              href="#waitlist"
-              className="inline-flex items-center px-4 py-2 rounded-lg bg-blue-700 text-white text-sm font-semibold hover:bg-blue-800 transition-colors shadow-sm"
-            >
-              Get Early Access
-            </a>
+            {session ? (
+              <>
+                <Link
+                  href="/app/dashboard"
+                  className="text-sm font-medium text-slate-600 hover:text-blue-700 transition-colors"
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  href="/api/auth/signout"
+                  className="inline-flex items-center px-4 py-2 rounded-lg bg-blue-700 text-white text-sm font-semibold hover:bg-blue-800 transition-colors shadow-sm"
+                >
+                  Log out
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/login"
+                  className="text-sm font-medium text-slate-600 hover:text-blue-700 transition-colors"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  href="/register"
+                  className="inline-flex items-center px-4 py-2 rounded-lg bg-blue-700 text-white text-sm font-semibold hover:bg-blue-800 transition-colors shadow-sm"
+                >
+                  Get Early Access
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile hamburger */}
@@ -81,13 +102,32 @@ export default function Navbar() {
               </a>
             ))}
             <div className="pt-2 flex flex-col gap-2">
-              <a
-                href="#waitlist"
-                className="w-full text-center px-4 py-2 rounded-lg bg-blue-700 text-white text-sm font-semibold hover:bg-blue-800 transition-colors"
-                onClick={() => setMobileOpen(false)}
-              >
-                Get Early Access
-              </a>
+              {session ? (
+                <>
+                  <Link
+                    href="/app/dashboard"
+                    className="w-full text-center px-4 py-2 rounded-lg border border-slate-200 text-slate-700 text-sm font-semibold hover:bg-slate-50"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    href="/api/auth/signout"
+                    className="w-full text-center px-4 py-2 rounded-lg bg-blue-700 text-white text-sm font-semibold hover:bg-blue-800 transition-colors"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Log out
+                  </Link>
+                </>
+              ) : (
+                <Link
+                  href="/register"
+                  className="w-full text-center px-4 py-2 rounded-lg bg-blue-700 text-white text-sm font-semibold hover:bg-blue-800 transition-colors"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  Get Early Access
+                </Link>
+              )}
             </div>
           </div>
         )}

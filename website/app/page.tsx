@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
@@ -8,10 +9,11 @@ import FAQ from "./components/FAQ";
 import Waitlist from "./components/Waitlist";
 import Footer from "./components/Footer";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
   return (
     <main>
-      <Navbar />
+      <Navbar session={session} />
       <Hero />
       <Features />
       <Modules />
