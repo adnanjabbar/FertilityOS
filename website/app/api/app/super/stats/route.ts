@@ -5,6 +5,7 @@ import {
   tenants,
   users,
   invitations,
+  patients,
 } from "@/db/schema";
 import { eq, sql, desc, isNull, ne } from "drizzle-orm";
 
@@ -87,7 +88,12 @@ export async function GET() {
       .orderBy(desc(invitations.createdAt))
       .limit(50);
 
-    const patientsCount = 0;
+    const [patientsCountRow] = await db
+      .select({ count: sql<number>`count(*)::int` })
+      .from(patients)
+      .innerJoin(tenants, eq(patients.tenantId, tenants.id))
+      .where(ne(tenants.slug, systemTenantSlug));
+    const patientsCount = patientsCountRow?.count ?? 0;
     const ivfCyclesCount = 0;
 
     return NextResponse.json({
@@ -106,7 +112,7 @@ export async function GET() {
       })),
       pendingInvitations,
       modules: {
-        patientManagement: "planned",
+        patientManagement: "active",
         scheduling: "planned",
         emr: "planned",
         ivfLab: "planned",

@@ -33,6 +33,12 @@ export default async function AppLayout({
                 >
                   Dashboard
                 </Link>
+                <Link
+                  href="/app/patients"
+                  className="text-sm font-medium text-slate-600 hover:text-blue-700"
+                >
+                  Patients
+                </Link>
                 {session.user.roleSlug === "admin" && (
                   <Link
                     href="/app/team"

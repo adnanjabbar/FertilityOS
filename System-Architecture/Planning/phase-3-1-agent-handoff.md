@@ -90,8 +90,8 @@ Agents 2 and 3 can run in parallel after Agent 1 is merged. Ensure migration `00
 
 ## Done criteria (Phase 3.1)
 
-- [ ] Patients table exists; migration run in dev and documented for prod.
-- [ ] GET/POST/GET-one/PATCH patients APIs work with tenant isolation.
-- [ ] `/app/patients` lists patients with search; "Add patient" creates a patient.
-- [ ] `/app/patients/[id]` shows patient and allows edit.
-- [ ] "Patients" link in app layout; appropriate roles can access.
+- [x] Patients table exists; migration run in dev and documented for prod.
+- [x] GET/POST/GET-one/PATCH patients APIs work with tenant isolation.
+- [x] `/app/patients` lists patients with search; "Add patient" creates a patient.
+- [x] `/app/patients/[id]` shows patient and allows edit.
+- [x] "Patients" link in app layout; appropriate roles can access.

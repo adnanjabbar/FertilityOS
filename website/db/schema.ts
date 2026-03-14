@@ -74,3 +74,30 @@ export const invitations = pgTable("invitations", {
   invitedById: uuid("invited_by_id").references(() => users.id, { onDelete: "set null" }),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
+
+export const patients = pgTable(
+  "patients",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    tenantId: uuid("tenant_id")
+      .notNull()
+      .references(() => tenants.id, { onDelete: "cascade" }),
+    firstName: varchar("first_name", { length: 255 }).notNull(),
+    lastName: varchar("last_name", { length: 255 }).notNull(),
+    dateOfBirth: timestamp("date_of_birth", { withTimezone: true }),
+    email: varchar("email", { length: 255 }),
+    phone: varchar("phone", { length: 64 }),
+    address: text("address"),
+    city: varchar("city", { length: 128 }),
+    state: varchar("state", { length: 128 }),
+    country: varchar("country", { length: 2 }),
+    postalCode: varchar("postal_code", { length: 32 }),
+    gender: varchar("gender", { length: 32 }),
+    notes: text("notes"),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    uniqueIndex("patients_tenant_id_idx").on(table.tenantId),
+  ]
+);

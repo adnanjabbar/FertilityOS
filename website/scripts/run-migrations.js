@@ -29,6 +29,7 @@ if (!DATABASE_URL) {
 const migrations = [
   "0000_phase2_tenants_users_roles.sql",
   "0001_invitations.sql",
+  "0002_patients.sql",
   "0003_super_admin.sql",
 ];
 
