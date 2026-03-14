@@ -21,6 +21,8 @@ export const roleSlugEnum = pgEnum("role_slug", [
   "super_admin",
 ]);
 
+export const donorTypeEnum = pgEnum("donor_type", ["egg", "sperm", "embryo"]);
+
 export const MODULE_SLUGS = [
   "patientManagement",
   "scheduling",
