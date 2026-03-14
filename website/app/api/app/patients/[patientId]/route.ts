@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { patients } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
+import { logAudit, getClientIp } from "@/lib/audit";
 
 const updatePatientSchema = z.object({
   firstName: z.string().min(1).max(255).optional(),
@@ -111,6 +112,16 @@ export async function PATCH(
   if (!updated) {
     return NextResponse.json({ error: "Patient not found" }, { status: 404 });
   }
+
+  await logAudit({
+    tenantId: session.user.tenantId,
+    userId: session.user.id,
+    action: "patient.update",
+    entityType: "patient",
+    entityId: patientId,
+    details: { firstName: updated.firstName, lastName: updated.lastName },
+    ipAddress: getClientIp(request),
+  });
 
   return NextResponse.json(updated);
 }

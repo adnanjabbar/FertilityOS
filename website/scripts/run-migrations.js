@@ -42,6 +42,10 @@ const migrations = [
   "0012_patient_portal_and_video.sql",
   "0013_api_keys.sql",
   "0014_referral_codes.sql",
+  "0015_tenant_default_currency.sql",
+  "0016_donors.sql",
+  "0017_audit_logs.sql",
+  "0018_surrogacy_cases.sql",
 ];
 
 async function main() {

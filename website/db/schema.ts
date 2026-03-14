@@ -42,6 +42,7 @@ export const tenants = pgTable("tenants", {
   specialty: varchar("specialty", { length: 255 }),
   licenseInfo: text("license_info"),
   enabledModules: text("enabled_modules"),
+  defaultCurrency: varchar("default_currency", { length: 3 }).notNull().default("USD"),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 });
@@ -341,4 +342,74 @@ export const apiKeys = pgTable(
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   },
   (table) => [index("api_keys_tenant_idx").on(table.tenantId)]
+);
+
+export const auditLogs = pgTable(
+  "audit_logs",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    tenantId: uuid("tenant_id")
+      .notNull()
+      .references(() => tenants.id, { onDelete: "cascade" }),
+    userId: uuid("user_id").references(() => users.id, { onDelete: "set null" }),
+    action: varchar("action", { length: 128 }).notNull(),
+    entityType: varchar("entity_type", { length: 64 }).notNull(),
+    entityId: uuid("entity_id"),
+    details: text("details"),
+    ipAddress: varchar("ip_address", { length: 45 }),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    index("audit_logs_tenant_created_idx").on(table.tenantId, table.createdAt),
+    index("audit_logs_tenant_action_idx").on(table.tenantId, table.action),
+    index("audit_logs_tenant_entity_idx").on(table.tenantId, table.entityType),
+  ]
+);
+
+export const donors = pgTable(
+  "donors",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    tenantId: uuid("tenant_id")
+      .notNull()
+      .references(() => tenants.id, { onDelete: "cascade" }),
+    type: donorTypeEnum("type").notNull(),
+    donorCode: varchar("donor_code", { length: 64 }).notNull(),
+    firstName: varchar("first_name", { length: 255 }),
+    lastName: varchar("last_name", { length: 255 }),
+    dateOfBirth: timestamp("date_of_birth", { withTimezone: true }),
+    bloodType: varchar("blood_type", { length: 16 }),
+    notes: text("notes"),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    uniqueIndex("donors_tenant_code_idx").on(table.tenantId, table.donorCode),
+  ]
+);
+
+export const surrogacyCases = pgTable(
+  "surrogacy_cases",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    tenantId: uuid("tenant_id")
+      .notNull()
+      .references(() => tenants.id, { onDelete: "cascade" }),
+    caseNumber: varchar("case_number", { length: 64 }).notNull(),
+    intendedParentPatientId: uuid("intended_parent_patient_id")
+      .notNull()
+      .references(() => patients.id, { onDelete: "cascade" }),
+    surrogateName: varchar("surrogate_name", { length: 255 }).notNull(),
+    surrogateContact: text("surrogate_contact"),
+    status: varchar("status", { length: 32 }).notNull().default("matching"),
+    startDate: timestamp("start_date", { withTimezone: true }),
+    dueDate: timestamp("due_date", { withTimezone: true }),
+    notes: text("notes"),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    uniqueIndex("surrogacy_cases_tenant_case_number_idx").on(table.tenantId, table.caseNumber),
+    index("surrogacy_cases_tenant_idx").on(table.tenantId),
+  ]
 );

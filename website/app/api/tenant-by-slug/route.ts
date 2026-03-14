@@ -16,7 +16,7 @@ export async function GET(request: Request) {
   }
 
   const [tenant] = await db
-    .select({ id: tenants.id, name: tenants.name, slug: tenants.slug })
+    .select({ id: tenants.id, name: tenants.name, slug: tenants.slug, defaultCurrency: tenants.defaultCurrency })
     .from(tenants)
     .where(eq(tenants.slug, slug))
     .limit(1);

@@ -5,6 +5,7 @@ import { invitations, users } from "@/db/schema";
 import { eq, and, isNull, desc } from "drizzle-orm";
 import { z } from "zod";
 import { randomBytes } from "crypto";
+import { logAudit, getClientIp } from "@/lib/audit";
 
 const createSchema = z.object({
   email: z.string().email(),
@@ -111,6 +112,16 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
+
+  await logAudit({
+    tenantId: session.user.tenantId,
+    userId: session.user.id,
+    action: "user.invite",
+    entityType: "invitation",
+    entityId: inv.id,
+    details: { email: inv.email, roleSlug: inv.roleSlug },
+    ipAddress: getClientIp(request),
+  });
 
   const baseUrl =
     process.env.NEXTAUTH_URL ||

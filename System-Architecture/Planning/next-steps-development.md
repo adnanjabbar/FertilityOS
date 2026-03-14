@@ -47,6 +47,8 @@ _ (and optionally 1h) before appointment. Use Resend, SendGrid, or nodemailer; s
 
 - Donor management, surrogacy, LIS/LIMS integration, mobile apps, multi-language, HL7 FHIR (see `product-roadmap.md`).
 
+**Phase 4 & 5 (first batch) completed:** Patient portal, reports, telemedicine, inventory, API keys, i18n, referrals, compliance. See `phase-4-handoff.md`, `phase-5-handoff.md`. Next batch: see `phase-6-handoff.md`.
+
 ---
 
 ## Implementation notes

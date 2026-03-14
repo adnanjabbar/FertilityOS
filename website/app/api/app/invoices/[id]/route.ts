@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { db } from "@/db";
-import { invoices, invoiceLines, patients } from "@/db/schema";
+import { invoices, invoiceLines, patients, tenants } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 
@@ -65,12 +65,22 @@ export async function GET(
     return NextResponse.json({ error: "Invoice not found" }, { status: 404 });
   }
 
+  const [tenantRow] = await db
+    .select({ defaultCurrency: tenants.defaultCurrency })
+    .from(tenants)
+    .where(eq(tenants.id, session.user.tenantId))
+    .limit(1);
+
   const lines = await db
     .select()
     .from(invoiceLines)
     .where(eq(invoiceLines.invoiceId, id));
 
-  return NextResponse.json({ ...inv, lines });
+  return NextResponse.json({
+    ...inv,
+    lines,
+    defaultCurrency: tenantRow?.defaultCurrency ?? "USD",
+  });
 }
 
 export async function PATCH(

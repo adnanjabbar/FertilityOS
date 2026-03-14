@@ -93,13 +93,18 @@ export default async function AppLayout({
                     {t("billing")}
                   </Link>
                 )}
+                {(session.user.roleSlug === "admin" || session.user.roleSlug === "embryologist" || session.user.roleSlug === "lab_tech") && (
+                  <Link href="/app/donors" className="text-sm font-medium text-slate-600 hover:text-blue-700">{t("donors")}</Link>
+                )}
                 {session.user.roleSlug === "admin" && (
                   <>
+                    <Link href="/app/surrogacy" className="text-sm font-medium text-slate-600 hover:text-blue-700">{t("surrogacy")}</Link>
                     <Link href="/app/inventory" className="text-sm font-medium text-slate-600 hover:text-blue-700">{t("inventory")}</Link>
                     <Link href="/app/referrals" className="text-sm font-medium text-slate-600 hover:text-blue-700">{t("referrals")}</Link>
                     <Link href="/app/team" className="text-sm font-medium text-slate-600 hover:text-blue-700">{t("team")}</Link>
                     <Link href="/app/developers" className="text-sm font-medium text-slate-600 hover:text-blue-700">{t("developers")}</Link>
                     <Link href="/app/compliance" className="text-sm font-medium text-slate-600 hover:text-blue-700">{t("compliance")}</Link>
+                    <Link href="/app/audit-logs" className="text-sm font-medium text-slate-600 hover:text-blue-700">{t("auditLog")}</Link>
                   </>
                 )}
                 {session.user.roleSlug === "super_admin" && (

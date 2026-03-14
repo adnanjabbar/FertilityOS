@@ -29,8 +29,16 @@ function formatDate(s: string | null) {
   return new Date(s).toLocaleString(undefined, { dateStyle: "medium" });
 }
 
+function formatCurrencyAmount(amount: string, currency: string | undefined, defaultCurrency: string): string {
+  const cur = (currency || defaultCurrency || "USD").trim() || "USD";
+  const num = parseFloat(String(amount).replace(/,/g, "")) || 0;
+  const formatted = num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return `${cur} ${formatted}`;
+}
+
 export default function InvoicesClient() {
   const [list, setList] = useState<InvoiceRow[]>([]);
+  const [defaultCurrency, setDefaultCurrency] = useState<string>("USD");
   const [patients, setPatients] = useState<PatientOption[]>([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState("");
@@ -56,7 +64,11 @@ export default function InvoicesClient() {
     try {
       const params = statusFilter ? `?status=${encodeURIComponent(statusFilter)}` : "";
       const res = await fetch(`/api/app/invoices${params}`);
-      if (res.ok) setList(await res.json());
+      if (res.ok) {
+        const data = await res.json();
+        setList(Array.isArray(data) ? data : data.invoices ?? []);
+        setDefaultCurrency(data.defaultCurrency ?? "USD");
+      }
     } finally {
       setLoading(false);
     }
@@ -250,7 +262,7 @@ export default function InvoicesClient() {
                     </Link>
                   </td>
                   <td className="px-4 py-3 text-slate-600">{inv.patientFirstName} {inv.patientLastName}</td>
-                  <td className="px-4 py-3 text-slate-900">{inv.currency} {inv.totalAmount}</td>
+                  <td className="px-4 py-3 text-slate-900">{formatCurrencyAmount(inv.totalAmount, inv.currency, defaultCurrency)}</td>
                   <td className="px-4 py-3">
                     <span className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${
                       inv.status === "paid" ? "bg-green-100 text-green-800" :

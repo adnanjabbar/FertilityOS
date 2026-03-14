@@ -73,10 +73,10 @@ FertilityOS is a cloud-native, multi-tenant SaaS platform that enables fertility
 
 ### Phase 4 — Advanced Modules
 
-- [ ] Telemedicine (video consultations)
-- [ ] Patient Portal (patient-facing app)
-- [ ] Inventory & Consumables Management
-- [ ] Reporting & Analytics Dashboard
+- [x] Telemedicine (video consultations) — Daily.co, Start/Join call on appointment
+- [x] Patient Portal (patient-facing app) — magic-link auth, profile/appointments/invoices
+- [x] Inventory & Consumables Management — CRUD, low-stock, dashboard alert
+- [x] Reporting & Analytics Dashboard — /app/reports, KPIs, chart
 - [ ] Donor Management Module
 - [ ] Surrogacy Case Management
 - [ ] Lab Integration (LIS/LIMS connectors)
@@ -85,11 +85,13 @@ FertilityOS is a cloud-native, multi-tenant SaaS platform that enables fertility
 
 ### Phase 5 — Growth & Scale
 
-- [ ] API marketplace for third-party integrations
+- [x] API keys / developer foundation — /app/developers, create/list/revoke keys
+- [ ] API marketplace for third-party integrations (full)
 - [ ] Mobile apps (iOS/Android) for staff and patients
-- [ ] Multi-language and multi-currency support
-- [ ] Regional compliance packs (HIPAA, GDPR, HL7 FHIR)
-- [ ] Referral and affiliate program
+- [x] Multi-language support (i18n) — next-intl, en/es, language switcher
+- [ ] Multi-currency support
+- [x] Regional compliance (HIPAA-style checklist) — doc + /app/compliance
+- [x] Referral program — codes, share link, ref on register
 - [ ] Enterprise / white-label licensing tier
 
 ---

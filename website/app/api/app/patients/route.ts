@@ -4,6 +4,7 @@ import { db } from "@/db";
 import { patients } from "@/db/schema";
 import { eq, desc, or, ilike, and } from "drizzle-orm";
 import { z } from "zod";
+import { logAudit, getClientIp } from "@/lib/audit";
 
 const createPatientSchema = z.object({
   firstName: z.string().min(1, "First name is required").max(255),
@@ -110,6 +111,16 @@ export async function POST(request: Request) {
       phone: patients.phone,
       createdAt: patients.createdAt,
     });
+
+  await logAudit({
+    tenantId: session.user.tenantId,
+    userId: session.user.id,
+    action: "patient.create",
+    entityType: "patient",
+    entityId: created.id,
+    details: { firstName: created.firstName, lastName: created.lastName },
+    ipAddress: getClientIp(request),
+  });
 
   return NextResponse.json(created, { status: 201 });
 }

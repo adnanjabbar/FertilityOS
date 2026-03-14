@@ -9,7 +9,7 @@ export default async function BillingPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold text-slate-900">Billing & subscription</h1>
-      <BillingClient />
+      <BillingClient isAdmin={session.user.roleSlug === "admin"} />
     </div>
   );
 }

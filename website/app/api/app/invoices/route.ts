@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { db } from "@/db";
-import { invoices, invoiceLines, patients } from "@/db/schema";
-import { eq, and, desc, like, sql } from "drizzle-orm";
+import { invoices, invoiceLines, patients, tenants } from "@/db/schema";
+import { eq, and, desc, like } from "drizzle-orm";
 import { z } from "zod";
+import { logAudit, getClientIp } from "@/lib/audit";
 
 const lineSchema = z.object({
   description: z.string().min(1).max(2000),
@@ -36,6 +37,12 @@ export async function GET(request: Request) {
   if (patientId) conditions.push(eq(invoices.patientId, patientId));
   if (status) conditions.push(eq(invoices.status, status));
 
+  const [tenantRow] = await db
+    .select({ defaultCurrency: tenants.defaultCurrency })
+    .from(tenants)
+    .where(eq(tenants.id, session.user.tenantId))
+    .limit(1);
+
   const list = await db
     .select({
       id: invoices.id,
@@ -55,7 +62,10 @@ export async function GET(request: Request) {
     .where(conditions.length > 1 ? and(...conditions) : conditions[0])
     .orderBy(desc(invoices.createdAt));
 
-  return NextResponse.json(list);
+  return NextResponse.json({
+    invoices: list,
+    defaultCurrency: tenantRow?.defaultCurrency ?? "USD",
+  });
 }
 
 export async function POST(request: Request) {
@@ -94,6 +104,13 @@ export async function POST(request: Request) {
   if (!patient) {
     return NextResponse.json({ error: "Patient not found" }, { status: 404 });
   }
+
+  const [tenantRow] = await db
+    .select({ defaultCurrency: tenants.defaultCurrency })
+    .from(tenants)
+    .where(eq(tenants.id, session.user.tenantId))
+    .limit(1);
+  const tenantCurrency = tenantRow?.defaultCurrency ?? "USD";
 
   const year = new Date().getFullYear();
   const prefix = `INV-${year}-`;
@@ -134,7 +151,7 @@ export async function POST(request: Request) {
       status: "draft",
       dueDate,
       totalAmount: toAmount(totalAmount),
-      currency: "USD",
+      currency: tenantCurrency,
       notes: data.notes?.trim() || null,
     })
     .returning();
@@ -158,6 +175,16 @@ export async function POST(request: Request) {
     .from(invoices)
     .where(eq(invoices.id, created.id))
     .limit(1);
+
+  await logAudit({
+    tenantId: session.user.tenantId,
+    userId: session.user.id,
+    action: "invoice.create",
+    entityType: "invoice",
+    entityId: created.id,
+    details: { invoiceNumber: created.invoiceNumber, patientId: created.patientId },
+    ipAddress: getClientIp(request),
+  });
 
   return NextResponse.json(withLines ?? created, { status: 201 });
 }

@@ -27,11 +27,19 @@ type Invoice = {
   createdAt: string;
   updatedAt: string;
   lines: InvoiceLine[];
+  defaultCurrency?: string;
 };
 
 function formatDate(s: string | null) {
   if (!s) return "—";
   return new Date(s).toLocaleString(undefined, { dateStyle: "medium" });
+}
+
+function formatCurrencyAmount(amount: string, currency: string | undefined, defaultCurrency: string): string {
+  const cur = (currency || defaultCurrency || "USD").trim() || "USD";
+  const num = parseFloat(String(amount).replace(/,/g, "")) || 0;
+  const formatted = num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return `${cur} ${formatted}`;
 }
 
 export default function InvoiceDetailClient({ invoiceId }: { invoiceId: string }) {
@@ -61,7 +69,7 @@ export default function InvoiceDetailClient({ invoiceId }: { invoiceId: string }
       });
       if (res.ok) {
         const data = await res.json();
-        setInvoice(data);
+        setInvoice((prev) => ({ ...data, defaultCurrency: prev?.defaultCurrency ?? "USD" }));
       }
     } finally {
       setMarkingPaid(false);
@@ -127,14 +135,14 @@ export default function InvoiceDetailClient({ invoiceId }: { invoiceId: string }
                 <tr key={line.id} className="border-b border-slate-100">
                   <td className="py-2 text-slate-900">{line.description}</td>
                   <td className="py-2 text-right text-slate-600">{line.quantity}</td>
-                  <td className="py-2 text-right text-slate-600">{invoice.currency} {line.unitPrice}</td>
-                  <td className="py-2 text-right text-slate-900">{invoice.currency} {line.amount}</td>
+                  <td className="py-2 text-right text-slate-600">{formatCurrencyAmount(line.unitPrice, invoice.currency, invoice.defaultCurrency ?? "USD")}</td>
+                  <td className="py-2 text-right text-slate-900">{formatCurrencyAmount(line.amount, invoice.currency, invoice.defaultCurrency ?? "USD")}</td>
                 </tr>
               ))}
             </tbody>
           </table>
           <div className="mt-4 flex justify-end">
-            <p className="text-lg font-bold text-slate-900">Total: {invoice.currency} {invoice.totalAmount}</p>
+            <p className="text-lg font-bold text-slate-900">Total: {formatCurrencyAmount(invoice.totalAmount, invoice.currency, invoice.defaultCurrency ?? "USD")}</p>
           </div>
           {invoice.notes && (
             <div className="mt-4 pt-4 border-t border-slate-200">

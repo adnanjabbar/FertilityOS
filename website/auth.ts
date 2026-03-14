@@ -4,6 +4,7 @@ import { db } from "./db";
 import { users, tenants, patients, patientPortalTokens } from "./db/schema";
 import { eq, and, gt, isNull } from "drizzle-orm";
 import bcrypt from "bcryptjs";
+import { logAudit } from "./lib/audit";
 
 declare module "next-auth" {
   interface User {
@@ -134,6 +135,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.roleSlug = user.roleSlug;
         token.tenantName = (user as { tenantName?: string }).tenantName;
         token.patientId = (user as { patientId?: string }).patientId;
+        void logAudit({
+          tenantId: user.tenantId,
+          userId: user.id,
+          action: "auth.sign_in",
+          entityType: "user",
+          entityId: user.id,
+          details: { email: user.email, roleSlug: user.roleSlug },
+        }).catch(() => {});
       }
       return token;
     },
