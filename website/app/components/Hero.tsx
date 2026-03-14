@@ -95,7 +95,7 @@ export default function Hero() {
               </div>
               <div className="flex-1 mx-4">
                 <div className="bg-white rounded-md px-3 py-1.5 text-xs text-slate-400 font-mono">
-                  app.fertilityo.com / dashboard
+                  app.thefertilityos.com/dashboard
                 </div>
               </div>
             </div>

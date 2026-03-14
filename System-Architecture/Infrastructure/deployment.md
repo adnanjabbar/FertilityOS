@@ -21,11 +21,29 @@
 - **Deploy:** Changes pushed to the connected branch (e.g. `main`) trigger build and deploy; Next.js app runs on port 3000.
 - **Domain:** `thefertilityos.com` / `www.thefertilityos.com` point to the App Platform app.
 
+## Required environment variables (App Platform)
+
+Set these in the App’s **Settings → App-Level Environment Variables** (or component env):
+
+| Variable | Value | Notes |
+|----------|--------|--------|
+| `DATABASE_URL` | `postgresql://...` | From the attached database (or copy from component) |
+| `AUTH_SECRET` | 32+ char secret | e.g. `openssl rand -hex 16` |
+| `NEXTAUTH_URL` | `https://www.thefertilityos.com` | Canonical app URL |
+| **`AUTH_URL`** | `https://www.thefertilityos.com` | Same as NEXTAUTH_URL; required for Auth.js v5 |
+| **`AUTH_TRUST_HOST`** | `true` | **Required** to avoid 503 UntrustedHost on non-Vercel hosts |
+
+Without `AUTH_TRUST_HOST=true` and `AUTH_URL`, the site can return **503** when calling `/api/auth/session` or signing in.
+
+**If you see 503 or "UntrustedHost" in logs:**  
+Add `AUTH_TRUST_HOST=true` and `AUTH_URL=https://www.thefertilityos.com` (or your live URL) to the app’s environment variables, then trigger a new deploy (e.g. redeploy from the DO dashboard or push a small commit).
+
 ## Database (PostgreSQL)
 
 - **Create/attach:** Use App Platform **Add Resource → Database → Create and attach**. Prefer PostgreSQL 18; set **database name** (e.g. `fertilityos`).
 - **Connection:** Ensure the web service has **`DATABASE_URL`** set to the DB connection string (DO often injects it under a component name; alias or copy it to `DATABASE_URL`).
 - **Migrations:** Run the SQL files in `website/db/migrations/` **once** (in order). See **`Infrastructure/digitalocean-database-setup.md`** for step-by-step instructions.
+- **Demo account (optional):** From `website/` run `npm run db:seed-demo` (with `DATABASE_URL` set). Creates a demo clinic and user. **Login:** `demo` / `demo`.
 
 ## For development and agents
 

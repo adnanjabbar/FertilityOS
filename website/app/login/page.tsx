@@ -85,12 +85,13 @@ function LoginForm() {
         >
           <div>
             <label htmlFor="email" className={labelClass}>
-              Email
+              Email or username
             </label>
             <input
               id="email"
-              type="email"
-              placeholder="you@yourclinic.com"
+              type="text"
+              autoComplete="username"
+              placeholder="you@yourclinic.com or demo"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={inputClass}

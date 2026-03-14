@@ -29,6 +29,7 @@ declare module "@auth/core/jwt" {
   }
 }
 
+// Production (e.g. DigitalOcean): set AUTH_TRUST_HOST=true and AUTH_URL in env to avoid 503 UntrustedHost.
 export const { handlers, auth, signIn, signOut } = NextAuth({
   trustHost: true,
   providers: [
