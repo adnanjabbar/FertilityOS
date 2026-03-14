@@ -41,6 +41,14 @@ export default async function AppLayout({
                     Team
                   </Link>
                 )}
+                {session.user.roleSlug === "super_admin" && (
+                  <Link
+                    href="/app/super"
+                    className="text-sm font-medium text-amber-700 hover:text-amber-800"
+                  >
+                    Super Dashboard
+                  </Link>
+                )}
               </nav>
             </div>
             <div className="flex items-center gap-4">

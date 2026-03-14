@@ -14,6 +14,67 @@ const ROLES = [
   { value: "admin", label: "Administrator" },
 ] as const;
 
+function UserRow({
+  user,
+  roles,
+  onRoleChange,
+}: {
+  user: UserListItem;
+  roles: readonly { value: string; label: string }[];
+  onRoleChange: () => void;
+}) {
+  const [roleSlug, setRoleSlug] = useState(user.roleSlug);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleRoleChange = async (newRole: string) => {
+    setRoleSlug(newRole);
+    setError(null);
+    setSaving(true);
+    try {
+      const res = await fetch(`/api/app/users/${user.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ roleSlug: newRole }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setError(data.error || "Failed to update role");
+        setRoleSlug(user.roleSlug);
+        return;
+      }
+      onRoleChange();
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <li className="py-3 flex items-center justify-between gap-4 flex-wrap">
+      <div>
+        <span className="font-medium text-slate-900">{user.fullName}</span>
+        <span className="text-slate-500 text-sm ml-2">{user.email}</span>
+        {error && <p className="text-red-600 text-xs mt-1">{error}</p>}
+      </div>
+      <div className="flex items-center gap-2">
+        <select
+          value={roleSlug}
+          onChange={(e) => handleRoleChange(e.target.value)}
+          disabled={saving}
+          className="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:opacity-60"
+        >
+          {roles.map((r) => (
+            <option key={r.value} value={r.value}>
+              {r.label}
+            </option>
+          ))}
+        </select>
+        {saving && <span className="text-slate-400 text-xs">Saving…</span>}
+      </div>
+    </li>
+  );
+}
+
 type Invitation = {
   id: string;
   email: string;
@@ -22,7 +83,7 @@ type Invitation = {
   createdAt: string;
 };
 
-type UserRow = {
+type UserListItem = {
   id: string;
   email: string;
   fullName: string;
@@ -32,7 +93,7 @@ type UserRow = {
 
 export default function TeamClient() {
   const [invitations, setInvitations] = useState<Invitation[]>([]);
-  const [users, setUsers] = useState<UserRow[]>([]);
+  const [users, setUsers] = useState<UserListItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [inviteEmail, setInviteEmail] = useState("");
   const [inviteRole, setInviteRole] = useState("staff");
@@ -202,15 +263,12 @@ export default function TeamClient() {
         </h2>
         <ul className="divide-y divide-slate-100">
           {users.map((u) => (
-            <li key={u.id} className="py-3 flex items-center justify-between">
-              <div>
-                <span className="font-medium text-slate-900">{u.fullName}</span>
-                <span className="text-slate-500 text-sm ml-2">{u.email}</span>
-              </div>
-              <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-xs font-medium">
-                {u.roleSlug.replace("_", " ")}
-              </span>
-            </li>
+            <UserRow
+              key={u.id}
+              user={u}
+              roles={ROLES}
+              onRoleChange={() => fetchData()}
+            />
           ))}
         </ul>
       </div>

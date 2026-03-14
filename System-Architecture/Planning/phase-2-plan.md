@@ -70,11 +70,12 @@ Tenant isolation: all queries filter by `tenant_id` from session.
 - [x] Invite user: admin enters email + role; invite link generated (email sending can be added later)
 - [x] Accept invite: set password, join tenant at `/invite/[token]`
 - [x] List users (admin only) at `/api/app/users`; list pending invites at `/api/app/invitations`
-- [ ] Edit user role (optional follow-up)
+- [x] Edit user role: PATCH `/api/app/users/[userId]` + role dropdown on Team page
 
 ### 2.5 — Subdomain (Optional in Phase 2)
-- [ ] Middleware: resolve tenant from host (e.g. `slug.thefertilityos.com`)
-- [ ] Document DNS: wildcard CNAME for `*.thefertilityos.com` to DO
+- [x] Middleware: resolve tenant from host (e.g. `slug.thefertilityos.com`); set `x-tenant-slug` header
+- [x] API `GET /api/tenant-by-slug?slug=xxx` for app to resolve tenant
+- [x] Document DNS: wildcard CNAME and subdomain setup in `Infrastructure/dns-subdomain.md` and `deployment.md`
 
 ---
 
@@ -94,12 +95,22 @@ Tenant isolation: all queries filter by `tenant_id` from session.
 | `/api/auth/accept-invite` | POST accept invite with password (public) |
 | `/api/app/invitations` | GET list pending, POST create (admin) |
 | `/api/app/users` | GET list users (admin) |
+| `/api/app/users/[userId]` | PATCH update user role (admin) |
+| `/api/tenant-by-slug` | GET tenant by slug (public, for subdomain) |
 
 ---
 
 ## Success Criteria (Phase 2)
 
-- [ ] A clinic can register (name, address, specialty, admin email/password) and see success.
-- [ ] Admin can log in and land on `/app/dashboard` with clinic context.
-- [ ] Session contains tenantId and userId; logout works.
-- [ ] (Phase 2.2) Admin can invite a user by email with a role; invited user can set password and log in.
+- [x] A clinic can register (name, address, specialty, admin email/password) and see success.
+- [x] Admin can log in and land on `/app/dashboard` with clinic context.
+- [x] Session contains tenantId and userId; logout works.
+- [x] (Phase 2.2) Admin can invite a user by email with a role; invited user can set password and log in.
+- [x] Admin can edit a user’s role from the Team page.
+- [x] Subdomain sets `x-tenant-slug`; tenant-by-slug API and DNS docs in place.
+
+---
+
+## Next: Phase 3.1 (Patient Management)
+
+See **`Planning/phase-3-1-agent-handoff.md`** for the three-agent handoff to implement Patient Management (schema, API, list, add, detail, edit, nav).

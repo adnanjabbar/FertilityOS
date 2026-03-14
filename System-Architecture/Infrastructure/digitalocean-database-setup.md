@@ -60,7 +60,7 @@ We provide a script that runs both migration files. From the repo:
    $env:NODE_TLS_REJECT_UNAUTHORIZED="0"
    node scripts/run-migrations.js
    ```
-   You should see: `Ran: 0000_phase2_tenants_users_roles.sql`, `Ran: 0001_invitations.sql`, then `Migrations finished successfully.`
+   You should see: `Ran: 0000_phase2_tenants_users_roles.sql`, `Ran: 0001_invitations.sql`, `Ran: 0003_super_admin.sql`, then `Migrations finished successfully.`
 
 ### Option B: Run from your computer with psql
 
@@ -79,6 +79,7 @@ We provide a script that runs both migration files. From the repo:
    # Replace YOUR_DATABASE_URL with the actual connection string (in quotes if it has special chars)
    psql "YOUR_DATABASE_URL" -f db/migrations/0000_phase2_tenants_users_roles.sql
    psql "YOUR_DATABASE_URL" -f db/migrations/0001_invitations.sql
+   psql "YOUR_DATABASE_URL" -f db/migrations/0003_super_admin.sql
    ```
 
    On Windows (PowerShell), use the same URLs in quotes; if the password has special characters, use the URI as given by DigitalOcean (often URL-encoded).
@@ -101,7 +102,7 @@ If you prefer not to use your local machine:
    - Use an image that has `psql` (e.g. `postgres:18-alpine`).
    - Command: run the two SQL files (e.g. by copying their contents into a script or mounting the repo and running `psql $DATABASE_URL -f ...`). The job must have access to `DATABASE_URL` (same app, so it’s usually injected).
 2. **Database console:**
-   - Some plans offer a **web-based SQL console** for the database. If available, open it, select the database (e.g. `fertilityos`), then paste and run the contents of `0000_phase2_tenants_users_roles.sql` first, then `0001_invitations.sql`.
+   - Some plans offer a **web-based SQL console** for the database. If available, open it, select the database (e.g. `fertilityos`), then paste and run the contents of `0000_phase2_tenants_users_roles.sql`, then `0001_invitations.sql`, then `0003_super_admin.sql`.
 
 Use **Option A** (Node script) for the simplest one-click run; use **Option B** if you prefer `psql`.
 
@@ -134,7 +135,7 @@ In **App Platform → your app → Web Service (e.g. fertilityos-website) → Se
 
 - [ ] Create PostgreSQL 18 database in App Platform (database name e.g. `fertilityos`).
 - [ ] Ensure web service has `DATABASE_URL` pointing to that database.
-- [ ] Run `0000_phase2_tenants_users_roles.sql` then `0001_invitations.sql` once (Option A or B).
+- [ ] Run `0000_phase2_tenants_users_roles.sql`, `0001_invitations.sql`, and `0003_super_admin.sql` once (Option A or B).
 - [ ] Set `AUTH_SECRET` and `NEXTAUTH_URL`; redeploy.
 - [ ] Test registration and login at `/register` and `/login`.
 

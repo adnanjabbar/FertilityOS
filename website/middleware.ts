@@ -2,8 +2,25 @@ import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 
 const authPagePaths = ["/login", "/register"];
+const ROOT_DOMAIN = "thefertilityos.com";
+
+function getSubdomainSlug(hostname: string): string | null {
+  const parts = hostname.split(".");
+  if (parts.length < 2) return null;
+  const first = parts[0].toLowerCase();
+  if (first === "www" || first === "api") return null;
+  const base = parts.slice(-2).join(".");
+  if (base === ROOT_DOMAIN) return first;
+  if (parts[parts.length - 1] === "localhost" && parts.length >= 2) return first;
+  return null;
+}
 
 export default auth((req) => {
+  const hostname = req.nextUrl.hostname;
+  const slug = getSubdomainSlug(hostname);
+  const requestHeaders = new Headers(req.headers);
+  if (slug) requestHeaders.set("x-tenant-slug", slug);
+
   const isApp = req.nextUrl.pathname.startsWith("/app");
   const isAuthPage = authPagePaths.includes(req.nextUrl.pathname);
   const isLoggedIn = !!req.auth;
@@ -14,11 +31,18 @@ export default auth((req) => {
     return NextResponse.redirect(login);
   }
 
+  const isSuperPath = req.nextUrl.pathname.startsWith("/app/super");
+  if (isSuperPath && isLoggedIn && req.auth?.user?.roleSlug !== "super_admin") {
+    return NextResponse.redirect(new URL("/app/dashboard", req.nextUrl.origin));
+  }
+
   if (isAuthPage && isLoggedIn) {
     return NextResponse.redirect(new URL("/app/dashboard", req.nextUrl.origin));
   }
 
-  return NextResponse.next();
+  return NextResponse.next({
+    request: { headers: requestHeaders },
+  });
 });
 
 export const config = {

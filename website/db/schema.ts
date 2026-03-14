@@ -17,6 +17,7 @@ export const roleSlugEnum = pgEnum("role_slug", [
   "reception",
   "radiologist",
   "staff",
+  "super_admin",
 ]);
 
 export const tenants = pgTable("tenants", {
