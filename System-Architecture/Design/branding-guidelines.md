@@ -1,5 +1,9 @@
 # Branding Guidelines — FertilityOS
 
+> **Canonical design source:** The live marketing website in the repo (`website/`) is the source of truth for UI/UX. See **`Design/website-design-source.md`** for implementation details (CSS variables, components, spacing). All product UI (dashboard, app, white-label) must align with these guidelines and the website patterns.
+
+---
+
 ## Brand Identity
 
 **FertilityOS** is the world's first comprehensive operating system for fertility clinics and reproductive health centers. The brand communicates:

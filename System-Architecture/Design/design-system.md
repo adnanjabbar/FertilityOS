@@ -2,9 +2,10 @@
 
 ## Overview
 
-The FertilityOS design system is the single source of truth for all UI components, patterns, and visual standards across the platform. Built with Tailwind CSS and shadcn/ui.
+The FertilityOS design system is the single source of truth for all UI components, patterns, and visual standards across the platform. Built with Tailwind CSS; the **live implementation** is the marketing website in `website/` (Next.js, React, Geist, Lucide).
 
-Reference: See `branding-guidelines.md` for colors, typography, and voice/tone.
+- **Implementation reference:** See `Design/website-design-source.md` for exact CSS variables, component patterns, and layout from the website.
+- **Brand:** See `branding-guidelines.md` for colors, typography, and voice/tone.
 
 ---
 

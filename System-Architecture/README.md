@@ -45,8 +45,13 @@ The immediate priority is the public-facing marketing website at `website/`. Thi
 | Product Roadmap | `Planning/product-roadmap.md` | Phased delivery plan |
 | Tech Stack | `Planning/tech-stack.md` | Chosen technologies and rationale |
 | MVP Scope | `Planning/mvp-scope.md` | Minimum viable product definition |
+| Pricing Strategy | `Planning/pricing-strategy.md` | Affordable positioning, core vs add-on modules, API monetization |
 | Branding Guidelines | `Design/branding-guidelines.md` | Colors, fonts, logo usage |
 | Design System | `Design/design-system.md` | Component library and patterns |
+| Website Design Source | `Design/website-design-source.md` | Canonical UI/UX from `website/` for all product UI |
+| Old-System Reference | `Old-System/README.md` | Summary of pre-architecture implementation (reference only) |
+| Skills Registry | `Skills/skills.md` | Global skills and FertilityOS conventions for agents |
+| Deployment | `Infrastructure/deployment.md` | DigitalOcean App Platform, domain (thefertilityos.com), Next.js port 3000 |
 
 ---
 
