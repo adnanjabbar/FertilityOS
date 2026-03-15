@@ -53,6 +53,10 @@ const migrations = [
   "0023_mr_number_and_print_jobs.sql",
   "0024_letterhead_prescription_portal_2fa.sql",
   "0025_tenant_integrations_and_trial_signups.sql",
+  "0026_email_campaigns_and_tenant_email_settings.sql",
+  "0027_whatsapp_integration.sql",
+  "0028_lab_connectors.sql",
+  "0029_locations_multi_location.sql",
 ];
 
 async function main() {

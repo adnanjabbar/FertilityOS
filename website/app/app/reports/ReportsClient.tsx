@@ -22,6 +22,8 @@ type Overview = {
 
 export default function ReportsClient() {
   const [data, setData] = useState<Overview | null>(null);
+  const [locations, setLocations] = useState<{ id: string; name: string }[]>([]);
+  const [locationFilter, setLocationFilter] = useState("");
   const [loading, setLoading] = useState(true);
   const [from, setFrom] = useState(() => {
     const d = new Date();
@@ -32,16 +34,23 @@ export default function ReportsClient() {
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
   });
 
+  useEffect(() => {
+    fetch("/api/app/locations")
+      .then((res) => (res.ok ? res.json() : []))
+      .then((list) => setLocations(list.map((l: { id: string; name: string }) => ({ id: l.id, name: l.name }))));
+  }, []);
+
   const fetchReport = useCallback(async () => {
     setLoading(true);
     try {
       const params = new URLSearchParams({ from, to, chart: "true" });
+      if (locationFilter) params.set("locationId", locationFilter);
       const res = await fetch(`/api/app/reports/overview?${params}`);
       if (res.ok) setData(await res.json());
     } finally {
       setLoading(false);
     }
-  }, [from, to]);
+  }, [from, to, locationFilter]);
 
   useEffect(() => {
     fetchReport();
@@ -72,6 +81,22 @@ export default function ReportsClient() {
             className="rounded-xl border border-slate-200 px-3 py-2 text-sm"
           />
         </label>
+        {locations.length > 0 && (
+          <label htmlFor="report-location" className="flex items-center gap-2 text-sm font-medium text-slate-700">
+            Location
+            <select
+              id="report-location"
+              value={locationFilter}
+              onChange={(e) => setLocationFilter(e.target.value)}
+              className="rounded-xl border border-slate-200 px-3 py-2 text-sm min-w-[180px]"
+            >
+            <option value="">All locations</option>
+            {locations.map((l) => (
+              <option key={l.id} value={l.id}>{l.name}</option>
+            ))}
+            </select>
+          </label>
+        )}
       </div>
 
       {loading ? (

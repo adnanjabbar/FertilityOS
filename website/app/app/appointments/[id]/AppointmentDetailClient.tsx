@@ -10,6 +10,8 @@ type Appointment = {
   patientFirstName: string;
   patientLastName: string;
   providerId: string | null;
+  locationId: string | null;
+  locationName: string | null;
   title: string | null;
   startAt: string;
   endAt: string;
@@ -24,6 +26,7 @@ type Appointment = {
 };
 
 type PatientOption = { id: string; firstName: string; lastName: string };
+type LocationOption = { id: string; name: string };
 
 const inputClass =
   "w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400";
@@ -47,6 +50,7 @@ function toDatetimeLocal(iso: string) {
 export default function AppointmentDetailClient({ appointmentId }: { appointmentId: string }) {
   const [appointment, setAppointment] = useState<Appointment | null>(null);
   const [patients, setPatients] = useState<PatientOption[]>([]);
+  const [locations, setLocations] = useState<LocationOption[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [editing, setEditing] = useState(false);
@@ -66,6 +70,7 @@ export default function AppointmentDetailClient({ appointmentId }: { appointment
         setAppointment(data);
         setForm({
           patientId: data.patientId,
+          locationId: data.locationId ?? "",
           title: data.title ?? "",
           startAt: toDatetimeLocal(data.startAt),
           endAt: toDatetimeLocal(data.endAt),
@@ -80,6 +85,9 @@ export default function AppointmentDetailClient({ appointmentId }: { appointment
     fetch("/api/app/patients")
       .then((res) => res.ok ? res.json() : [])
       .then((data) => setPatients(data.map((p: { id: string; firstName: string; lastName: string }) => ({ id: p.id, firstName: p.firstName, lastName: p.lastName }))));
+    fetch("/api/app/locations")
+      .then((res) => res.ok ? res.json() : [])
+      .then((data) => setLocations(data.map((l: { id: string; name: string }) => ({ id: l.id, name: l.name }))));
   }, [appointmentId]);
 
   const videoTypes = ["consultation", "follow-up", "video"];
@@ -124,6 +132,7 @@ export default function AppointmentDetailClient({ appointmentId }: { appointment
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           patientId: form.patientId,
+          locationId: form.locationId || null,
           title: form.title || null,
           startAt,
           endAt,
@@ -145,6 +154,7 @@ export default function AppointmentDetailClient({ appointmentId }: { appointment
         setVideoError(null);
         setForm({
           patientId: full.patientId,
+          locationId: full.locationId ?? "",
           title: full.title ?? "",
           startAt: toDatetimeLocal(full.startAt),
           endAt: toDatetimeLocal(full.endAt),
@@ -251,6 +261,12 @@ export default function AppointmentDetailClient({ appointmentId }: { appointment
                   </Link>
                 </dd>
               </div>
+              {appointment.locationName && (
+                <div>
+                  <dt className="text-sm font-medium text-slate-500">Location</dt>
+                  <dd className="mt-1 text-slate-900">{appointment.locationName}</dd>
+                </div>
+              )}
               <div>
                 <dt className="text-sm font-medium text-slate-500">Start</dt>
                 <dd className="mt-1 text-slate-900">{formatDateTime(appointment.startAt)}</dd>
@@ -319,6 +335,21 @@ export default function AppointmentDetailClient({ appointmentId }: { appointment
                   ))}
                 </select>
               </div>
+              {locations.length > 0 && (
+                <div>
+                  <label className={labelClass}>Location</label>
+                  <select
+                    className={inputClass}
+                    value={form.locationId ?? ""}
+                    onChange={(e) => setForm((f) => ({ ...f, locationId: e.target.value }))}
+                  >
+                    <option value="">No specific location</option>
+                    {locations.map((l) => (
+                      <option key={l.id} value={l.id}>{l.name}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className={labelClass}>Start</label>

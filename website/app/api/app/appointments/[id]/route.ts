@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { db } from "@/db";
-import { appointments, patients } from "@/db/schema";
+import { appointments, patients, locations } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 
 const updateAppointmentSchema = z.object({
   patientId: z.string().uuid().optional(),
   providerId: z.string().uuid().optional().nullable(),
+  locationId: z.string().uuid().optional().nullable(),
   title: z.string().max(255).optional().nullable(),
   startAt: z.string().datetime().optional(),
   endAt: z.string().datetime().optional(),
@@ -35,6 +36,8 @@ export async function GET(
       patientFirstName: patients.firstName,
       patientLastName: patients.lastName,
       providerId: appointments.providerId,
+      locationId: appointments.locationId,
+      locationName: locations.name,
       title: appointments.title,
       startAt: appointments.startAt,
       endAt: appointments.endAt,
@@ -49,6 +52,7 @@ export async function GET(
     })
     .from(appointments)
     .innerJoin(patients, eq(appointments.patientId, patients.id))
+    .leftJoin(locations, eq(appointments.locationId, locations.id))
     .where(
       and(
         eq(appointments.id, id),
@@ -107,11 +111,28 @@ export async function PATCH(
     }
   }
 
+  if (data.locationId !== undefined && data.locationId !== null) {
+    const [loc] = await db
+      .select({ id: locations.id })
+      .from(locations)
+      .where(
+        and(
+          eq(locations.id, data.locationId),
+          eq(locations.tenantId, session.user.tenantId)
+        )
+      )
+      .limit(1);
+    if (!loc) {
+      return NextResponse.json({ error: "Location not found" }, { status: 404 });
+    }
+  }
+
   const updateValues: Partial<typeof appointments.$inferInsert> = {
     updatedAt: new Date(),
   };
   if (data.patientId !== undefined) updateValues.patientId = data.patientId;
   if (data.providerId !== undefined) updateValues.providerId = data.providerId;
+  if (data.locationId !== undefined) updateValues.locationId = data.locationId ?? null;
   if (data.title !== undefined) updateValues.title = data.title?.trim() || null;
   if (data.startAt !== undefined) updateValues.startAt = new Date(data.startAt);
   if (data.endAt !== undefined) updateValues.endAt = new Date(data.endAt);

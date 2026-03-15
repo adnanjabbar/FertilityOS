@@ -10,11 +10,12 @@ import { appointments, patients, tenants } from "@/db/schema";
 import { and, eq, gte, lte, or, isNull } from "drizzle-orm";
 import { sendEmail, appointmentReminderContent } from "@/lib/email";
 import { sendSms, appointmentReminderSmsBody } from "@/lib/sms";
+import { sendWhatsApp, appointmentReminderWhatsAppBody } from "@/lib/whatsapp";
 
 const WINDOW_HOURS = 24; // Remind for appointments in the next 24 hours
 const BUFFER_MINUTES = 30; // Don't send if appointment is in the past (e.g. 24h window already passed)
 
-type ReminderChannel = "email" | "sms" | "both";
+type ReminderChannel = "email" | "sms" | "both" | "whatsapp";
 
 export async function GET(request: Request) {
   return runReminders(request);
@@ -52,6 +53,7 @@ async function runReminders(request: Request) {
       reminderChannel: tenants.reminderChannel,
       reminderSentAt: appointments.reminderSentAt,
       reminderSmsSentAt: appointments.reminderSmsSentAt,
+      reminderWhatsappSentAt: appointments.reminderWhatsappSentAt,
     })
     .from(appointments)
     .innerJoin(patients, eq(appointments.patientId, patients.id))
@@ -71,18 +73,22 @@ async function runReminders(request: Request) {
           and(
             or(eq(tenants.reminderChannel, "sms"), eq(tenants.reminderChannel, "both")),
             isNull(appointments.reminderSmsSentAt)
-          )
+          ),
+          // Need WhatsApp: channel is whatsapp and WhatsApp not yet sent
+          and(eq(tenants.reminderChannel, "whatsapp"), isNull(appointments.reminderWhatsappSentAt))
         )
       )
     );
 
   const emailResults: { appointmentId: string; email: string; ok: boolean; error?: string }[] = [];
   const smsResults: { appointmentId: string; to: string; ok: boolean; error?: string }[] = [];
+  const whatsappResults: { appointmentId: string; to: string; ok: boolean; error?: string }[] = [];
 
   for (const row of rows) {
     const channel = (row.reminderChannel ?? "email") as ReminderChannel;
     const needEmail = (channel === "email" || channel === "both") && !row.reminderSentAt;
     const needSms = (channel === "sms" || channel === "both") && !row.reminderSmsSentAt;
+    const needWhatsApp = channel === "whatsapp" && !row.reminderWhatsappSentAt;
 
     if (needEmail) {
       const email = row.patientEmail?.trim();
@@ -128,6 +134,28 @@ async function runReminders(request: Request) {
         smsResults.push({ appointmentId: row.appointmentId, to: phone, ok: sendResult.ok, error: sendResult.error });
       }
     }
+
+    if (needWhatsApp) {
+      const phone = row.patientPhone?.trim();
+      if (!phone) {
+        whatsappResults.push({ appointmentId: row.appointmentId, to: "", ok: false, error: "No patient phone" });
+      } else {
+        const body = appointmentReminderWhatsAppBody({
+          patientFirstName: row.patientFirstName,
+          startAt: row.startAt,
+          type: row.type,
+          clinicName: row.tenantName ?? undefined,
+        });
+        const sendResult = await sendWhatsApp({ to: phone, body, tenantId: row.tenantId });
+        if (sendResult.ok) {
+          await db
+            .update(appointments)
+            .set({ reminderWhatsappSentAt: now, updatedAt: now })
+            .where(eq(appointments.id, row.appointmentId));
+        }
+        whatsappResults.push({ appointmentId: row.appointmentId, to: phone, ok: sendResult.ok, error: sendResult.error });
+      }
+    }
   }
 
   return NextResponse.json({
@@ -135,5 +163,6 @@ async function runReminders(request: Request) {
     window: { from: windowStart.toISOString(), to: windowEnd.toISOString() },
     email: { sent: emailResults.filter((r) => r.ok).length, failed: emailResults.filter((r) => !r.ok).length, results: emailResults },
     sms: { sent: smsResults.filter((r) => r.ok).length, failed: smsResults.filter((r) => !r.ok).length, results: smsResults },
+    whatsapp: { sent: whatsappResults.filter((r) => r.ok).length, failed: whatsappResults.filter((r) => !r.ok).length, results: whatsappResults },
   });
 }

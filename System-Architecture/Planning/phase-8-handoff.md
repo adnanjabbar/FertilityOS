@@ -23,13 +23,15 @@
 
 ## 8.2 Newsletter and automated emails (tenant-facing)
 
-**Scope:** Allow clinics to send newsletters and automated emails to patients. Two modes: (1) default — sent via our infrastructure with FertilityOS branding in footer; (2) premium — tenant’s own domain/SMTP, no FertilityOS branding in footer.
+**Scope:** Allow clinics to send newsletters and automated emails to patients. Two modes: (1) default — sent via our infrastructure with TheFertilityOS branding in footer; (2) premium — tenant’s own domain/SMTP, no platform branding in footer.
+
+**Branding (default mode):** The product and domain are **TheFertilityOS** (www.thefertilityos.com). In the email footer, show “FertilityOS” in a **blue–teal gradient** style (e.g. `text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-500`) and link it to **https://www.thefertilityos.com**. So: “Sent via [FertilityOS](https://www.thefertilityos.com)” where “FertilityOS” is styled with the gradient and is the only linked text. Do not use “FertilityOS” alone as the domain; the canonical domain is www.thefertilityos.com.
 
 - **Schema:** `email_campaigns` or `newsletter_campaigns`: id, tenantId, name, subject, bodyHtml, bodyText, status (draft|scheduled|sent), scheduledAt, sentAt, createdById, recipientFilter (e.g. all patients, segment), createdAt, updatedAt. Optional: `email_send_log` (campaignId, patientId, sentAt, provider used). Tenant setting: `email_sending_mode` (platform | custom_domain), `custom_smtp_*` or `custom_domain_*` for premium. Migration.
-- **Sending:** Default: use existing Resend (or app email) with “Sent via FertilityOS” / clinic name in From/Reply; store clinic name and optional reply-to from tenant. Premium: tenant configures SMTP or verified domain; send via their config; no FertilityOS footer. Respect tenant’s choice and store which provider was used per send.
-- **APIs:** CRUD for campaigns (draft, schedule, cancel). GET list of campaigns; GET/POST/PATCH/DELETE single campaign. Endpoint to “send test” (to current user or specified email). Optional: GET stats (sent, opened, clicked) if using a provider that supports it.
-- **UI:** New section “Newsletter” or “Email campaigns” under Administration (or Marketing): list campaigns, create draft (subject, body, recipient filter, schedule or send now), view sent log. Settings: “Email sending” — Default (FertilityOS) vs Custom domain (premium); if custom, form for SMTP or domain verification.
-- **Deliverables:** Schema + migration, campaign CRUD APIs, send pipeline (platform vs custom), UI for campaigns and email settings. Document in `website/NEWSLETTER-AND-EMAILS.md`.
+- **Sending:** Default: use existing Resend (or app email) with clinic name in From/Reply; footer: “Sent via FertilityOS” with “FertilityOS” in blue–teal gradient (inline or in a small HTML span) linking to https://www.thefertilityos.com. Premium: tenant configures SMTP or verified domain; no platform footer. Store which provider was used per send.
+- **APIs:** CRUD for campaigns (draft, schedule, cancel). GET list of campaigns; GET/POST/PATCH/DELETE single campaign. Endpoint to “send test”. Optional: GET stats (sent, opened, clicked).
+- **UI:** “Newsletter” or “Email campaigns” under Administration: list campaigns, create draft (subject, body, recipient filter, schedule or send now), view sent log. Settings: “Email sending” — Default (TheFertilityOS) vs Custom domain (premium); if custom, form for SMTP or domain verification.
+- **Deliverables:** Schema + migration, campaign CRUD APIs, send pipeline (platform vs custom), footer component with gradient “FertilityOS” link to www.thefertilityos.com. Document in `website/NEWSLETTER-AND-EMAILS.md`.
 
 ---
 

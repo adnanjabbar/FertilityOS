@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm";
 import { z } from "zod";
 
 const SUPPORTED_CURRENCIES = ["USD", "EUR", "GBP", "AUD", "CAD", "CHF", "JPY", "INR"] as const;
-const REMINDER_CHANNELS = ["email", "sms", "both"] as const;
+const REMINDER_CHANNELS = ["email", "sms", "both", "whatsapp"] as const;
 const patchSchema = z.object({
   defaultCurrency: z.enum(SUPPORTED_CURRENCIES).optional(),
   reminderChannel: z.enum(REMINDER_CHANNELS).optional(),
@@ -66,7 +66,7 @@ export async function PATCH(request: Request) {
     );
   }
 
-  const updatePayload: Partial<{ defaultCurrency: string; reminderChannel: "email" | "sms" | "both"; updatedAt: Date }> = {
+  const updatePayload: Partial<{ defaultCurrency: string; reminderChannel: "email" | "sms" | "both" | "whatsapp"; updatedAt: Date }> = {
     updatedAt: new Date(),
   };
   if (parsed.data.defaultCurrency !== undefined) updatePayload.defaultCurrency = parsed.data.defaultCurrency;

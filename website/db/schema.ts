@@ -24,7 +24,7 @@ export const roleSlugEnum = pgEnum("role_slug", [
   "super_admin",
 ]);
 
-export const reminderChannelEnum = pgEnum("reminder_channel", ["email", "sms", "both"]);
+export const reminderChannelEnum = pgEnum("reminder_channel", ["email", "sms", "both", "whatsapp"]);
 
 export const donorTypeEnum = pgEnum("donor_type", ["egg", "sperm", "embryo"]);
 
@@ -119,6 +119,7 @@ export const users = pgTable(
     tenantId: uuid("tenant_id")
       .notNull()
       .references(() => tenants.id, { onDelete: "cascade" }),
+    defaultLocationId: uuid("default_location_id").references(() => locations.id, { onDelete: "set null" }),
     email: varchar("email", { length: 255 }).notNull(),
     passwordHash: text("password_hash").notNull(),
     fullName: varchar("full_name", { length: 255 }).notNull(),
@@ -152,6 +153,28 @@ export const invitations = pgTable("invitations", {
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
+// Multi-location: physical locations per tenant (Phase 8.4)
+export const locations = pgTable(
+  "locations",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    tenantId: uuid("tenant_id")
+      .notNull()
+      .references(() => tenants.id, { onDelete: "cascade" }),
+    name: varchar("name", { length: 255 }).notNull(),
+    address: text("address"),
+    city: varchar("city", { length: 128 }),
+    state: varchar("state", { length: 128 }),
+    country: varchar("country", { length: 2 }),
+    postalCode: varchar("postal_code", { length: 32 }),
+    timezone: varchar("timezone", { length: 64 }),
+    isDefault: boolean("is_default").notNull().default(false),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [index("locations_tenant_idx").on(table.tenantId)]
+);
+
 export const patients = pgTable(
   "patients",
   {
@@ -159,6 +182,7 @@ export const patients = pgTable(
     tenantId: uuid("tenant_id")
       .notNull()
       .references(() => tenants.id, { onDelete: "cascade" }),
+    preferredLocationId: uuid("preferred_location_id").references(() => locations.id, { onDelete: "set null" }),
     mrNumber: varchar("mr_number", { length: 64 }),
     firstName: varchar("first_name", { length: 255 }).notNull(),
     lastName: varchar("last_name", { length: 255 }).notNull(),
@@ -191,6 +215,7 @@ export const appointments = pgTable(
     tenantId: uuid("tenant_id")
       .notNull()
       .references(() => tenants.id, { onDelete: "cascade" }),
+    locationId: uuid("location_id").references(() => locations.id, { onDelete: "set null" }),
     patientId: uuid("patient_id")
       .notNull()
       .references(() => patients.id, { onDelete: "cascade" }),
@@ -203,6 +228,7 @@ export const appointments = pgTable(
     notes: text("notes"),
     reminderSentAt: timestamp("reminder_sent_at", { withTimezone: true }),
     reminderSmsSentAt: timestamp("reminder_sms_sent_at", { withTimezone: true }),
+    reminderWhatsappSentAt: timestamp("reminder_whatsapp_sent_at", { withTimezone: true }),
     videoRoomId: varchar("video_room_id", { length: 255 }),
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
@@ -694,7 +720,16 @@ export const printJobs = pgTable(
   ]
 );
 
-// Tenant-owned credentials: Twilio (SMS), Daily.co (video). No platform keys — tenants add their own.
+// WhatsApp provider slug for tenant_integrations
+export const whatsappProviderEnum = pgEnum("whatsapp_provider", ["twilio_whatsapp", "meta_cloud_api"]);
+
+// Email sending: platform (Resend + FertilityOS footer) vs custom_domain (tenant SMTP, no platform footer).
+export const emailSendingModeEnum = pgEnum("email_sending_mode", ["platform", "custom_domain"]);
+
+// Newsletter/campaign status.
+export const emailCampaignStatusEnum = pgEnum("email_campaign_status", ["draft", "scheduled", "sent"]);
+
+// Tenant-owned credentials: Twilio (SMS), Daily.co (video), WhatsApp (tenant-owned), optional custom SMTP. No platform keys — tenants add their own.
 export const tenantIntegrations = pgTable("tenant_integrations", {
   tenantId: uuid("tenant_id")
     .primaryKey()
@@ -703,9 +738,67 @@ export const tenantIntegrations = pgTable("tenant_integrations", {
   twilioAuthToken: text("twilio_auth_token"),
   twilioPhoneNumber: varchar("twilio_phone_number", { length: 32 }),
   dailyApiKey: text("daily_api_key"),
+  whatsappProvider: whatsappProviderEnum("whatsapp_provider"),
+  whatsappPhoneNumberId: text("whatsapp_phone_number_id"),
+  whatsappAccessToken: text("whatsapp_access_token"),
+  whatsappFromNumber: varchar("whatsapp_from_number", { length: 32 }),
+  whatsappTemplateNamespace: text("whatsapp_template_namespace"),
+  emailSendingMode: emailSendingModeEnum("email_sending_mode").default("platform"),
+  customSmtpHost: text("custom_smtp_host"),
+  customSmtpPort: integer("custom_smtp_port"),
+  customSmtpUser: text("custom_smtp_user"),
+  customSmtpPassword: text("custom_smtp_password"),
+  customSmtpFromEmail: varchar("custom_smtp_from_email", { length: 255 }),
+  customSmtpSecure: boolean("custom_smtp_secure").default(true),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 });
+
+// Newsletter / email campaigns (Phase 8.2). recipientFilter: e.g. "all" or JSON for segments.
+export const emailCampaigns = pgTable(
+  "email_campaigns",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    tenantId: uuid("tenant_id")
+      .notNull()
+      .references(() => tenants.id, { onDelete: "cascade" }),
+    name: varchar("name", { length: 255 }).notNull(),
+    subject: varchar("subject", { length: 512 }).notNull(),
+    bodyHtml: text("body_html").notNull(),
+    bodyText: text("body_text").notNull(),
+    status: emailCampaignStatusEnum("status").notNull().default("draft"),
+    scheduledAt: timestamp("scheduled_at", { withTimezone: true }),
+    sentAt: timestamp("sent_at", { withTimezone: true }),
+    createdById: uuid("created_by_id").references(() => users.id, { onDelete: "set null" }),
+    recipientFilter: text("recipient_filter").notNull().default("all"),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    index("email_campaigns_tenant_status_idx").on(table.tenantId, table.status),
+    index("email_campaigns_scheduled_at_idx").on(table.scheduledAt),
+  ]
+);
+
+// Optional: per-recipient send log (campaignId, patientId, sentAt, provider).
+export const emailSendLog = pgTable(
+  "email_send_log",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    campaignId: uuid("campaign_id")
+      .notNull()
+      .references(() => emailCampaigns.id, { onDelete: "cascade" }),
+    patientId: uuid("patient_id")
+      .notNull()
+      .references(() => patients.id, { onDelete: "cascade" }),
+    sentAt: timestamp("sent_at", { withTimezone: true }).defaultNow().notNull(),
+    provider: varchar("provider", { length: 32 }).notNull(), // 'resend' | 'smtp'
+  },
+  (table) => [
+    index("email_send_log_campaign_idx").on(table.campaignId),
+    index("email_send_log_patient_idx").on(table.patientId),
+  ]
+);
 
 // Trial/waitlist signups: prevent repeat trial abuse (one trial per email/contact).
 export const trialSignups = pgTable(
@@ -718,4 +811,75 @@ export const trialSignups = pgTable(
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   },
   (table) => [uniqueIndex("trial_signups_email_idx").on(table.email)]
+);
+
+// --- LIS/LIMS lab integration (Phase 8.3) ---
+
+export const labConnectorTypeEnum = pgEnum("lab_connector_type", ["lis", "lims"]);
+
+export const labConnectors = pgTable(
+  "lab_connectors",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    tenantId: uuid("tenant_id")
+      .notNull()
+      .references(() => tenants.id, { onDelete: "cascade" }),
+    name: varchar("name", { length: 255 }).notNull(),
+    type: labConnectorTypeEnum("type").notNull(),
+    provider: varchar("provider", { length: 64 }).notNull(), // e.g. hl7_fhir, custom_api, file_import
+    config: jsonb("config").$type<Record<string, unknown>>().notNull().default({}),
+    isActive: boolean("is_active").notNull().default(true),
+    lastSyncAt: timestamp("last_sync_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [index("lab_connectors_tenant_idx").on(table.tenantId)]
+);
+
+export const labOrders = pgTable(
+  "lab_orders",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    tenantId: uuid("tenant_id")
+      .notNull()
+      .references(() => tenants.id, { onDelete: "cascade" }),
+    patientId: uuid("patient_id")
+      .notNull()
+      .references(() => patients.id, { onDelete: "cascade" }),
+    cycleId: uuid("cycle_id").references(() => ivfCycles.id, { onDelete: "set null" }),
+    specimenId: uuid("specimen_id"), // optional FK when specimens table exists
+    connectorId: uuid("connector_id").references(() => labConnectors.id, { onDelete: "set null" }),
+    externalId: varchar("external_id", { length: 255 }),
+    orderCode: varchar("order_code", { length: 128 }),
+    status: varchar("status", { length: 32 }).notNull().default("pending"),
+    requestedAt: timestamp("requested_at", { withTimezone: true }),
+    resultAt: timestamp("result_at", { withTimezone: true }),
+    resultPayload: jsonb("result_payload").$type<Record<string, unknown>>(),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    index("lab_orders_tenant_idx").on(table.tenantId),
+    index("lab_orders_patient_idx").on(table.patientId),
+    index("lab_orders_cycle_idx").on(table.cycleId),
+    index("lab_orders_connector_external_idx").on(table.connectorId, table.externalId),
+  ]
+);
+
+export const labResultMappings = pgTable(
+  "lab_result_mappings",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    connectorId: uuid("connector_id")
+      .notNull()
+      .references(() => labConnectors.id, { onDelete: "cascade" }),
+    externalCode: varchar("external_code", { length: 128 }).notNull(),
+    internalCode: varchar("internal_code", { length: 128 }).notNull(),
+    description: text("description"),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    index("lab_result_mappings_connector_idx").on(table.connectorId),
+    uniqueIndex("lab_result_mappings_connector_external_idx").on(table.connectorId, table.externalCode),
+  ]
 );

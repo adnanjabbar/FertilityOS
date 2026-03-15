@@ -53,7 +53,9 @@ _ (and optionally 1h) before appointment. Use Resend, SendGrid, or nodemailer; s
 
 **Phase 7 completed:** PGT/PGS logging, formulary & prescriptions, full ICD-11 diagnosis, letterhead/QR/patient 2FA, MR printing, SMS reminders, tenant integrations (Twilio/Daily), pricing ($29.99/$49.99/$79.99), 14-day trial and trial signup storage. See `phase-7-handoff.md`. Full WHO ICD-11 MMS seeded via `seed-icd11-full.js`.
 
-**Next batch:** Phase 8 — WhatsApp integration (tenant-owned), newsletter/automated emails (platform vs custom domain), LIS/LIMS lab connectors, optional multi-location. See `phase-8-handoff.md`.
+**Phase 8 completed:** WhatsApp integration (tenant-owned), newsletter/email campaigns (TheFertilityOS footer: gradient “FertilityOS” → www.thefertilityos.com), LIS/LIMS lab connectors, multi-location. See `phase-8-handoff.md`.
+
+**Next batch:** Phase 9 — PWA/mobile foundation, API marketplace/catalog, enterprise/white-label/SSO, security hardening, mobile apps exploration. See `phase-9-handoff.md`.
 
 ---
 

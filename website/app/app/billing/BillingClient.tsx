@@ -22,7 +22,7 @@ type SubscriptionState = {
 
 type SettingsState = {
   defaultCurrency: string;
-  reminderChannel: "email" | "sms" | "both";
+  reminderChannel: "email" | "sms" | "both" | "whatsapp";
 };
 
 export default function BillingClient({ isAdmin = false }: { isAdmin?: boolean }) {
@@ -32,7 +32,7 @@ export default function BillingClient({ isAdmin = false }: { isAdmin?: boolean }
   const [actionLoading, setActionLoading] = useState<"checkout" | "portal" | "settings" | null>(null);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [settingsCurrency, setSettingsCurrency] = useState<string>("USD");
-  const [reminderChannel, setReminderChannel] = useState<"email" | "sms" | "both">("email");
+  const [reminderChannel, setReminderChannel] = useState<"email" | "sms" | "both" | "whatsapp">("email");
   const [reminderSaveLoading, setReminderSaveLoading] = useState(false);
 
   useEffect(() => {
@@ -293,12 +293,13 @@ export default function BillingClient({ isAdmin = false }: { isAdmin?: boolean }
               id="reminder-channel"
               className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:bg-slate-50"
               value={reminderChannel}
-              onChange={(e) => setReminderChannel(e.target.value as "email" | "sms" | "both")}
+              onChange={(e) => setReminderChannel(e.target.value as "email" | "sms" | "both" | "whatsapp")}
               disabled={!isAdmin}
             >
               <option value="email">Email only</option>
               <option value="sms">SMS only</option>
               <option value="both">Email and SMS</option>
+              <option value="whatsapp">WhatsApp only</option>
             </select>
           </div>
           {isAdmin && (

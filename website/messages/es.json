@@ -138,7 +138,16 @@
         "patientPortal": { "name": "Portal del paciente", "description": "Portal con tu marca donde los pacientes ven plan de tratamiento, resultados, citas, facturas y mensajes al equipo." },
         "inventory": { "name": "Gestión de inventario", "description": "Consumibles, medicamentos, reactivos y equipos. Alertas de stock bajo y seguimiento de caducidad." },
         "analytics": { "name": "Análisis e informes", "description": "Dashboards KPI, tasas de éxito, resultados de ciclos, resúmenes financieros y exportación PDF/CSV." },
-        "compliance": { "name": "Cumplimiento y auditoría", "description": "Trazas de auditoría, registros de acceso, herramientas HIPAA y GDPR y políticas de retención." }
+        "compliance": { "name": "Cumplimiento y auditoría", "description": "Trazas de auditoría, registros de acceso, herramientas HIPAA y GDPR y políticas de retención." },
+        "formulary": { "name": "Formulario y prescripciones", "description": "Base de datos de medicamentos y protocolos (p. ej. FIV). Prescripción solo desde formulario o protocolo; seguimiento dispensado y completado." },
+        "icd11": { "name": "Diagnóstico ICD-11", "description": "ICD-11 OMS completo para mortalidad y morbilidad. Búsqueda y asignación de diagnósticos; diagnóstico personalizado opcional con controles por rol." },
+        "letterheadPrint": { "name": "Membrete e impresión", "description": "Subir membrete o plantillas; márgenes y pie. Impresión de recetas con código QR para acceso al portal del paciente." },
+        "mrPrinting": { "name": "Etiquetas MR y pulseras", "description": "Impresión de pulseras, códigos de barras de laboratorio FIV, etiquetas de viales y muestras, sobres de medicación. Zebra, Brother, térmica y PDF." },
+        "auditLogs": { "name": "Registros de auditoría", "description": "Acciones clave registradas para cumplimiento: inicio de sesión, crear/actualizar paciente, crear factura. Vista admin con filtros." },
+        "surrogacy": { "name": "Casos de subrogación", "description": "Seguimiento de casos de subrogación, padres de intención, datos de gestante, estado y fechas. Número de caso y notas por inquilino." },
+        "referrals": { "name": "Programa de referidos", "description": "Códigos y enlaces de referidos; seguimiento de inscripciones. Aplicar código en el registro." },
+        "apiKeys": { "name": "Claves API", "description": "Crear y gestionar claves API para integraciones. Listar, revocar y usar en sistemas externos." },
+        "multiCurrency": { "name": "Multi-moneda", "description": "Moneda por defecto del inquilino (USD, EUR, GBP, etc.). Facturas e importes en la moneda elegida." }
       }
     },
     "howItWorks": {
@@ -290,8 +299,11 @@
       "developers": "Desarrolladores",
       "compliance": "Cumplimiento",
       "auditLog": "Registro de auditoría",
+      "emailCampaigns": "Campañas de email",
       "letterhead": "Membrete e impresión",
+      "locations": "Ubicaciones",
       "integrations": "Integraciones",
+      "labIntegration": "Integración de laboratorio",
       "superDashboard": "Super panel",
       "logOut": "Cerrar sesión",
       "brand": "FertilityOS",

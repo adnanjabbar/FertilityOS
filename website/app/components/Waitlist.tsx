@@ -139,7 +139,7 @@ export default function Waitlist() {
             </div>
             <button
               type="submit"
-              disabled={submitState === "loading"}
+              disabled={false}
               className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-blue-700 text-white font-bold text-base hover:bg-blue-800 transition-all shadow-lg shadow-blue-200 hover:shadow-blue-300 hover:-translate-y-0.5 disabled:opacity-50"
             >
               {t("joinWaitlist")}

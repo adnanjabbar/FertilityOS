@@ -10,6 +10,8 @@ type AppointmentRow = {
   patientFirstName: string;
   patientLastName: string;
   providerId: string | null;
+  locationId: string | null;
+  locationName: string | null;
   title: string | null;
   startAt: string;
   endAt: string;
@@ -20,6 +22,7 @@ type AppointmentRow = {
 };
 
 type PatientOption = { id: string; firstName: string; lastName: string };
+type LocationOption = { id: string; name: string };
 
 const inputClass =
   "w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400";
@@ -44,14 +47,17 @@ export default function AppointmentsClient() {
   const [list, setList] = useState<AppointmentRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [patients, setPatients] = useState<PatientOption[]>([]);
+  const [locations, setLocations] = useState<LocationOption[]>([]);
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [patientFilter, setPatientFilter] = useState("");
+  const [locationFilter, setLocationFilter] = useState("");
   const [showAddForm, setShowAddForm] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
   const [addError, setAddError] = useState<string | null>(null);
   const [form, setForm] = useState({
     patientId: "",
+    locationId: "",
     startAt: "",
     endAt: "",
     type: "consultation",
@@ -67,19 +73,28 @@ export default function AppointmentsClient() {
     }
   }, []);
 
+  const fetchLocations = useCallback(async () => {
+    const res = await fetch("/api/app/locations");
+    if (res.ok) {
+      const data = await res.json();
+      setLocations(data.map((l: { id: string; name: string }) => ({ id: l.id, name: l.name })));
+    }
+  }, []);
+
   const fetchList = useCallback(async () => {
     try {
       const params = new URLSearchParams();
       if (fromDate) params.set("from", new Date(fromDate).toISOString());
       if (toDate) params.set("to", new Date(toDate + "T23:59:59").toISOString());
       if (patientFilter) params.set("patientId", patientFilter);
+      if (locationFilter) params.set("locationId", locationFilter);
       const q = params.toString() ? `?${params.toString()}` : "";
       const res = await fetch(`/api/app/appointments${q}`);
       if (res.ok) setList(await res.json());
     } finally {
       setLoading(false);
     }
-  }, [fromDate, toDate, patientFilter]);
+  }, [fromDate, toDate, patientFilter, locationFilter]);
 
   useEffect(() => {
     setLoading(true);
@@ -111,6 +126,7 @@ export default function AppointmentsClient() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           patientId: form.patientId,
+          locationId: form.locationId.trim() || undefined,
           startAt: start.toISOString(),
           endAt: end.toISOString(),
           type: form.type || "consultation",
@@ -124,7 +140,7 @@ export default function AppointmentsClient() {
         return;
       }
       setShowAddForm(false);
-      setForm({ patientId: "", startAt: "", endAt: "", type: "consultation", title: "", notes: "" });
+      setForm({ patientId: "", locationId: "", startAt: "", endAt: "", type: "consultation", title: "", notes: "" });
       fetchList();
       if (data.id) window.location.href = `/app/appointments/${data.id}`;
     } finally {
@@ -161,6 +177,18 @@ export default function AppointmentsClient() {
             <option key={p.id} value={p.id}>{p.firstName} {p.lastName}</option>
           ))}
         </select>
+        {locations.length > 0 && (
+          <select
+            className={inputClass + " w-auto min-w-[160px]"}
+            value={locationFilter}
+            onChange={(e) => setLocationFilter(e.target.value)}
+          >
+            <option value="">All locations</option>
+            {locations.map((l) => (
+              <option key={l.id} value={l.id}>{l.name}</option>
+            ))}
+          </select>
+        )}
         <button
           type="button"
           onClick={() => setShowAddForm(true)}
@@ -193,6 +221,22 @@ export default function AppointmentsClient() {
                 ))}
               </select>
             </div>
+            {locations.length > 0 && (
+              <div>
+                <label htmlFor="locationId" className={labelClass}>Location</label>
+                <select
+                  id="locationId"
+                  className={inputClass}
+                  value={form.locationId}
+                  onChange={(e) => setForm((f) => ({ ...f, locationId: e.target.value }))}
+                >
+                  <option value="">No specific location</option>
+                  {locations.map((l) => (
+                    <option key={l.id} value={l.id}>{l.name}</option>
+                  ))}
+                </select>
+              </div>
+            )}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="startAt" className={labelClass}>Start *</label>
@@ -285,9 +329,10 @@ export default function AppointmentsClient() {
           </div>
         ) : (
           <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-slate-200 bg-slate-50 text-left text-slate-600 font-medium">
+<thead>
+            <tr className="border-b border-slate-200 bg-slate-50 text-left text-slate-600 font-medium">
                 <th className="px-4 py-3">Patient</th>
+                {locations.length > 0 && <th className="px-4 py-3">Location</th>}
                 <th className="px-4 py-3">Start</th>
                 <th className="px-4 py-3">End</th>
                 <th className="px-4 py-3">Type</th>
@@ -305,6 +350,9 @@ export default function AppointmentsClient() {
                       {a.patientFirstName} {a.patientLastName}
                     </Link>
                   </td>
+                  {locations.length > 0 && (
+                    <td className="px-4 py-3 text-slate-600">{a.locationName ?? "—"}</td>
+                  )}
                   <td className="px-4 py-3 text-slate-600">{formatDateTime(a.startAt)}</td>
                   <td className="px-4 py-3 text-slate-600">{formatDateTime(a.endAt)}</td>
                   <td className="px-4 py-3 text-slate-600 capitalize">{a.type}</td>

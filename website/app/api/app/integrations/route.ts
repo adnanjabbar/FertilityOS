@@ -5,11 +5,25 @@ import { tenantIntegrations } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { z } from "zod";
 
+const WHATSAPP_PROVIDERS = ["twilio_whatsapp", "meta_cloud_api"] as const;
+
 const PATCH_BODY = z.object({
   twilioAccountSid: z.string().trim().optional(),
   twilioAuthToken: z.string().trim().optional(),
   twilioPhoneNumber: z.string().trim().max(32).optional(),
   dailyApiKey: z.string().trim().optional(),
+  whatsappProvider: z.enum(WHATSAPP_PROVIDERS).optional().nullable(),
+  whatsappPhoneNumberId: z.string().trim().optional().nullable(),
+  whatsappAccessToken: z.string().trim().optional().nullable(),
+  whatsappFromNumber: z.string().trim().max(32).optional().nullable(),
+  whatsappTemplateNamespace: z.string().trim().optional().nullable(),
+  emailSendingMode: z.enum(["platform", "custom_domain"]).optional(),
+  customSmtpHost: z.string().trim().optional(),
+  customSmtpPort: z.number().int().min(1).max(65535).optional(),
+  customSmtpUser: z.string().trim().optional(),
+  customSmtpPassword: z.string().trim().optional(),
+  customSmtpFromEmail: z.string().trim().max(255).optional(),
+  customSmtpSecure: z.boolean().optional(),
 });
 
 /**
@@ -27,15 +41,39 @@ export async function GET() {
       twilioAccountSid: tenantIntegrations.twilioAccountSid,
       twilioPhoneNumber: tenantIntegrations.twilioPhoneNumber,
       dailyApiKey: tenantIntegrations.dailyApiKey,
+      whatsappProvider: tenantIntegrations.whatsappProvider,
+      whatsappPhoneNumberId: tenantIntegrations.whatsappPhoneNumberId,
+      whatsappFromNumber: tenantIntegrations.whatsappFromNumber,
+      emailSendingMode: tenantIntegrations.emailSendingMode,
+      customSmtpHost: tenantIntegrations.customSmtpHost,
+      customSmtpPort: tenantIntegrations.customSmtpPort,
+      customSmtpFromEmail: tenantIntegrations.customSmtpFromEmail,
+      customSmtpSecure: tenantIntegrations.customSmtpSecure,
     })
     .from(tenantIntegrations)
     .where(eq(tenantIntegrations.tenantId, session.user.tenantId))
     .limit(1);
 
+  const whatsappConfigured =
+    !!row?.whatsappProvider &&
+    (row.whatsappProvider === "meta_cloud_api"
+      ? !!row.whatsappPhoneNumberId
+      : !!(row.whatsappFromNumber || row.twilioPhoneNumber) && !!row.twilioAccountSid);
+
   return NextResponse.json({
     twilioConfigured: !!(row?.twilioAccountSid && row?.twilioPhoneNumber),
     twilioPhoneNumber: row?.twilioPhoneNumber ? `••••${row.twilioPhoneNumber.slice(-4)}` : null,
     dailyConfigured: !!row?.dailyApiKey,
+    whatsappConfigured,
+    whatsappProvider: row?.whatsappProvider ?? null,
+    whatsappPhoneNumberId: row?.whatsappPhoneNumberId ? `••••${row.whatsappPhoneNumberId.slice(-4)}` : null,
+    whatsappFromNumber: row?.whatsappFromNumber ? `••••${row.whatsappFromNumber.slice(-4)}` : null,
+    emailSendingMode: row?.emailSendingMode ?? "platform",
+    customSmtpConfigured: !!(row?.customSmtpHost && row?.customSmtpFromEmail),
+    customSmtpHost: row?.customSmtpHost ?? null,
+    customSmtpPort: row?.customSmtpPort ?? null,
+    customSmtpFromEmail: row?.customSmtpFromEmail ?? null,
+    customSmtpSecure: row?.customSmtpSecure ?? true,
   });
 }
 
@@ -64,6 +102,18 @@ export async function PATCH(request: Request) {
   if (parsed.data.twilioAuthToken !== undefined) payload.twilioAuthToken = parsed.data.twilioAuthToken || null;
   if (parsed.data.twilioPhoneNumber !== undefined) payload.twilioPhoneNumber = parsed.data.twilioPhoneNumber || null;
   if (parsed.data.dailyApiKey !== undefined) payload.dailyApiKey = parsed.data.dailyApiKey || null;
+  if (parsed.data.emailSendingMode !== undefined) payload.emailSendingMode = parsed.data.emailSendingMode;
+  if (parsed.data.customSmtpHost !== undefined) payload.customSmtpHost = parsed.data.customSmtpHost || null;
+  if (parsed.data.customSmtpPort !== undefined) payload.customSmtpPort = parsed.data.customSmtpPort ?? null;
+  if (parsed.data.customSmtpUser !== undefined) payload.customSmtpUser = parsed.data.customSmtpUser || null;
+  if (parsed.data.customSmtpPassword !== undefined) payload.customSmtpPassword = parsed.data.customSmtpPassword || null;
+  if (parsed.data.customSmtpFromEmail !== undefined) payload.customSmtpFromEmail = parsed.data.customSmtpFromEmail || null;
+  if (parsed.data.customSmtpSecure !== undefined) payload.customSmtpSecure = parsed.data.customSmtpSecure;
+  if (parsed.data.whatsappProvider !== undefined) payload.whatsappProvider = parsed.data.whatsappProvider ?? null;
+  if (parsed.data.whatsappPhoneNumberId !== undefined) payload.whatsappPhoneNumberId = parsed.data.whatsappPhoneNumberId ?? null;
+  if (parsed.data.whatsappAccessToken !== undefined) payload.whatsappAccessToken = parsed.data.whatsappAccessToken ?? null;
+  if (parsed.data.whatsappFromNumber !== undefined) payload.whatsappFromNumber = parsed.data.whatsappFromNumber ?? null;
+  if (parsed.data.whatsappTemplateNamespace !== undefined) payload.whatsappTemplateNamespace = parsed.data.whatsappTemplateNamespace ?? null;
 
   const [existing] = await db
     .select({ tenantId: tenantIntegrations.tenantId })

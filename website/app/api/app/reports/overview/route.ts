@@ -24,6 +24,7 @@ export async function GET(request: Request) {
   const fromParam = url.searchParams.get("from");
   const toParam = url.searchParams.get("to");
   const includeChart = url.searchParams.get("chart") === "true";
+  const locationId = url.searchParams.get("locationId")?.trim() || null;
 
   const tenantId = session.user.tenantId;
   let fromDate: Date;
@@ -47,16 +48,19 @@ export async function GET(request: Request) {
   const fromTs = fromDate;
   const toTs = new Date(toDate.getTime() + 24 * 60 * 60 * 1000);
 
+  const appointmentConditions = [
+    eq(appointments.tenantId, tenantId),
+    gte(appointments.startAt, fromTs),
+    lte(appointments.startAt, toTs),
+  ];
+  if (locationId) {
+    appointmentConditions.push(eq(appointments.locationId, locationId));
+  }
+
   const [appointmentsCount] = await db
     .select({ count: count() })
     .from(appointments)
-    .where(
-      and(
-        eq(appointments.tenantId, tenantId),
-        gte(appointments.startAt, fromTs),
-        lte(appointments.startAt, toTs)
-      )
-    );
+    .where(and(...appointmentConditions));
 
   const [patientsCount] = await db
     .select({ count: count() })
@@ -104,13 +108,7 @@ export async function GET(request: Request) {
         count: count(),
       })
       .from(appointments)
-      .where(
-        and(
-          eq(appointments.tenantId, tenantId),
-          gte(appointments.startAt, fromTs),
-          lte(appointments.startAt, toTs)
-        )
-      )
+      .where(and(...appointmentConditions))
       .groupBy(sql`DATE(${appointments.startAt})`)
       .orderBy(sql`DATE(${appointments.startAt})`);
     appointmentsByDay = byDay.map((r) => ({ date: r.date, count: Number(r.count) }));

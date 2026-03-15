@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { db } from "@/db";
-import { appointments, patients } from "@/db/schema";
+import { appointments, patients, locations } from "@/db/schema";
 import { eq, and, desc, gte, lte } from "drizzle-orm";
 import { z } from "zod";
 
 const createAppointmentSchema = z.object({
   patientId: z.string().uuid(),
   providerId: z.string().uuid().optional().nullable(),
+  locationId: z.string().uuid().optional().nullable(),
   title: z.string().max(255).optional(),
   startAt: z.string().datetime({ message: "Invalid start date/time" }),
   endAt: z.string().datetime({ message: "Invalid end date/time" }),
@@ -25,10 +26,14 @@ export async function GET(request: Request) {
   const fromParam = url.searchParams.get("from");
   const toParam = url.searchParams.get("to");
   const patientId = url.searchParams.get("patientId")?.trim() || null;
+  const locationId = url.searchParams.get("locationId")?.trim() || null;
 
   const conditions = [eq(appointments.tenantId, session.user.tenantId)];
   if (patientId) {
     conditions.push(eq(appointments.patientId, patientId));
+  }
+  if (locationId) {
+    conditions.push(eq(appointments.locationId, locationId));
   }
   if (fromParam) {
     try {
@@ -58,6 +63,8 @@ export async function GET(request: Request) {
       patientFirstName: patients.firstName,
       patientLastName: patients.lastName,
       providerId: appointments.providerId,
+      locationId: appointments.locationId,
+      locationName: locations.name,
       title: appointments.title,
       startAt: appointments.startAt,
       endAt: appointments.endAt,
@@ -68,6 +75,7 @@ export async function GET(request: Request) {
     })
     .from(appointments)
     .innerJoin(patients, eq(appointments.patientId, patients.id))
+    .leftJoin(locations, eq(appointments.locationId, locations.id))
     .where(conditions.length > 1 ? and(...conditions) : conditions[0])
     .orderBy(desc(appointments.startAt));
 
@@ -114,12 +122,29 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Patient not found" }, { status: 404 });
   }
 
+  if (data.locationId) {
+    const [loc] = await db
+      .select({ id: locations.id })
+      .from(locations)
+      .where(
+        and(
+          eq(locations.id, data.locationId),
+          eq(locations.tenantId, session.user.tenantId)
+        )
+      )
+      .limit(1);
+    if (!loc) {
+      return NextResponse.json({ error: "Location not found" }, { status: 404 });
+    }
+  }
+
   const [created] = await db
     .insert(appointments)
     .values({
       tenantId: session.user.tenantId,
       patientId: data.patientId,
       providerId: data.providerId || null,
+      locationId: data.locationId || null,
       title: data.title?.trim() || null,
       startAt,
       endAt,
@@ -131,6 +156,7 @@ export async function POST(request: Request) {
       id: appointments.id,
       patientId: appointments.patientId,
       providerId: appointments.providerId,
+      locationId: appointments.locationId,
       title: appointments.title,
       startAt: appointments.startAt,
       endAt: appointments.endAt,

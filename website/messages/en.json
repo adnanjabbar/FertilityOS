@@ -138,7 +138,16 @@
         "patientPortal": { "name": "Patient Portal", "description": "A branded, patient-facing portal where patients can view their treatment plan, test results, appointments, invoices, and message their care team securely." },
         "inventory": { "name": "Inventory Management", "description": "Track consumables, medications, lab reagents, and equipment. Set low-stock alerts, manage purchase orders, and maintain expiry tracking." },
         "analytics": { "name": "Analytics & Reporting", "description": "KPI dashboards, success rate analytics, cycle outcome reports, financial summaries, and custom report builder. Export to PDF or CSV." },
-        "compliance": { "name": "Compliance & Audit", "description": "Automated audit trails, data access logs, HIPAA and GDPR compliance tools, data retention policies, and regulatory report generation." }
+        "compliance": { "name": "Compliance & Audit", "description": "Automated audit trails, data access logs, HIPAA and GDPR compliance tools, data retention policies, and regulatory report generation." },
+        "formulary": { "name": "Formulary & Prescriptions", "description": "Clinic-owned medication database and protocols (e.g. IVF). Prescribe only from formulary or protocol; track dispensed and completed." },
+        "icd11": { "name": "ICD-11 Diagnosis", "description": "Full WHO ICD-11 for Mortality and Morbidity. Search and assign diagnoses; optional custom diagnosis with role-based controls." },
+        "letterheadPrint": { "name": "Letterhead & Print", "description": "Upload letterhead or use templates; set margins and footer. Prescription print with QR code for patient portal access." },
+        "mrPrinting": { "name": "MR Labels & Wrist Bands", "description": "Print wrist bands, IVF lab barcodes, vial and sample labels, medication envelopes. Zebra, Brother, thermal, and PDF support." },
+        "auditLogs": { "name": "Audit Logs", "description": "Key actions logged for compliance: login, patient create/update, invoice create. Admin view with filters." },
+        "surrogacy": { "name": "Surrogacy Cases", "description": "Track surrogacy cases, intended parents, surrogate details, status and dates. Case number and notes per tenant." },
+        "referrals": { "name": "Referral Program", "description": "Referral codes and share links; track signups. Apply code at registration for attribution." },
+        "apiKeys": { "name": "API Keys", "description": "Create and manage API keys for integrations. List, revoke, and use keys for external systems." },
+        "multiCurrency": { "name": "Multi-Currency", "description": "Tenant default currency (USD, EUR, GBP, etc.). Invoices and amounts display in chosen currency." }
       }
     },
     "howItWorks": {
@@ -290,8 +299,11 @@
       "developers": "Developers",
       "compliance": "Compliance",
       "auditLog": "Audit log",
+      "emailCampaigns": "Email campaigns",
       "letterhead": "Letterhead & printing",
+      "locations": "Locations",
       "integrations": "Integrations",
+      "labIntegration": "Lab integration",
       "superDashboard": "Super Dashboard",
       "logOut": "Log out",
       "brand": "FertilityOS",
