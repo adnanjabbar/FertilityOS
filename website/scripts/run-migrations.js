@@ -67,10 +67,29 @@ async function main() {
   const dir = join(__dirname, "..", "db", "migrations");
   try {
     await client.connect();
+    // Ensure migrations tracking table exists
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS _schema_migrations (
+        filename varchar(255) PRIMARY KEY,
+        applied_at timestamptz DEFAULT now() NOT NULL
+      )
+    `);
+    const { rows: applied } = await client.query(
+      "SELECT filename FROM _schema_migrations"
+    );
+    const appliedSet = new Set(applied.map((r) => r.filename));
     for (const file of migrations) {
+      if (appliedSet.has(file)) {
+        console.log("Skip (already applied):", file);
+        continue;
+      }
       const path = join(dir, file);
       const sql = readFileSync(path, "utf8");
       await client.query(sql);
+      await client.query(
+        "INSERT INTO _schema_migrations (filename) VALUES ($1)",
+        [file]
+      );
       console.log("Ran:", file);
     }
     console.log("Migrations finished successfully.");

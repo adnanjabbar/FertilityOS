@@ -47,7 +47,7 @@ The database starts **empty**. You must run the FertilityOS schema and seed data
 
 ### Option A: Run from your computer (one-click script)
 
-We provide a script that runs both migration files. From the repo:
+We provide a script that runs **all** migration files (0000 through 0029). From the repo:
 
 1. Ensure **`website/.env`** contains your database URL:
    ```bash
@@ -60,7 +60,7 @@ We provide a script that runs both migration files. From the repo:
    $env:NODE_TLS_REJECT_UNAUTHORIZED="0"
    node scripts/run-migrations.js
    ```
-   You should see: `Ran: 0000_phase2_tenants_users_roles.sql`, `Ran: 0001_invitations.sql`, `Ran: 0002_patients.sql`, `Ran: 0003_super_admin.sql`, `Ran: 0004_appointments.sql`, then `Migrations finished successfully.` (and any later migrations as we add them).
+   You should see each file logged (e.g. `Ran: 0000_...`, `Ran: 0011_inventory_items.sql`, … through `0029_locations_multi_location.sql`), then `Migrations finished successfully.` If your **production** app already runs but shows errors like **`relation "inventory_items" does not exist`**, the production DB is missing migrations: set `DATABASE_URL` in `website/.env` to your production DB URL (from the DO dashboard) and run the same script once.
 
 ### Option B: Run from your computer with psql
 
@@ -145,7 +145,7 @@ In **App Platform → your app → Web Service (e.g. fertilityos-website) → Se
 
 - [ ] Create PostgreSQL 18 database in App Platform (database name e.g. `fertilityos`).
 - [ ] Ensure web service has `DATABASE_URL` pointing to that database.
-- [ ] Run all migration files in order (0000 through 0004 and any later ones) once (Option A or B).
+- [ ] Run all migration files in order (0000 through 0029) once (Option A or B). Use Option A script against production `DATABASE_URL` if you see "relation does not exist" errors.
 - [ ] Set `AUTH_SECRET` and `NEXTAUTH_URL`; redeploy.
 - [ ] Test registration and login at `/register` and `/login`.
 

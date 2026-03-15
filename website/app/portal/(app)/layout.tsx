@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { signOut } from "@/auth";
 import { User, Calendar, FileText, LayoutDashboard, LogOut, Pill } from "lucide-react";
+import { signOutPortal } from "../actions";
 
 export default function PortalAppLayout({
   children,
@@ -50,12 +50,7 @@ export default function PortalAppLayout({
               <FileText className="w-4 h-4" />
               Invoices
             </Link>
-            <form
-              action={async () => {
-                "use server";
-                await signOut({ redirectTo: "/portal/login" });
-              }}
-            >
+            <form action={signOutPortal}>
               <button
                 type="submit"
                 className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 text-sm"
