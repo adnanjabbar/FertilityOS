@@ -46,6 +46,19 @@ export async function POST(request: Request) {
     });
 
     if (!result.ok) {
+      if (context === "patient_verify" && patientId) {
+        const session = await auth();
+        if (session?.user?.tenantId) {
+          await logAudit({
+            tenantId: session.user.tenantId,
+            userId: session.user.id,
+            action: "auth.phone_verification_failed",
+            entityType: "patient",
+            entityId: patientId,
+            details: { context: "patient_verify" },
+          }).catch(() => {});
+        }
+      }
       return NextResponse.json({ error: result.error }, { status: 400 });
     }
 

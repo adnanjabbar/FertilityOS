@@ -551,6 +551,30 @@ export const apiKeys = pgTable(
   (table) => [index("api_keys_tenant_idx").on(table.tenantId)]
 );
 
+export const userSessions = pgTable(
+  "user_sessions",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    tenantId: uuid("tenant_id")
+      .notNull()
+      .references(() => tenants.id, { onDelete: "cascade" }),
+    sessionId: varchar("session_id", { length: 255 }).notNull(),
+    userAgent: text("user_agent"),
+    ipAddress: varchar("ip_address", { length: 45 }),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    lastUsedAt: timestamp("last_used_at", { withTimezone: true }),
+    revokedAt: timestamp("revoked_at", { withTimezone: true }),
+  },
+  (table) => [
+    uniqueIndex("user_sessions_session_id_idx").on(table.sessionId),
+    index("user_sessions_user_idx").on(table.userId),
+    index("user_sessions_tenant_idx").on(table.tenantId),
+  ]
+);
+
 export const auditLogs = pgTable(
   "audit_logs",
   {

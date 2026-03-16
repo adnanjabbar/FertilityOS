@@ -5,6 +5,7 @@ import { db } from "@/db";
 import { tenants, users, referralCodes, referralSignups } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
 import { consumeVerifiedEmail } from "@/lib/email-verification";
+import { validateStaffPassword } from "@/lib/password-policy";
 
 const registerSchema = z.object({
   ref: z.string().max(64).optional(),
@@ -26,7 +27,7 @@ const registerSchema = z.object({
   }),
   admin: z.object({
     email: z.string().email("Invalid email"),
-    password: z.string().min(8, "Password must be at least 8 characters"),
+    password: z.string().min(1, "Password is required"),
     fullName: z.string().min(1, "Full name is required").max(255),
     phone: z.string().max(64).optional(),
   }),
@@ -46,6 +47,14 @@ export async function POST(request: Request) {
 
     const { clinic, admin, ref: refCode, tenantSlug } = parsed.data;
     const email = admin.email.trim().toLowerCase();
+
+    const passwordValidation = validateStaffPassword(admin.password);
+    if (!passwordValidation.valid) {
+      return NextResponse.json(
+        { error: passwordValidation.message },
+        { status: 400 }
+      );
+    }
 
     const emailVerified = await consumeVerifiedEmail({
       email,

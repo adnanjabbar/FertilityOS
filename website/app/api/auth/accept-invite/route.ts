@@ -4,11 +4,12 @@ import { invitations, users } from "@/db/schema";
 import { eq, and, isNull } from "drizzle-orm";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
+import { validateStaffPassword } from "@/lib/password-policy";
 
 const bodySchema = z.object({
   token: z.string().min(1),
   fullName: z.string().min(1, "Full name is required").max(255),
-  password: z.string().min(8, "Password must be at least 8 characters"),
+  password: z.string().min(1, "Password is required"),
   phone: z.string().max(64).optional(),
 });
 
@@ -24,6 +25,14 @@ export async function POST(request: Request) {
 
   const { token, fullName, password, phone: rawPhone } = parsed.data;
   const phone = rawPhone?.trim().replace(/\s/g, "") || undefined;
+
+  const passwordValidation = validateStaffPassword(password);
+  if (!passwordValidation.valid) {
+    return NextResponse.json(
+      { error: passwordValidation.message },
+      { status: 400 }
+    );
+  }
 
   const [inv] = await db
     .select()

@@ -115,7 +115,7 @@ export default function InvitePage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!token || !fullName.trim() || password.length < 8) return;
+    if (!token || !fullName.trim()) return;
     setError(null);
     setSubmitting(true);
     try {

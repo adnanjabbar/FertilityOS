@@ -2,8 +2,9 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import AzureAD from "next-auth/providers/azure-ad";
+import { headers } from "next/headers";
 import { db } from "./db";
-import { users, tenants, patients, patientPortalTokens } from "./db/schema";
+import { users, tenants, patients, patientPortalTokens, userSessions } from "./db/schema";
 import { eq, and, gt, isNull } from "drizzle-orm";
 import bcrypt from "bcryptjs";
 import { logAudit } from "./lib/audit";
@@ -31,10 +32,59 @@ declare module "@auth/core/jwt" {
     roleSlug: string;
     tenantName?: string;
     patientId?: string;
+    sessionId?: string;
   }
 }
 
 const OAUTH_PROVIDERS = ["google", "azure-ad"] as const;
+
+async function upsertUserSessionFromToken(token: import("@auth/core/jwt").JWT) {
+  if (!token.id || !token.tenantId || !token.sessionId) return;
+
+  const hdrs = headers();
+  const userAgent = hdrs.get("user-agent") ?? undefined;
+  const forwardedFor = hdrs.get("x-forwarded-for");
+  const ipAddress = forwardedFor?.split(",")[0]?.trim() || hdrs.get("x-real-ip") || undefined;
+
+  const now = new Date();
+
+  const [existing] = await db
+    .select({
+      id: userSessions.id,
+      revokedAt: userSessions.revokedAt,
+    })
+    .from(userSessions)
+    .where(eq(userSessions.sessionId, token.sessionId))
+    .limit(1);
+
+  if (existing) {
+    await db
+      .update(userSessions)
+      .set({
+        lastUsedAt: now,
+        ...(userAgent ? { userAgent } : {}),
+        ...(ipAddress ? { ipAddress } : {}),
+      })
+      .where(eq(userSessions.id, existing.id));
+
+    if (existing.revokedAt) {
+      token.id = "";
+      token.tenantId = "";
+      token.roleSlug = "";
+    }
+    return;
+  }
+
+  await db.insert(userSessions).values({
+    userId: token.id,
+    tenantId: token.tenantId,
+    sessionId: token.sessionId,
+    userAgent,
+    ipAddress,
+    createdAt: now,
+    lastUsedAt: now,
+  });
+}
 
 // Production (e.g. DigitalOcean): set AUTH_TRUST_HOST=true and AUTH_URL in env to avoid 503 UntrustedHost.
 export const { handlers, auth, signIn, signOut } = NextAuth({
@@ -85,7 +135,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
         if (!row || !row.passwordHash) return null;
         const ok = await bcrypt.compare(password, row.passwordHash);
-        if (!ok) return null;
+        if (!ok) {
+          void logAudit({
+            tenantId: row.tenantId,
+            userId: row.id,
+            action: "auth.sign_in_failed",
+            entityType: "user",
+            entityId: row.id,
+            details: { email: row.email },
+          }).catch(() => {});
+          return null;
+        }
 
         return {
           id: row.id,
@@ -148,6 +208,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     async jwt({ token, user, account }) {
+      if (!token.sessionId) {
+        token.sessionId = crypto.randomUUID();
+      }
       // OAuth sign-in: resolve or create user in DB and set token from our user shape (dynamic import to avoid Node crypto in Edge)
       if (account && OAUTH_PROVIDERS.includes(account.provider as (typeof OAUTH_PROVIDERS)[number])) {
         const oauthEmail = (user?.email ?? token.email ?? "") as string;
@@ -176,6 +239,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             details: { email: resolved.email, roleSlug: resolved.roleSlug, provider: account.provider },
           }).catch(() => {});
         }
+        await upsertUserSessionFromToken(token as any);
         return token;
       }
       // Credentials / portal-token sign-in
@@ -196,9 +260,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           details: { email: user.email, roleSlug: user.roleSlug },
         }).catch(() => {});
       }
+      await upsertUserSessionFromToken(token as any);
       return token;
     },
     async session({ session, token }) {
+      if (!token.id) {
+        return null as any;
+      }
       if (session.user) {
         session.user.id = token.id ?? "";
         session.user.email = token.email ?? "";
