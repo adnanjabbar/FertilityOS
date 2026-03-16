@@ -9,9 +9,14 @@ type LabTest = {
   id: string;
   code: string;
   name: string;
+  category: string | null;
   unit: string | null;
   referenceRangeLow: string | null;
   referenceRangeHigh: string | null;
+  referenceRangeMaleLow: string | null;
+  referenceRangeMaleHigh: string | null;
+  referenceRangeFemaleLow: string | null;
+  referenceRangeFemaleHigh: string | null;
   isPanel: boolean;
 };
 
@@ -21,9 +26,20 @@ export default function NewLabOrderClient() {
   const [tests, setTests] = useState<LabTest[]>([]);
   const [patientId, setPatientId] = useState("");
   const [testIds, setTestIds] = useState<Set<string>>(new Set());
+  const [testSearch, setTestSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const filteredTests = tests.filter(
+    (t) =>
+      !t.isPanel &&
+      (testSearch.trim() === "" ||
+        [t.code, t.name, t.category].some(
+          (x) => x && String(x).toLowerCase().includes(testSearch.toLowerCase())
+        )
+      )
+  );
 
   useEffect(() => {
     Promise.all([
@@ -99,29 +115,54 @@ export default function NewLabOrderClient() {
       </div>
 
       <div>
-        <label className="mb-2 block text-sm font-semibold text-slate-700">Tests</label>
+        <label className="mb-2 block text-sm font-semibold text-slate-700">Tests (NABL-style catalog)</label>
         {tests.length === 0 ? (
           <p className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
-            No tests in catalog. Add tests to create orders. (Test catalog UI coming soon; for now use API or DB.)
+            No tests in catalog. Run: <code className="bg-amber-100 px-1">node scripts/seed-lab-tests-nabl.js</code> from
+            the <code className="bg-amber-100 px-1">website</code> folder to load the default NABL-style test list.
           </p>
         ) : (
-          <ul className="space-y-2 rounded-xl border border-slate-200 bg-white p-4">
-            {tests.filter((t) => !t.isPanel).map((t) => (
-              <li key={t.id} className="flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  id={t.id}
-                  checked={testIds.has(t.id)}
-                  onChange={() => toggleTest(t.id)}
-                  className="h-4 w-4 rounded border-slate-300 text-blue-600"
-                />
-                <label htmlFor={t.id} className="cursor-pointer text-sm text-slate-900">
-                  {t.code} — {t.name}
-                  {t.unit && ` (${t.unit})`}
-                </label>
-              </li>
-            ))}
-          </ul>
+          <>
+            <input
+              type="search"
+              placeholder="Search by code, name, or category…"
+              value={testSearch}
+              onChange={(e) => setTestSearch(e.target.value)}
+              className="mb-3 w-full rounded-xl border border-slate-200 px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-blue-400"
+            />
+            <ul className="max-h-80 space-y-2 overflow-y-auto rounded-xl border border-slate-200 bg-white p-4">
+              {filteredTests.map((t) => (
+                <li key={t.id} className="flex items-start gap-3">
+                  <input
+                    type="checkbox"
+                    id={t.id}
+                    checked={testIds.has(t.id)}
+                    onChange={() => toggleTest(t.id)}
+                    className="mt-1 h-4 w-4 shrink-0 rounded border-slate-300 text-blue-600"
+                  />
+                  <label htmlFor={t.id} className="cursor-pointer text-sm">
+                    <span className="font-medium text-slate-900">
+                      {t.code} — {t.name}
+                    </span>
+                    {t.category && (
+                      <span className="ml-2 text-xs text-slate-500">({t.category})</span>
+                    )}
+                    {t.unit && <span className="text-slate-600"> · {t.unit}</span>}
+                    {(t.referenceRangeMaleLow != null || t.referenceRangeFemaleLow != null) && (
+                      <span className="block mt-0.5 text-xs text-slate-500">
+                        Male: {t.referenceRangeMaleLow ?? "—"}–{t.referenceRangeMaleHigh ?? "—"}
+                        {" · "}
+                        Female: {t.referenceRangeFemaleLow ?? "—"}–{t.referenceRangeFemaleHigh ?? "—"}
+                      </span>
+                    )}
+                  </label>
+                </li>
+              ))}
+            </ul>
+            {filteredTests.length === 0 && testSearch.trim() !== "" && (
+              <p className="mt-2 text-sm text-slate-500">No tests match &quot;{testSearch}&quot;</p>
+            )}
+          </>
         )}
       </div>
 

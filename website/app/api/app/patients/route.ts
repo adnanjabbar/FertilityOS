@@ -19,6 +19,14 @@ const createPatientSchema = z.object({
   country: z.string().max(2).optional(),
   postalCode: z.string().max(32).optional(),
   gender: z.string().max(32).optional(),
+  genderIdentity: z.string().max(64).optional(),
+  relationshipStatus: z.string().max(32).optional(),
+  coupleType: z.string().max(32).optional(),
+  spouseFirstName: z.string().max(255).optional(),
+  spouseLastName: z.string().max(255).optional(),
+  spouseDateOfBirth: z.string().optional(),
+  spouseEmail: z.string().email().optional().or(z.literal("")),
+  spousePhone: z.string().max(64).optional(),
   notes: z.string().optional(),
 });
 
@@ -28,36 +36,41 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const url = new URL(request.url);
-  const q = url.searchParams.get("q")?.trim() || "";
+  try {
+    const url = new URL(request.url);
+    const q = url.searchParams.get("q")?.trim() || "";
 
-  const conditions = [eq(patients.tenantId, session.user.tenantId)];
-  if (q.length > 0) {
-    const pattern = `%${q}%`;
-    conditions.push(
-      or(
-        ilike(patients.firstName, pattern),
-        ilike(patients.lastName, pattern),
-        ilike(patients.email, pattern)
-      )!
-    );
+    const conditions = [eq(patients.tenantId, session.user.tenantId)];
+    if (q.length > 0) {
+      const pattern = `%${q}%`;
+      conditions.push(
+        or(
+          ilike(patients.firstName, pattern),
+          ilike(patients.lastName, pattern),
+          ilike(patients.email, pattern)
+        )!
+      );
+    }
+
+    const list = await db
+      .select({
+        id: patients.id,
+        firstName: patients.firstName,
+        lastName: patients.lastName,
+        dateOfBirth: patients.dateOfBirth,
+        email: patients.email,
+        phone: patients.phone,
+        createdAt: patients.createdAt,
+      })
+      .from(patients)
+      .where(conditions.length > 1 ? and(...conditions) : conditions[0])
+      .orderBy(desc(patients.createdAt));
+
+    return NextResponse.json(list);
+  } catch (err) {
+    console.error("GET /api/app/patients error:", err);
+    return NextResponse.json([]);
   }
-
-  const list = await db
-    .select({
-      id: patients.id,
-      firstName: patients.firstName,
-      lastName: patients.lastName,
-      dateOfBirth: patients.dateOfBirth,
-      email: patients.email,
-      phone: patients.phone,
-      createdAt: patients.createdAt,
-    })
-    .from(patients)
-    .where(conditions.length > 1 ? and(...conditions) : conditions[0])
-    .orderBy(desc(patients.createdAt));
-
-  return NextResponse.json(list);
 }
 
 export async function POST(request: Request) {
@@ -88,6 +101,7 @@ export async function POST(request: Request) {
 
   const mrNumber = await generateNextMrNumber(session.user.tenantId);
 
+  const spouseDateOfBirth = data.spouseDateOfBirth ? new Date(data.spouseDateOfBirth) : null;
   const [created] = await db
     .insert(patients)
     .values({
@@ -104,6 +118,14 @@ export async function POST(request: Request) {
       country: data.country?.trim().toUpperCase() || null,
       postalCode: data.postalCode?.trim() || null,
       gender: data.gender?.trim() || null,
+      genderIdentity: data.genderIdentity?.trim() || null,
+      relationshipStatus: data.relationshipStatus?.trim() || null,
+      coupleType: data.coupleType?.trim() || null,
+      spouseFirstName: data.spouseFirstName?.trim() || null,
+      spouseLastName: data.spouseLastName?.trim() || null,
+      spouseDateOfBirth,
+      spouseEmail: data.spouseEmail?.trim() || null,
+      spousePhone: data.spousePhone?.trim() || null,
       notes: data.notes?.trim() || null,
     })
     .returning({

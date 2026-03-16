@@ -38,10 +38,22 @@ TheFertilityOS includes a **native Lab Information Management System (LIS)** so 
 - **Native LIS:** Orders created and managed inside the platform; `connector_id` is null. Use test catalog, specimens, and order items for full in-house workflow.
 - Both can coexist: some orders from external LIS, some native.
 
+## NABL-style test catalog (default seed)
+
+- **Seed data:** `db/seed-data/nabl-style-tests.json` contains 40+ common pathology tests with category, unit, and **male/female reference ranges** (aligned with NABL-style categories: Haematology, Clinical Biochemistry, Endocrinology, Coagulation, Immunology).
+- **Seed script:** From `website/` run `node scripts/seed-lab-tests-nabl.js` (optionally pass a tenant ID). Inserts into `lab_tests` with ON CONFLICT DO NOTHING so safe to re-run. Requires migrations 0030 and 0031.
+- **New order page:** Search bar filters by code, name, or category; each test shows category, unit, and male/female reference ranges.
+
+## External lab reports (traceability)
+
+- **Table:** `lab_report_documents` — patient_id, lab_name, lab_location, mr_number_on_report, file_key (for upload reference), notes, reported_at.
+- **Purpose:** When a patient brings an external lab report, staff can record which lab, where, and the MR number on that report for traceability. File upload (file_key) can be wired to object storage later.
+- **UI:** Add “Add external report” on patient detail or Lab → record lab name, location, MR number; upload document (API/UI to be added).
+
 ## Next steps (future work)
 
-- **Test catalog UI:** CRUD for `lab_tests` and `lab_panels` (e.g. Settings → Lab catalog or /app/lab/tests).
-- **Specimens UI:** Create/list specimens, link to orders and order items.
-- **Result entry:** Form to enter result value/unit per order item, set status, sign off (performed_by).
-- **Reporting:** Export results, reference range flags, cumulative reports.
-- **Optional:** QC, instruments, batch result entry.
+- **Lab report document UI:** Form to add external report (lab name, location, MR number) + file upload endpoint.
+- **Result entry:** Form to enter result value/unit per order item on order detail, set status, sign off (performed_by).
+- **Test catalog UI:** CRUD for `lab_tests` and `lab_panels` (e.g. Settings → Lab catalog).
+- **Specimens UI:** Create/list specimens, link to orders.
+- **Reporting:** Export results, reference range flags.

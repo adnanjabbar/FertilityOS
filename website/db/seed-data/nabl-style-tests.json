@@ -1,0 +1,5422 @@
+[
+  {
+    "code": "HB",
+    "name": "Haemoglobin",
+    "category": "Haematology",
+    "unit": "g/dL",
+    "referenceRangeMaleLow": "13",
+    "referenceRangeMaleHigh": "17",
+    "referenceRangeFemaleLow": "11",
+    "referenceRangeFemaleHigh": "15"
+  },
+  {
+    "code": "RBC",
+    "name": "Red Blood Cell Count",
+    "category": "Haematology",
+    "unit": "million/cumm",
+    "referenceRangeMaleLow": "4.5",
+    "referenceRangeMaleHigh": "5.5",
+    "referenceRangeFemaleLow": "4",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "WBC",
+    "name": "Total Leukocyte Count",
+    "category": "Haematology",
+    "unit": "/cumm",
+    "referenceRangeMaleLow": "4000",
+    "referenceRangeMaleHigh": "11000",
+    "referenceRangeFemaleLow": "4000",
+    "referenceRangeFemaleHigh": "11000"
+  },
+  {
+    "code": "PLT",
+    "name": "Platelet Count",
+    "category": "Haematology",
+    "unit": "/cumm",
+    "referenceRangeMaleLow": "150000",
+    "referenceRangeMaleHigh": "400000",
+    "referenceRangeFemaleLow": "150000",
+    "referenceRangeFemaleHigh": "400000"
+  },
+  {
+    "code": "PCV",
+    "name": "Packed Cell Volume",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "40",
+    "referenceRangeMaleHigh": "50",
+    "referenceRangeFemaleLow": "36",
+    "referenceRangeFemaleHigh": "46"
+  },
+  {
+    "code": "HCT",
+    "name": "Hematocrit",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "40",
+    "referenceRangeMaleHigh": "50",
+    "referenceRangeFemaleLow": "36",
+    "referenceRangeFemaleHigh": "46"
+  },
+  {
+    "code": "MCV",
+    "name": "Mean Corpuscular Volume",
+    "category": "Haematology",
+    "unit": "fL",
+    "referenceRangeMaleLow": "80",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "80",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "MCH",
+    "name": "Mean Corpuscular Haemoglobin",
+    "category": "Haematology",
+    "unit": "pg",
+    "referenceRangeMaleLow": "27",
+    "referenceRangeMaleHigh": "32",
+    "referenceRangeFemaleLow": "27",
+    "referenceRangeFemaleHigh": "32"
+  },
+  {
+    "code": "MCHC",
+    "name": "Mean Corpuscular Haemoglobin Concentration",
+    "category": "Haematology",
+    "unit": "g/dL",
+    "referenceRangeMaleLow": "32",
+    "referenceRangeMaleHigh": "36",
+    "referenceRangeFemaleLow": "32",
+    "referenceRangeFemaleHigh": "36"
+  },
+  {
+    "code": "RETIC",
+    "name": "Reticulocyte Count",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0.5",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "NEUT",
+    "name": "Neutrophils",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "40",
+    "referenceRangeMaleHigh": "75",
+    "referenceRangeFemaleLow": "40",
+    "referenceRangeFemaleHigh": "75"
+  },
+  {
+    "code": "LYMPH",
+    "name": "Lymphocytes",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "20",
+    "referenceRangeMaleHigh": "45",
+    "referenceRangeFemaleLow": "20",
+    "referenceRangeFemaleHigh": "45"
+  },
+  {
+    "code": "MONO",
+    "name": "Monocytes",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "2",
+    "referenceRangeMaleHigh": "10",
+    "referenceRangeFemaleLow": "2",
+    "referenceRangeFemaleHigh": "10"
+  },
+  {
+    "code": "EOS",
+    "name": "Eosinophils",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "6",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "6"
+  },
+  {
+    "code": "BASO",
+    "name": "Basophils",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "ESR",
+    "name": "Erythrocyte Sedimentation Rate",
+    "category": "Haematology",
+    "unit": "mm/hr",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "15",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "20"
+  },
+  {
+    "code": "RDW",
+    "name": "Red Cell Distribution Width",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "11.5",
+    "referenceRangeMaleHigh": "14.5",
+    "referenceRangeFemaleLow": "11.5",
+    "referenceRangeFemaleHigh": "14.5"
+  },
+  {
+    "code": "MPV",
+    "name": "Mean Platelet Volume",
+    "category": "Haematology",
+    "unit": "fL",
+    "referenceRangeMaleLow": "7.5",
+    "referenceRangeMaleHigh": "11.5",
+    "referenceRangeFemaleLow": "7.5",
+    "referenceRangeFemaleHigh": "11.5"
+  },
+  {
+    "code": "PCT",
+    "name": "Plateletcrit",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0.15",
+    "referenceRangeMaleHigh": "0.35",
+    "referenceRangeFemaleLow": "0.15",
+    "referenceRangeFemaleHigh": "0.35"
+  },
+  {
+    "code": "PDW",
+    "name": "Platelet Distribution Width",
+    "category": "Haematology",
+    "unit": "fL",
+    "referenceRangeMaleLow": "9",
+    "referenceRangeMaleHigh": "17",
+    "referenceRangeFemaleLow": "9",
+    "referenceRangeFemaleHigh": "17"
+  },
+  {
+    "code": "FBS",
+    "name": "Fasting Blood Sugar",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "RBS",
+    "name": "Random Blood Sugar",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "140",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "140"
+  },
+  {
+    "code": "PPBS",
+    "name": "Post Prandial Blood Sugar",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "140",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "140"
+  },
+  {
+    "code": "HbA1c",
+    "name": "Glycated Haemoglobin",
+    "category": "Clinical Biochemistry",
+    "unit": "%",
+    "referenceRangeMaleLow": "4",
+    "referenceRangeMaleHigh": "5.6",
+    "referenceRangeFemaleLow": "4",
+    "referenceRangeFemaleHigh": "5.6"
+  },
+  {
+    "code": "OGTT",
+    "name": "Oral Glucose Tolerance Test (2h)",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "140",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "140"
+  },
+  {
+    "code": "INS",
+    "name": "Fasting Insulin",
+    "category": "Clinical Biochemistry",
+    "unit": "microU/mL",
+    "referenceRangeMaleLow": "2",
+    "referenceRangeMaleHigh": "25",
+    "referenceRangeFemaleLow": "2",
+    "referenceRangeFemaleHigh": "25"
+  },
+  {
+    "code": "CPEP",
+    "name": "C-Peptide",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0.9",
+    "referenceRangeMaleHigh": "7.1",
+    "referenceRangeFemaleLow": "0.9",
+    "referenceRangeFemaleHigh": "7.1"
+  },
+  {
+    "code": "SGOT",
+    "name": "AST (Aspartate Aminotransferase)",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "10",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "10",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "SGPT",
+    "name": "ALT (Alanine Aminotransferase)",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "10",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "10",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "AST",
+    "name": "Aspartate Aminotransferase",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "10",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "10",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "ALT",
+    "name": "Alanine Aminotransferase",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "10",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "10",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "ALP",
+    "name": "Alkaline Phosphatase",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "40",
+    "referenceRangeMaleHigh": "129",
+    "referenceRangeFemaleLow": "40",
+    "referenceRangeFemaleHigh": "129"
+  },
+  {
+    "code": "GGT",
+    "name": "Gamma-Glutamyl Transferase",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "9",
+    "referenceRangeMaleHigh": "48",
+    "referenceRangeFemaleLow": "9",
+    "referenceRangeFemaleHigh": "48"
+  },
+  {
+    "code": "TB",
+    "name": "Total Bilirubin",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.1",
+    "referenceRangeMaleHigh": "1.2",
+    "referenceRangeFemaleLow": "0.1",
+    "referenceRangeFemaleHigh": "1.2"
+  },
+  {
+    "code": "DB",
+    "name": "Direct Bilirubin",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0.3",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0.3"
+  },
+  {
+    "code": "IB",
+    "name": "Indirect Bilirubin",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.1",
+    "referenceRangeMaleHigh": "1",
+    "referenceRangeFemaleLow": "0.1",
+    "referenceRangeFemaleHigh": "1"
+  },
+  {
+    "code": "TP",
+    "name": "Total Protein",
+    "category": "Clinical Biochemistry",
+    "unit": "g/dL",
+    "referenceRangeMaleLow": "6",
+    "referenceRangeMaleHigh": "8.3",
+    "referenceRangeFemaleLow": "6",
+    "referenceRangeFemaleHigh": "8.3"
+  },
+  {
+    "code": "ALB",
+    "name": "Serum Albumin",
+    "category": "Clinical Biochemistry",
+    "unit": "g/dL",
+    "referenceRangeMaleLow": "3.5",
+    "referenceRangeMaleHigh": "5",
+    "referenceRangeFemaleLow": "3.5",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "GLOB",
+    "name": "Serum Globulin",
+    "category": "Clinical Biochemistry",
+    "unit": "g/dL",
+    "referenceRangeMaleLow": "2",
+    "referenceRangeMaleHigh": "3.5",
+    "referenceRangeFemaleLow": "2",
+    "referenceRangeFemaleHigh": "3.5"
+  },
+  {
+    "code": "A/G",
+    "name": "Albumin/Globulin Ratio",
+    "category": "Clinical Biochemistry",
+    "unit": null,
+    "referenceRangeMaleLow": "1",
+    "referenceRangeMaleHigh": "2.5",
+    "referenceRangeFemaleLow": "1",
+    "referenceRangeFemaleHigh": "2.5"
+  },
+  {
+    "code": "LDH",
+    "name": "Lactate Dehydrogenase",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "140",
+    "referenceRangeMaleHigh": "280",
+    "referenceRangeFemaleLow": "140",
+    "referenceRangeFemaleHigh": "280"
+  },
+  {
+    "code": "BUN",
+    "name": "Blood Urea Nitrogen",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "7",
+    "referenceRangeMaleHigh": "20",
+    "referenceRangeFemaleLow": "7",
+    "referenceRangeFemaleHigh": "20"
+  },
+  {
+    "code": "UREA",
+    "name": "Blood Urea",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "15",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "CREAT",
+    "name": "Serum Creatinine",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.7",
+    "referenceRangeMaleHigh": "1.3",
+    "referenceRangeFemaleLow": "0.6",
+    "referenceRangeFemaleHigh": "1.1"
+  },
+  {
+    "code": "URIC",
+    "name": "Serum Uric Acid",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "3.5",
+    "referenceRangeMaleHigh": "7.2",
+    "referenceRangeFemaleLow": "2.6",
+    "referenceRangeFemaleHigh": "6"
+  },
+  {
+    "code": "GFR",
+    "name": "Estimated GFR",
+    "category": "Clinical Biochemistry",
+    "unit": "mL/min/1.73m2",
+    "referenceRangeMaleLow": "90",
+    "referenceRangeMaleHigh": "120",
+    "referenceRangeFemaleLow": "90",
+    "referenceRangeFemaleHigh": "120"
+  },
+  {
+    "code": "NA",
+    "name": "Sodium",
+    "category": "Clinical Biochemistry",
+    "unit": "mEq/L",
+    "referenceRangeMaleLow": "136",
+    "referenceRangeMaleHigh": "145",
+    "referenceRangeFemaleLow": "136",
+    "referenceRangeFemaleHigh": "145"
+  },
+  {
+    "code": "K",
+    "name": "Potassium",
+    "category": "Clinical Biochemistry",
+    "unit": "mEq/L",
+    "referenceRangeMaleLow": "3.5",
+    "referenceRangeMaleHigh": "5",
+    "referenceRangeFemaleLow": "3.5",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "CL",
+    "name": "Chloride",
+    "category": "Clinical Biochemistry",
+    "unit": "mEq/L",
+    "referenceRangeMaleLow": "98",
+    "referenceRangeMaleHigh": "106",
+    "referenceRangeFemaleLow": "98",
+    "referenceRangeFemaleHigh": "106"
+  },
+  {
+    "code": "CO2",
+    "name": "Carbon Dioxide",
+    "category": "Clinical Biochemistry",
+    "unit": "mEq/L",
+    "referenceRangeMaleLow": "23",
+    "referenceRangeMaleHigh": "29",
+    "referenceRangeFemaleLow": "23",
+    "referenceRangeFemaleHigh": "29"
+  },
+  {
+    "code": "CA",
+    "name": "Serum Calcium",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "8.6",
+    "referenceRangeMaleHigh": "10.2",
+    "referenceRangeFemaleLow": "8.6",
+    "referenceRangeFemaleHigh": "10.2"
+  },
+  {
+    "code": "PHOS",
+    "name": "Serum Phosphorus",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "2.5",
+    "referenceRangeMaleHigh": "4.5",
+    "referenceRangeFemaleLow": "2.5",
+    "referenceRangeFemaleHigh": "4.5"
+  },
+  {
+    "code": "MG",
+    "name": "Magnesium",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "1.7",
+    "referenceRangeMaleHigh": "2.2",
+    "referenceRangeFemaleLow": "1.7",
+    "referenceRangeFemaleHigh": "2.2"
+  },
+  {
+    "code": "TC",
+    "name": "Total Cholesterol",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "TG",
+    "name": "Triglycerides",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "150",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "150"
+  },
+  {
+    "code": "HDL",
+    "name": "HDL Cholesterol",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "40",
+    "referenceRangeMaleHigh": "60",
+    "referenceRangeFemaleLow": "50",
+    "referenceRangeFemaleHigh": "60"
+  },
+  {
+    "code": "LDL",
+    "name": "LDL Cholesterol",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "VLDL",
+    "name": "VLDL Cholesterol",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "5",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "5",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "APOA",
+    "name": "Apolipoprotein A1",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "115",
+    "referenceRangeMaleHigh": "165",
+    "referenceRangeFemaleLow": "115",
+    "referenceRangeFemaleHigh": "165"
+  },
+  {
+    "code": "APOB",
+    "name": "Apolipoprotein B",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "60",
+    "referenceRangeMaleHigh": "130",
+    "referenceRangeFemaleLow": "60",
+    "referenceRangeFemaleHigh": "130"
+  },
+  {
+    "code": "LPA",
+    "name": "Lipoprotein (a)",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "30",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "30"
+  },
+  {
+    "code": "HDLC",
+    "name": "HDL-C",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "40",
+    "referenceRangeMaleHigh": "60",
+    "referenceRangeFemaleLow": "50",
+    "referenceRangeFemaleHigh": "60"
+  },
+  {
+    "code": "LDLC",
+    "name": "LDL-C",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "TSH",
+    "name": "Thyroid Stimulating Hormone",
+    "category": "Endocrinology",
+    "unit": "mIU/L",
+    "referenceRangeMaleLow": "0.4",
+    "referenceRangeMaleHigh": "4",
+    "referenceRangeFemaleLow": "0.4",
+    "referenceRangeFemaleHigh": "4"
+  },
+  {
+    "code": "FT3",
+    "name": "Free Triiodothyronine",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "2.3",
+    "referenceRangeMaleHigh": "4.2",
+    "referenceRangeFemaleLow": "2.3",
+    "referenceRangeFemaleHigh": "4.2"
+  },
+  {
+    "code": "FT4",
+    "name": "Free Thyroxine",
+    "category": "Endocrinology",
+    "unit": "ng/dL",
+    "referenceRangeMaleLow": "0.8",
+    "referenceRangeMaleHigh": "1.8",
+    "referenceRangeFemaleLow": "0.8",
+    "referenceRangeFemaleHigh": "1.8"
+  },
+  {
+    "code": "TT3",
+    "name": "Total Triiodothyronine",
+    "category": "Endocrinology",
+    "unit": "ng/dL",
+    "referenceRangeMaleLow": "80",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "80",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "TT4",
+    "name": "Total Thyroxine",
+    "category": "Endocrinology",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "5",
+    "referenceRangeMaleHigh": "12",
+    "referenceRangeFemaleLow": "5",
+    "referenceRangeFemaleHigh": "12"
+  },
+  {
+    "code": "TGAB",
+    "name": "Anti-Thyroglobulin Antibody",
+    "category": "Endocrinology",
+    "unit": "IU/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "TPO",
+    "name": "Anti-TPO Antibody",
+    "category": "Endocrinology",
+    "unit": "IU/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "34",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "34"
+  },
+  {
+    "code": "FSH",
+    "name": "Follicle Stimulating Hormone",
+    "category": "Endocrinology",
+    "unit": "mIU/mL",
+    "referenceRangeMaleLow": "1.5",
+    "referenceRangeMaleHigh": "12.4",
+    "referenceRangeFemaleLow": "1.4",
+    "referenceRangeFemaleHigh": "18.1"
+  },
+  {
+    "code": "LH",
+    "name": "Luteinizing Hormone",
+    "category": "Endocrinology",
+    "unit": "mIU/mL",
+    "referenceRangeMaleLow": "1.7",
+    "referenceRangeMaleHigh": "8.6",
+    "referenceRangeFemaleLow": "1",
+    "referenceRangeFemaleHigh": "18"
+  },
+  {
+    "code": "PROL",
+    "name": "Prolactin",
+    "category": "Endocrinology",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "2",
+    "referenceRangeMaleHigh": "18",
+    "referenceRangeFemaleLow": "3",
+    "referenceRangeFemaleHigh": "30"
+  },
+  {
+    "code": "TESTO",
+    "name": "Total Testosterone",
+    "category": "Endocrinology",
+    "unit": "ng/dL",
+    "referenceRangeMaleLow": "270",
+    "referenceRangeMaleHigh": "1070",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "70"
+  },
+  {
+    "code": "TESTOF",
+    "name": "Free Testosterone",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "9",
+    "referenceRangeMaleHigh": "30",
+    "referenceRangeFemaleLow": "0.3",
+    "referenceRangeFemaleHigh": "1.9"
+  },
+  {
+    "code": "E2",
+    "name": "Estradiol",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "10",
+    "referenceRangeMaleHigh": "50",
+    "referenceRangeFemaleLow": "30",
+    "referenceRangeFemaleHigh": "400"
+  },
+  {
+    "code": "PROG",
+    "name": "Progesterone",
+    "category": "Endocrinology",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0.2",
+    "referenceRangeMaleHigh": "1.4",
+    "referenceRangeFemaleLow": "0.1",
+    "referenceRangeFemaleHigh": "25"
+  },
+  {
+    "code": "AMH",
+    "name": "Anti-Müllerian Hormone",
+    "category": "Endocrinology",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": "1",
+    "referenceRangeFemaleHigh": "4"
+  },
+  {
+    "code": "DHEA",
+    "name": "DHEA-Sulphate",
+    "category": "Endocrinology",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "280",
+    "referenceRangeMaleHigh": "640",
+    "referenceRangeFemaleLow": "65",
+    "referenceRangeFemaleHigh": "380"
+  },
+  {
+    "code": "SHBG",
+    "name": "Sex Hormone Binding Globulin",
+    "category": "Endocrinology",
+    "unit": "nmol/L",
+    "referenceRangeMaleLow": "20",
+    "referenceRangeMaleHigh": "50",
+    "referenceRangeFemaleLow": "40",
+    "referenceRangeFemaleHigh": "120"
+  },
+  {
+    "code": "HCG",
+    "name": "Beta-HCG",
+    "category": "Endocrinology",
+    "unit": "mIU/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "INHB",
+    "name": "Inhibin B",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "80",
+    "referenceRangeMaleHigh": "400",
+    "referenceRangeFemaleLow": "10",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "CORT",
+    "name": "Cortisol (Fasting)",
+    "category": "Endocrinology",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "6",
+    "referenceRangeMaleHigh": "23",
+    "referenceRangeFemaleLow": "6",
+    "referenceRangeFemaleHigh": "23"
+  },
+  {
+    "code": "ACTH",
+    "name": "Adrenocorticotropic Hormone",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "10",
+    "referenceRangeMaleHigh": "60",
+    "referenceRangeFemaleLow": "10",
+    "referenceRangeFemaleHigh": "60"
+  },
+  {
+    "code": "PTH",
+    "name": "Parathyroid Hormone",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "15",
+    "referenceRangeMaleHigh": "65",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "65"
+  },
+  {
+    "code": "ALD",
+    "name": "Aldosterone",
+    "category": "Endocrinology",
+    "unit": "ng/dL",
+    "referenceRangeMaleLow": "2",
+    "referenceRangeMaleHigh": "9",
+    "referenceRangeFemaleLow": "2",
+    "referenceRangeFemaleHigh": "9"
+  },
+  {
+    "code": "GH",
+    "name": "Growth Hormone",
+    "category": "Endocrinology",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "10",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "10"
+  },
+  {
+    "code": "IGF1",
+    "name": "IGF-1",
+    "category": "Endocrinology",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "75",
+    "referenceRangeMaleHigh": "212",
+    "referenceRangeFemaleLow": "75",
+    "referenceRangeFemaleHigh": "212"
+  },
+  {
+    "code": "PT",
+    "name": "Prothrombin Time",
+    "category": "Coagulation",
+    "unit": "sec",
+    "referenceRangeMaleLow": "11",
+    "referenceRangeMaleHigh": "13.5",
+    "referenceRangeFemaleLow": "11",
+    "referenceRangeFemaleHigh": "13.5"
+  },
+  {
+    "code": "INR",
+    "name": "International Normalized Ratio",
+    "category": "Coagulation",
+    "unit": null,
+    "referenceRangeMaleLow": "0.9",
+    "referenceRangeMaleHigh": "1.1",
+    "referenceRangeFemaleLow": "0.9",
+    "referenceRangeFemaleHigh": "1.1"
+  },
+  {
+    "code": "APTT",
+    "name": "Activated Partial Thromboplastin Time",
+    "category": "Coagulation",
+    "unit": "sec",
+    "referenceRangeMaleLow": "25",
+    "referenceRangeMaleHigh": "35",
+    "referenceRangeFemaleLow": "25",
+    "referenceRangeFemaleHigh": "35"
+  },
+  {
+    "code": "FIB",
+    "name": "Fibrinogen",
+    "category": "Coagulation",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "200",
+    "referenceRangeMaleHigh": "400",
+    "referenceRangeFemaleLow": "200",
+    "referenceRangeFemaleHigh": "400"
+  },
+  {
+    "code": "DDIM",
+    "name": "D-Dimer",
+    "category": "Coagulation",
+    "unit": "mcg/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0.5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0.5"
+  },
+  {
+    "code": "BT",
+    "name": "Bleeding Time",
+    "category": "Coagulation",
+    "unit": "min",
+    "referenceRangeMaleLow": "2",
+    "referenceRangeMaleHigh": "9",
+    "referenceRangeFemaleLow": "2",
+    "referenceRangeFemaleHigh": "9"
+  },
+  {
+    "code": "CT",
+    "name": "Clotting Time",
+    "category": "Coagulation",
+    "unit": "min",
+    "referenceRangeMaleLow": "5",
+    "referenceRangeMaleHigh": "15",
+    "referenceRangeFemaleLow": "5",
+    "referenceRangeFemaleHigh": "15"
+  },
+  {
+    "code": "TROP",
+    "name": "Troponin I",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0.04",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0.04"
+  },
+  {
+    "code": "TROPT",
+    "name": "Troponin T",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0.01",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0.01"
+  },
+  {
+    "code": "CKMB",
+    "name": "Creatine Kinase-MB",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "CK",
+    "name": "Creatine Kinase",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "39",
+    "referenceRangeMaleHigh": "308",
+    "referenceRangeFemaleLow": "26",
+    "referenceRangeFemaleHigh": "192"
+  },
+  {
+    "code": "MYO",
+    "name": "Myoglobin",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "28",
+    "referenceRangeMaleHigh": "72",
+    "referenceRangeFemaleLow": "25",
+    "referenceRangeFemaleHigh": "58"
+  },
+  {
+    "code": "BNP",
+    "name": "Brain Natriuretic Peptide",
+    "category": "Clinical Biochemistry",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "NTBNP",
+    "name": "NT-proBNP",
+    "category": "Clinical Biochemistry",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "125",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "125"
+  },
+  {
+    "code": "VITD",
+    "name": "Vitamin D (25-OH)",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "30",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "30",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "VITB12",
+    "name": "Vitamin B12",
+    "category": "Clinical Biochemistry",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "200",
+    "referenceRangeMaleHigh": "900",
+    "referenceRangeFemaleLow": "200",
+    "referenceRangeFemaleHigh": "900"
+  },
+  {
+    "code": "FOL",
+    "name": "Folate (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "3",
+    "referenceRangeMaleHigh": "17",
+    "referenceRangeFemaleLow": "3",
+    "referenceRangeFemaleHigh": "17"
+  },
+  {
+    "code": "FER",
+    "name": "Serum Ferritin",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "30",
+    "referenceRangeMaleHigh": "400",
+    "referenceRangeFemaleLow": "13",
+    "referenceRangeFemaleHigh": "150"
+  },
+  {
+    "code": "IRON",
+    "name": "Serum Iron",
+    "category": "Clinical Biochemistry",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "60",
+    "referenceRangeMaleHigh": "170",
+    "referenceRangeFemaleLow": "40",
+    "referenceRangeFemaleHigh": "150"
+  },
+  {
+    "code": "TIBC",
+    "name": "Total Iron Binding Capacity",
+    "category": "Clinical Biochemistry",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "250",
+    "referenceRangeMaleHigh": "370",
+    "referenceRangeFemaleLow": "250",
+    "referenceRangeFemaleHigh": "370"
+  },
+  {
+    "code": "TSAT",
+    "name": "Transferrin Saturation",
+    "category": "Clinical Biochemistry",
+    "unit": "%",
+    "referenceRangeMaleLow": "20",
+    "referenceRangeMaleHigh": "50",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "50"
+  },
+  {
+    "code": "VITA",
+    "name": "Vitamin A",
+    "category": "Clinical Biochemistry",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "30",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "30",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "VITE",
+    "name": "Vitamin E",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/L",
+    "referenceRangeMaleLow": "0.5",
+    "referenceRangeMaleHigh": "1.8",
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "1.8"
+  },
+  {
+    "code": "ZN",
+    "name": "Zinc",
+    "category": "Clinical Biochemistry",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "60",
+    "referenceRangeMaleHigh": "120",
+    "referenceRangeFemaleLow": "60",
+    "referenceRangeFemaleHigh": "120"
+  },
+  {
+    "code": "CRP",
+    "name": "C-Reactive Protein",
+    "category": "Immunology",
+    "unit": "mg/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "6",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "6"
+  },
+  {
+    "code": "HS-CRP",
+    "name": "High Sensitivity CRP",
+    "category": "Immunology",
+    "unit": "mg/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "3",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "3"
+  },
+  {
+    "code": "ANA",
+    "name": "Anti-Nuclear Antibody",
+    "category": "Immunology",
+    "unit": "titre",
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "RF",
+    "name": "Rheumatoid Factor",
+    "category": "Immunology",
+    "unit": "IU/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "15",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "15"
+  },
+  {
+    "code": "ASO",
+    "name": "Anti-Streptolysin O",
+    "category": "Immunology",
+    "unit": "IU/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "IGG",
+    "name": "Immunoglobulin G",
+    "category": "Immunology",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "700",
+    "referenceRangeMaleHigh": "1600",
+    "referenceRangeFemaleLow": "700",
+    "referenceRangeFemaleHigh": "1600"
+  },
+  {
+    "code": "IGA",
+    "name": "Immunoglobulin A",
+    "category": "Immunology",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "400",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "400"
+  },
+  {
+    "code": "IGM",
+    "name": "Immunoglobulin M",
+    "category": "Immunology",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "40",
+    "referenceRangeMaleHigh": "230",
+    "referenceRangeFemaleLow": "40",
+    "referenceRangeFemaleHigh": "230"
+  },
+  {
+    "code": "IGE",
+    "name": "Total IgE",
+    "category": "Immunology",
+    "unit": "IU/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "C3",
+    "name": "Complement C3",
+    "category": "Immunology",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "90",
+    "referenceRangeMaleHigh": "180",
+    "referenceRangeFemaleLow": "90",
+    "referenceRangeFemaleHigh": "180"
+  },
+  {
+    "code": "C4",
+    "name": "Complement C4",
+    "category": "Immunology",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "10",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "10",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "DSDNA",
+    "name": "Anti-dsDNA",
+    "category": "Immunology",
+    "unit": "IU/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "25",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "25"
+  },
+  {
+    "code": "CCP",
+    "name": "Anti-CCP Antibody",
+    "category": "Immunology",
+    "unit": "U/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "20",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "20"
+  },
+  {
+    "code": "HIV",
+    "name": "HIV 1 & 2 Antibody",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "HBSAG",
+    "name": "HBsAg",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "HCV",
+    "name": "Anti-HCV",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "HAVIGM",
+    "name": "Anti-HAV IgM",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "HEVIGM",
+    "name": "Anti-HEV IgM",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "VDRL",
+    "name": "VDRL / RPR",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "TPHA",
+    "name": "TPHA",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "DENGNS",
+    "name": "Dengue NS1 Antigen",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "DENGIGM",
+    "name": "Dengue IgM",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "DENGIGG",
+    "name": "Dengue IgG",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "TYPHO",
+    "name": "Typhoid (Widal)",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "MAL",
+    "name": "Malaria Parasite",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "EBVIGM",
+    "name": "EBV IgM",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "EBVIGG",
+    "name": "EBV IgG",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "CMVIGM",
+    "name": "CMV IgM",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "CMVIGG",
+    "name": "CMV IgG",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "COVID",
+    "name": "SARS-CoV-2 Antibody",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "URCOL",
+    "name": "Urine Colour",
+    "category": "Urinalysis",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "URPH",
+    "name": "Urine pH",
+    "category": "Urinalysis",
+    "unit": null,
+    "referenceRangeMaleLow": "4.5",
+    "referenceRangeMaleHigh": "8",
+    "referenceRangeFemaleLow": "4.5",
+    "referenceRangeFemaleHigh": "8"
+  },
+  {
+    "code": "URSP",
+    "name": "Urine Specific Gravity",
+    "category": "Urinalysis",
+    "unit": null,
+    "referenceRangeMaleLow": "1.005",
+    "referenceRangeMaleHigh": "1.03",
+    "referenceRangeFemaleLow": "1.005",
+    "referenceRangeFemaleHigh": "1.03"
+  },
+  {
+    "code": "URPRO",
+    "name": "Urine Protein",
+    "category": "Urinalysis",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "trace",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "trace"
+  },
+  {
+    "code": "URGLU",
+    "name": "Urine Glucose",
+    "category": "Urinalysis",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0"
+  },
+  {
+    "code": "URKET",
+    "name": "Urine Ketones",
+    "category": "Urinalysis",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0"
+  },
+  {
+    "code": "URBIL",
+    "name": "Urine Bilirubin",
+    "category": "Urinalysis",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "URURO",
+    "name": "Urine Urobilinogen",
+    "category": "Urinalysis",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.1",
+    "referenceRangeMaleHigh": "1",
+    "referenceRangeFemaleLow": "0.1",
+    "referenceRangeFemaleHigh": "1"
+  },
+  {
+    "code": "URBLD",
+    "name": "Urine Blood",
+    "category": "Urinalysis",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "URNIT",
+    "name": "Urine Nitrite",
+    "category": "Urinalysis",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "URLEU",
+    "name": "Urine Leukocyte Esterase",
+    "category": "Urinalysis",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "URWBC",
+    "name": "Urine WBC",
+    "category": "Urinalysis",
+    "unit": "/HPF",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "URRBC",
+    "name": "Urine RBC",
+    "category": "Urinalysis",
+    "unit": "/HPF",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "3",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "3"
+  },
+  {
+    "code": "URECA",
+    "name": "Urine Epithelial Cells",
+    "category": "Urinalysis",
+    "unit": "/HPF",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "few",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "few"
+  },
+  {
+    "code": "URBACT",
+    "name": "Urine Bacteria",
+    "category": "Urinalysis",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "URCR",
+    "name": "Urine Creatinine",
+    "category": "Urinalysis",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "20",
+    "referenceRangeMaleHigh": "250",
+    "referenceRangeFemaleLow": "20",
+    "referenceRangeFemaleHigh": "250"
+  },
+  {
+    "code": "URALB",
+    "name": "Urine Microalbumin",
+    "category": "Urinalysis",
+    "unit": "mg/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "30",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "30"
+  },
+  {
+    "code": "URACR",
+    "name": "Urine Albumin/Creatinine Ratio",
+    "category": "Urinalysis",
+    "unit": "mg/g",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "30",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "30"
+  },
+  {
+    "code": "STOOLR",
+    "name": "Stool Routine",
+    "category": "Stool",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "STOOLO",
+    "name": "Stool Occult Blood",
+    "category": "Stool",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "STOOLF",
+    "name": "Stool Fat",
+    "category": "Stool",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "STOOLP",
+    "name": "Stool Reducing Substances",
+    "category": "Stool",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "PH",
+    "name": "Arterial pH",
+    "category": "Blood Gas",
+    "unit": null,
+    "referenceRangeMaleLow": "7.35",
+    "referenceRangeMaleHigh": "7.45",
+    "referenceRangeFemaleLow": "7.35",
+    "referenceRangeFemaleHigh": "7.45"
+  },
+  {
+    "code": "PCO2",
+    "name": "pCO2",
+    "category": "Blood Gas",
+    "unit": "mmHg",
+    "referenceRangeMaleLow": "35",
+    "referenceRangeMaleHigh": "45",
+    "referenceRangeFemaleLow": "35",
+    "referenceRangeFemaleHigh": "45"
+  },
+  {
+    "code": "PO2",
+    "name": "pO2",
+    "category": "Blood Gas",
+    "unit": "mmHg",
+    "referenceRangeMaleLow": "80",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "80",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "HCO3",
+    "name": "Bicarbonate",
+    "category": "Blood Gas",
+    "unit": "mEq/L",
+    "referenceRangeMaleLow": "22",
+    "referenceRangeMaleHigh": "28",
+    "referenceRangeFemaleLow": "22",
+    "referenceRangeFemaleHigh": "28"
+  },
+  {
+    "code": "BE",
+    "name": "Base Excess",
+    "category": "Blood Gas",
+    "unit": "mEq/L",
+    "referenceRangeMaleLow": "-2",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "-2",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "O2SAT",
+    "name": "O2 Saturation",
+    "category": "Blood Gas",
+    "unit": "%",
+    "referenceRangeMaleLow": "95",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "95",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "LACT",
+    "name": "Lactate",
+    "category": "Blood Gas",
+    "unit": "mmol/L",
+    "referenceRangeMaleLow": "0.5",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "AFP",
+    "name": "Alpha-Fetoprotein",
+    "category": "Tumour Markers",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "10",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "10"
+  },
+  {
+    "code": "CEA",
+    "name": "Carcinoembryonic Antigen",
+    "category": "Tumour Markers",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "3",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "3"
+  },
+  {
+    "code": "PSA",
+    "name": "Prostate Specific Antigen",
+    "category": "Tumour Markers",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "4",
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "CA125",
+    "name": "CA-125",
+    "category": "Tumour Markers",
+    "unit": "U/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "35",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "35"
+  },
+  {
+    "code": "CA19-9",
+    "name": "CA 19-9",
+    "category": "Tumour Markers",
+    "unit": "U/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "37",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "37"
+  },
+  {
+    "code": "CA15-3",
+    "name": "CA 15-3",
+    "category": "Tumour Markers",
+    "unit": "U/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "30",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "30"
+  },
+  {
+    "code": "PSAF",
+    "name": "Free PSA",
+    "category": "Tumour Markers",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0.5",
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "B2M",
+    "name": "Beta-2 Microglobulin",
+    "category": "Tumour Markers",
+    "unit": "mg/L",
+    "referenceRangeMaleLow": "1",
+    "referenceRangeMaleHigh": "3",
+    "referenceRangeFemaleLow": "1",
+    "referenceRangeFemaleHigh": "3"
+  },
+  {
+    "code": "ABO",
+    "name": "ABO Group",
+    "category": "Blood Banking",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "RH",
+    "name": "Rh Type",
+    "category": "Blood Banking",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "CROSS",
+    "name": "Crossmatch",
+    "category": "Blood Banking",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "COOMB",
+    "name": "Direct Coombs",
+    "category": "Blood Banking",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "COOMBI",
+    "name": "Indirect Coombs",
+    "category": "Blood Banking",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "BCULT",
+    "name": "Blood Culture",
+    "category": "Microbiology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "UCULT",
+    "name": "Urine Culture",
+    "category": "Microbiology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "SCULT",
+    "name": "Sputum Culture",
+    "category": "Microbiology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "STCULT",
+    "name": "Stool Culture",
+    "category": "Microbiology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "SENS",
+    "name": "Antimicrobial Sensitivity",
+    "category": "Microbiology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "AFB",
+    "name": "AFB Stain / Culture",
+    "category": "Microbiology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "GRAM",
+    "name": "Gram Stain",
+    "category": "Microbiology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "TTG",
+    "name": "Anti-tTG IgA",
+    "category": "Immunology",
+    "unit": "U/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "20",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "20"
+  },
+  {
+    "code": "TTGIGG",
+    "name": "Anti-tTG IgG",
+    "category": "Immunology",
+    "unit": "U/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "20",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "20"
+  },
+  {
+    "code": "EMAG",
+    "name": "Anti-Endomysial Antibody",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "PROC",
+    "name": "Procalcitonin",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0.15",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0.15"
+  },
+  {
+    "code": "HBA2",
+    "name": "HbA2",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "2",
+    "referenceRangeMaleHigh": "3.5",
+    "referenceRangeFemaleLow": "2",
+    "referenceRangeFemaleHigh": "3.5"
+  },
+  {
+    "code": "HBF",
+    "name": "HbF",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "1",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "1"
+  },
+  {
+    "code": "HB_G",
+    "name": "Haemoglobin (g/L)",
+    "category": "Haematology",
+    "unit": "g/L",
+    "referenceRangeMaleLow": "130",
+    "referenceRangeMaleHigh": "170",
+    "referenceRangeFemaleLow": "110",
+    "referenceRangeFemaleHigh": "150"
+  },
+  {
+    "code": "RBS_MMOL",
+    "name": "Random Blood Sugar (mmol/L)",
+    "category": "Clinical Biochemistry",
+    "unit": "mmol/L",
+    "referenceRangeMaleLow": "3.9",
+    "referenceRangeMaleHigh": "7.8",
+    "referenceRangeFemaleLow": "3.9",
+    "referenceRangeFemaleHigh": "7.8"
+  },
+  {
+    "code": "FBS_MMOL",
+    "name": "Fasting Blood Sugar (mmol/L)",
+    "category": "Clinical Biochemistry",
+    "unit": "mmol/L",
+    "referenceRangeMaleLow": "3.9",
+    "referenceRangeMaleHigh": "5.6",
+    "referenceRangeFemaleLow": "3.9",
+    "referenceRangeFemaleHigh": "5.6"
+  },
+  {
+    "code": "CREAT_UMOL",
+    "name": "Creatinine (µmol/L)",
+    "category": "Clinical Biochemistry",
+    "unit": "µmol/L",
+    "referenceRangeMaleLow": "62",
+    "referenceRangeMaleHigh": "115",
+    "referenceRangeFemaleLow": "53",
+    "referenceRangeFemaleHigh": "97"
+  },
+  {
+    "code": "UREA_MMOL",
+    "name": "Urea (mmol/L)",
+    "category": "Clinical Biochemistry",
+    "unit": "mmol/L",
+    "referenceRangeMaleLow": "2.5",
+    "referenceRangeMaleHigh": "7.1",
+    "referenceRangeFemaleLow": "2.5",
+    "referenceRangeFemaleHigh": "7.1"
+  },
+  {
+    "code": "BILT_UMOL",
+    "name": "Total Bilirubin (µmol/L)",
+    "category": "Clinical Biochemistry",
+    "unit": "µmol/L",
+    "referenceRangeMaleLow": "2",
+    "referenceRangeMaleHigh": "21",
+    "referenceRangeFemaleLow": "2",
+    "referenceRangeFemaleHigh": "21"
+  },
+  {
+    "code": "CHOL_MMOL",
+    "name": "Total Cholesterol (mmol/L)",
+    "category": "Clinical Biochemistry",
+    "unit": "mmol/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "5.2",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "5.2"
+  },
+  {
+    "code": "ALT_S",
+    "name": "ALT (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "10",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "10",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "AST_S",
+    "name": "AST (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "10",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "10",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "GCT",
+    "name": "GGT (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "9",
+    "referenceRangeMaleHigh": "48",
+    "referenceRangeFemaleLow": "9",
+    "referenceRangeFemaleHigh": "48"
+  },
+  {
+    "code": "BILI_T",
+    "name": "Bilirubin Total",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.1",
+    "referenceRangeMaleHigh": "1.2",
+    "referenceRangeFemaleLow": "0.1",
+    "referenceRangeFemaleHigh": "1.2"
+  },
+  {
+    "code": "BILI_D",
+    "name": "Bilirubin Direct",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0.3",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0.3"
+  },
+  {
+    "code": "ALB_S",
+    "name": "Albumin (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "g/dL",
+    "referenceRangeMaleLow": "3.5",
+    "referenceRangeMaleHigh": "5",
+    "referenceRangeFemaleLow": "3.5",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "PROT_T",
+    "name": "Protein Total",
+    "category": "Clinical Biochemistry",
+    "unit": "g/dL",
+    "referenceRangeMaleLow": "6",
+    "referenceRangeMaleHigh": "8.3",
+    "referenceRangeFemaleLow": "6",
+    "referenceRangeFemaleHigh": "8.3"
+  },
+  {
+    "code": "GLU_F",
+    "name": "Glucose Fasting",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "GLU_R",
+    "name": "Glucose Random",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "140",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "140"
+  },
+  {
+    "code": "UREA_S",
+    "name": "Urea (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "15",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "CREA_S",
+    "name": "Creatinine (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.7",
+    "referenceRangeMaleHigh": "1.3",
+    "referenceRangeFemaleLow": "0.6",
+    "referenceRangeFemaleHigh": "1.1"
+  },
+  {
+    "code": "URIC_S",
+    "name": "Uric Acid (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "3.5",
+    "referenceRangeMaleHigh": "7.2",
+    "referenceRangeFemaleLow": "2.6",
+    "referenceRangeFemaleHigh": "6"
+  },
+  {
+    "code": "TCHO",
+    "name": "Total Cholesterol",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "TRIG",
+    "name": "Triglycerides",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "150",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "150"
+  },
+  {
+    "code": "SOD",
+    "name": "Sodium",
+    "category": "Clinical Biochemistry",
+    "unit": "mmol/L",
+    "referenceRangeMaleLow": "136",
+    "referenceRangeMaleHigh": "145",
+    "referenceRangeFemaleLow": "136",
+    "referenceRangeFemaleHigh": "145"
+  },
+  {
+    "code": "POT",
+    "name": "Potassium",
+    "category": "Clinical Biochemistry",
+    "unit": "mmol/L",
+    "referenceRangeMaleLow": "3.5",
+    "referenceRangeMaleHigh": "5",
+    "referenceRangeFemaleLow": "3.5",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "CHL",
+    "name": "Chloride",
+    "category": "Clinical Biochemistry",
+    "unit": "mmol/L",
+    "referenceRangeMaleLow": "98",
+    "referenceRangeMaleHigh": "106",
+    "referenceRangeFemaleLow": "98",
+    "referenceRangeFemaleHigh": "106"
+  },
+  {
+    "code": "CAL",
+    "name": "Calcium",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "8.6",
+    "referenceRangeMaleHigh": "10.2",
+    "referenceRangeFemaleLow": "8.6",
+    "referenceRangeFemaleHigh": "10.2"
+  },
+  {
+    "code": "PHOS_S",
+    "name": "Phosphorus",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "2.5",
+    "referenceRangeMaleHigh": "4.5",
+    "referenceRangeFemaleLow": "2.5",
+    "referenceRangeFemaleHigh": "4.5"
+  },
+  {
+    "code": "MAG_S",
+    "name": "Magnesium",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "1.7",
+    "referenceRangeMaleHigh": "2.2",
+    "referenceRangeFemaleLow": "1.7",
+    "referenceRangeFemaleHigh": "2.2"
+  },
+  {
+    "code": "B12",
+    "name": "Vitamin B12",
+    "category": "Clinical Biochemistry",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "200",
+    "referenceRangeMaleHigh": "900",
+    "referenceRangeFemaleLow": "200",
+    "referenceRangeFemaleHigh": "900"
+  },
+  {
+    "code": "VITD3",
+    "name": "Vitamin D3",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "30",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "30",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "FERR_S",
+    "name": "Ferritin",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "30",
+    "referenceRangeMaleHigh": "400",
+    "referenceRangeFemaleLow": "13",
+    "referenceRangeFemaleHigh": "150"
+  },
+  {
+    "code": "IRON_S",
+    "name": "Iron (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "60",
+    "referenceRangeMaleHigh": "170",
+    "referenceRangeFemaleLow": "40",
+    "referenceRangeFemaleHigh": "150"
+  },
+  {
+    "code": "TIBC_S",
+    "name": "TIBC",
+    "category": "Clinical Biochemistry",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "250",
+    "referenceRangeMaleHigh": "370",
+    "referenceRangeFemaleLow": "250",
+    "referenceRangeFemaleHigh": "370"
+  },
+  {
+    "code": "TSH_S",
+    "name": "TSH",
+    "category": "Endocrinology",
+    "unit": "mIU/L",
+    "referenceRangeMaleLow": "0.4",
+    "referenceRangeMaleHigh": "4",
+    "referenceRangeFemaleLow": "0.4",
+    "referenceRangeFemaleHigh": "4"
+  },
+  {
+    "code": "T3F",
+    "name": "Free T3",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "2.3",
+    "referenceRangeMaleHigh": "4.2",
+    "referenceRangeFemaleLow": "2.3",
+    "referenceRangeFemaleHigh": "4.2"
+  },
+  {
+    "code": "T4F",
+    "name": "Free T4",
+    "category": "Endocrinology",
+    "unit": "ng/dL",
+    "referenceRangeMaleLow": "0.8",
+    "referenceRangeMaleHigh": "1.8",
+    "referenceRangeFemaleLow": "0.8",
+    "referenceRangeFemaleHigh": "1.8"
+  },
+  {
+    "code": "T3T",
+    "name": "Total T3",
+    "category": "Endocrinology",
+    "unit": "ng/dL",
+    "referenceRangeMaleLow": "80",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "80",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "T4T",
+    "name": "Total T4",
+    "category": "Endocrinology",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "5",
+    "referenceRangeMaleHigh": "12",
+    "referenceRangeFemaleLow": "5",
+    "referenceRangeFemaleHigh": "12"
+  },
+  {
+    "code": "PRL",
+    "name": "Prolactin",
+    "category": "Endocrinology",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "2",
+    "referenceRangeMaleHigh": "18",
+    "referenceRangeFemaleLow": "3",
+    "referenceRangeFemaleHigh": "30"
+  },
+  {
+    "code": "FSH_S",
+    "name": "FSH",
+    "category": "Endocrinology",
+    "unit": "mIU/mL",
+    "referenceRangeMaleLow": "1.5",
+    "referenceRangeMaleHigh": "12.4",
+    "referenceRangeFemaleLow": "1.4",
+    "referenceRangeFemaleHigh": "18.1"
+  },
+  {
+    "code": "LH_S",
+    "name": "LH",
+    "category": "Endocrinology",
+    "unit": "mIU/mL",
+    "referenceRangeMaleLow": "1.7",
+    "referenceRangeMaleHigh": "8.6",
+    "referenceRangeFemaleLow": "1",
+    "referenceRangeFemaleHigh": "18"
+  },
+  {
+    "code": "TES_S",
+    "name": "Testosterone Total",
+    "category": "Endocrinology",
+    "unit": "ng/dL",
+    "referenceRangeMaleLow": "270",
+    "referenceRangeMaleHigh": "1070",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "70"
+  },
+  {
+    "code": "E2_S",
+    "name": "Estradiol",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "10",
+    "referenceRangeMaleHigh": "50",
+    "referenceRangeFemaleLow": "30",
+    "referenceRangeFemaleHigh": "400"
+  },
+  {
+    "code": "PROG_S",
+    "name": "Progesterone",
+    "category": "Endocrinology",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0.2",
+    "referenceRangeMaleHigh": "1.4",
+    "referenceRangeFemaleLow": "0.1",
+    "referenceRangeFemaleHigh": "25"
+  },
+  {
+    "code": "AMH_S",
+    "name": "AMH",
+    "category": "Endocrinology",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": "1",
+    "referenceRangeFemaleHigh": "4"
+  },
+  {
+    "code": "PT_S",
+    "name": "PT",
+    "category": "Coagulation",
+    "unit": "sec",
+    "referenceRangeMaleLow": "11",
+    "referenceRangeMaleHigh": "13.5",
+    "referenceRangeFemaleLow": "11",
+    "referenceRangeFemaleHigh": "13.5"
+  },
+  {
+    "code": "APTT_S",
+    "name": "APTT",
+    "category": "Coagulation",
+    "unit": "sec",
+    "referenceRangeMaleLow": "25",
+    "referenceRangeMaleHigh": "35",
+    "referenceRangeFemaleLow": "25",
+    "referenceRangeFemaleHigh": "35"
+  },
+  {
+    "code": "INR_S",
+    "name": "INR",
+    "category": "Coagulation",
+    "unit": null,
+    "referenceRangeMaleLow": "0.9",
+    "referenceRangeMaleHigh": "1.1",
+    "referenceRangeFemaleLow": "0.9",
+    "referenceRangeFemaleHigh": "1.1"
+  },
+  {
+    "code": "FIB_S",
+    "name": "Fibrinogen",
+    "category": "Coagulation",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "200",
+    "referenceRangeMaleHigh": "400",
+    "referenceRangeFemaleLow": "200",
+    "referenceRangeFemaleHigh": "400"
+  },
+  {
+    "code": "DD_S",
+    "name": "D-Dimer",
+    "category": "Coagulation",
+    "unit": "mcg/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0.5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0.5"
+  },
+  {
+    "code": "CRP_S",
+    "name": "CRP",
+    "category": "Immunology",
+    "unit": "mg/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "6",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "6"
+  },
+  {
+    "code": "RF_S",
+    "name": "Rheumatoid Factor",
+    "category": "Immunology",
+    "unit": "IU/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "15",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "15"
+  },
+  {
+    "code": "ANA_S",
+    "name": "ANA",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "ASOT",
+    "name": "ASO Titre",
+    "category": "Immunology",
+    "unit": "IU/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "NEUT_P",
+    "name": "Neutrophil %",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "40",
+    "referenceRangeMaleHigh": "75",
+    "referenceRangeFemaleLow": "40",
+    "referenceRangeFemaleHigh": "75"
+  },
+  {
+    "code": "LYMPH_P",
+    "name": "Lymphocyte %",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "20",
+    "referenceRangeMaleHigh": "45",
+    "referenceRangeFemaleLow": "20",
+    "referenceRangeFemaleHigh": "45"
+  },
+  {
+    "code": "MONO_P",
+    "name": "Monocyte %",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "2",
+    "referenceRangeMaleHigh": "10",
+    "referenceRangeFemaleLow": "2",
+    "referenceRangeFemaleHigh": "10"
+  },
+  {
+    "code": "EOS_P",
+    "name": "Eosinophil %",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "6",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "6"
+  },
+  {
+    "code": "BASO_P",
+    "name": "Basophil %",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "NEUT_A",
+    "name": "Absolute Neutrophil Count",
+    "category": "Haematology",
+    "unit": "/cumm",
+    "referenceRangeMaleLow": "2000",
+    "referenceRangeMaleHigh": "7500",
+    "referenceRangeFemaleLow": "2000",
+    "referenceRangeFemaleHigh": "7500"
+  },
+  {
+    "code": "LYMPH_A",
+    "name": "Absolute Lymphocyte Count",
+    "category": "Haematology",
+    "unit": "/cumm",
+    "referenceRangeMaleLow": "1000",
+    "referenceRangeMaleHigh": "4000",
+    "referenceRangeFemaleLow": "1000",
+    "referenceRangeFemaleHigh": "4000"
+  },
+  {
+    "code": "MONO_A",
+    "name": "Absolute Monocyte Count",
+    "category": "Haematology",
+    "unit": "/cumm",
+    "referenceRangeMaleLow": "200",
+    "referenceRangeMaleHigh": "1000",
+    "referenceRangeFemaleLow": "200",
+    "referenceRangeFemaleHigh": "1000"
+  },
+  {
+    "code": "EOS_A",
+    "name": "Absolute Eosinophil Count",
+    "category": "Haematology",
+    "unit": "/cumm",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "500",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "500"
+  },
+  {
+    "code": "BASO_A",
+    "name": "Absolute Basophil Count",
+    "category": "Haematology",
+    "unit": "/cumm",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "OSMO",
+    "name": "Serum Osmolality",
+    "category": "Clinical Biochemistry",
+    "unit": "mOsm/kg",
+    "referenceRangeMaleLow": "275",
+    "referenceRangeMaleHigh": "295",
+    "referenceRangeFemaleLow": "275",
+    "referenceRangeFemaleHigh": "295"
+  },
+  {
+    "code": "UROSMO",
+    "name": "Urine Osmolality",
+    "category": "Urinalysis",
+    "unit": "mOsm/kg",
+    "referenceRangeMaleLow": "50",
+    "referenceRangeMaleHigh": "1200",
+    "referenceRangeFemaleLow": "50",
+    "referenceRangeFemaleHigh": "1200"
+  },
+  {
+    "code": "LIPASE",
+    "name": "Lipase",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "160",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "160"
+  },
+  {
+    "code": "AMYL",
+    "name": "Amylase",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "28",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "28",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "G6PD",
+    "name": "G6PD Activity",
+    "category": "Haematology",
+    "unit": "U/g Hb",
+    "referenceRangeMaleLow": "4",
+    "referenceRangeMaleHigh": "11",
+    "referenceRangeFemaleLow": "4",
+    "referenceRangeFemaleHigh": "11"
+  },
+  {
+    "code": "HPT",
+    "name": "Haptoglobin",
+    "category": "Haematology",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "30",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "30",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "TRF",
+    "name": "Transferrin",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "200",
+    "referenceRangeMaleHigh": "360",
+    "referenceRangeFemaleLow": "200",
+    "referenceRangeFemaleHigh": "360"
+  },
+  {
+    "code": "CERU",
+    "name": "Ceruloplasmin",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "20",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "20",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "COPPER",
+    "name": "Serum Copper",
+    "category": "Clinical Biochemistry",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "140",
+    "referenceRangeFemaleLow": "80",
+    "referenceRangeFemaleHigh": "155"
+  },
+  {
+    "code": "ZN_S",
+    "name": "Zinc (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "60",
+    "referenceRangeMaleHigh": "120",
+    "referenceRangeFemaleLow": "60",
+    "referenceRangeFemaleHigh": "120"
+  },
+  {
+    "code": "SEL",
+    "name": "Selenium",
+    "category": "Clinical Biochemistry",
+    "unit": "mcg/L",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "150",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "150"
+  },
+  {
+    "code": "PB",
+    "name": "Lead (Blood)",
+    "category": "Clinical Biochemistry",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "HOMOC",
+    "name": "Homocysteine",
+    "category": "Clinical Biochemistry",
+    "unit": "µmol/L",
+    "referenceRangeMaleLow": "5",
+    "referenceRangeMaleHigh": "15",
+    "referenceRangeFemaleLow": "5",
+    "referenceRangeFemaleHigh": "12"
+  },
+  {
+    "code": "LACT_F",
+    "name": "Lactate (Fasting)",
+    "category": "Clinical Biochemistry",
+    "unit": "mmol/L",
+    "referenceRangeMaleLow": "0.5",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "PYR",
+    "name": "Pyruvate",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.3",
+    "referenceRangeMaleHigh": "0.9",
+    "referenceRangeFemaleLow": "0.3",
+    "referenceRangeFemaleHigh": "0.9"
+  },
+  {
+    "code": "KET",
+    "name": "Blood Ketones",
+    "category": "Clinical Biochemistry",
+    "unit": "mmol/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0.6",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0.6"
+  },
+  {
+    "code": "ANION",
+    "name": "Anion Gap",
+    "category": "Clinical Biochemistry",
+    "unit": "mEq/L",
+    "referenceRangeMaleLow": "8",
+    "referenceRangeMaleHigh": "16",
+    "referenceRangeFemaleLow": "8",
+    "referenceRangeFemaleHigh": "16"
+  },
+  {
+    "code": "OSMOL",
+    "name": "Osmolal Gap",
+    "category": "Clinical Biochemistry",
+    "unit": "mOsm/kg",
+    "referenceRangeMaleLow": "-10",
+    "referenceRangeMaleHigh": "10",
+    "referenceRangeFemaleLow": "-10",
+    "referenceRangeFemaleHigh": "10"
+  },
+  {
+    "code": "BIL_I",
+    "name": "Indirect Bilirubin",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.1",
+    "referenceRangeMaleHigh": "1",
+    "referenceRangeFemaleLow": "0.1",
+    "referenceRangeFemaleHigh": "1"
+  },
+  {
+    "code": "G6PD_Q",
+    "name": "G6PD Quantitative",
+    "category": "Haematology",
+    "unit": "U/g Hb",
+    "referenceRangeMaleLow": "4",
+    "referenceRangeMaleHigh": "11",
+    "referenceRangeFemaleLow": "4",
+    "referenceRangeFemaleHigh": "11"
+  },
+  {
+    "code": "HBEL",
+    "name": "Hb Electrophoresis",
+    "category": "Haematology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "RET_A",
+    "name": "Absolute Reticulocyte Count",
+    "category": "Haematology",
+    "unit": "/cumm",
+    "referenceRangeMaleLow": "25000",
+    "referenceRangeMaleHigh": "100000",
+    "referenceRangeFemaleLow": "25000",
+    "referenceRangeFemaleHigh": "100000"
+  },
+  {
+    "code": "SICKLE",
+    "name": "Sickle Cell Test",
+    "category": "Haematology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "MP",
+    "name": "Malaria Parasite (Smear)",
+    "category": "Microbiology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "MP_Q",
+    "name": "Malaria Antigen",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "WIDAL_O",
+    "name": "Widal O",
+    "category": "Serology",
+    "unit": "titre",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "1:80",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "1:80"
+  },
+  {
+    "code": "WIDAL_H",
+    "name": "Widal H",
+    "category": "Serology",
+    "unit": "titre",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "1:160",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "1:160"
+  },
+  {
+    "code": "TYPHID",
+    "name": "Typhidot",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "LEP",
+    "name": "Leptospira IgM",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "SCRUB",
+    "name": "Scrub Typhus IgM",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "BRU",
+    "name": "Brucella Agglutination",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "RUB_IGM",
+    "name": "Rubella IgM",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "RUB_IGG",
+    "name": "Rubella IgG",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "TOXO_IGM",
+    "name": "Toxoplasma IgM",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "TOXO_IGG",
+    "name": "Toxoplasma IgG",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "HSV1_IGG",
+    "name": "HSV-1 IgG",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "HSV2_IGG",
+    "name": "HSV-2 IgG",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "VZV_IGG",
+    "name": "Varicella IgG",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "H PYLORI",
+    "name": "H. pylori Antibody",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "H PYLORI_AG",
+    "name": "H. pylori Antigen (Stool)",
+    "category": "Stool",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "ROTA",
+    "name": "Rotavirus Antigen",
+    "category": "Stool",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "ADENO",
+    "name": "Adenovirus Antigen",
+    "category": "Stool",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "GIA",
+    "name": "Giardia Antigen",
+    "category": "Stool",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "CRYPTO",
+    "name": "Cryptosporidium Antigen",
+    "category": "Stool",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "HELICO",
+    "name": "Helicobacter pylori IgG",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "ASCA",
+    "name": "ASCA Antibody",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "ANCA",
+    "name": "ANCA",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "PR3",
+    "name": "Anti-Proteinase 3",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "MPO",
+    "name": "Anti-Myeloperoxidase",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "GLIADIN",
+    "name": "Anti-Gliadin Antibody",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "LKM",
+    "name": "Anti-LKM-1",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "SMA",
+    "name": "Anti-Smooth Muscle Antibody",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "AMA",
+    "name": "Anti-Mitochondrial Antibody",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "ACA",
+    "name": "Anti-Centromere Antibody",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "SCL70",
+    "name": "Anti-Scl-70",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "JO1",
+    "name": "Anti-Jo-1",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "SM",
+    "name": "Anti-Sm",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "SSA",
+    "name": "Anti-SSA",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "SSB",
+    "name": "Anti-SSB",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "URATE",
+    "name": "Urate (Urine)",
+    "category": "Urinalysis",
+    "unit": "mg/24h",
+    "referenceRangeMaleLow": "250",
+    "referenceRangeMaleHigh": "750",
+    "referenceRangeFemaleLow": "250",
+    "referenceRangeFemaleHigh": "750"
+  },
+  {
+    "code": "URCA",
+    "name": "Urine Calcium",
+    "category": "Urinalysis",
+    "unit": "mg/24h",
+    "referenceRangeMaleLow": "100",
+    "referenceRangeMaleHigh": "300",
+    "referenceRangeFemaleLow": "100",
+    "referenceRangeFemaleHigh": "300"
+  },
+  {
+    "code": "URPHOS",
+    "name": "Urine Phosphorus",
+    "category": "Urinalysis",
+    "unit": "g/24h",
+    "referenceRangeMaleLow": "0.4",
+    "referenceRangeMaleHigh": "1.3",
+    "referenceRangeFemaleLow": "0.4",
+    "referenceRangeFemaleHigh": "1.3"
+  },
+  {
+    "code": "URCREAT",
+    "name": "Urine Creatinine (24h)",
+    "category": "Urinalysis",
+    "unit": "mg/24h",
+    "referenceRangeMaleLow": "1000",
+    "referenceRangeMaleHigh": "2000",
+    "referenceRangeFemaleLow": "800",
+    "referenceRangeFemaleHigh": "1800"
+  },
+  {
+    "code": "URPRO_24",
+    "name": "Urine Protein (24h)",
+    "category": "Urinalysis",
+    "unit": "mg/24h",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "150",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "150"
+  },
+  {
+    "code": "URMA",
+    "name": "Urine Microalbumin (24h)",
+    "category": "Urinalysis",
+    "unit": "mg/24h",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "30",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "30"
+  },
+  {
+    "code": "URNA",
+    "name": "Urine Sodium",
+    "category": "Urinalysis",
+    "unit": "mEq/24h",
+    "referenceRangeMaleLow": "40",
+    "referenceRangeMaleHigh": "220",
+    "referenceRangeFemaleLow": "40",
+    "referenceRangeFemaleHigh": "220"
+  },
+  {
+    "code": "URK_24",
+    "name": "Urine Potassium (24h)",
+    "category": "Urinalysis",
+    "unit": "mEq/24h",
+    "referenceRangeMaleLow": "25",
+    "referenceRangeMaleHigh": "125",
+    "referenceRangeFemaleLow": "25",
+    "referenceRangeFemaleHigh": "125"
+  },
+  {
+    "code": "UROXO",
+    "name": "Urine Oxalate",
+    "category": "Urinalysis",
+    "unit": "mg/24h",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "URCORT",
+    "name": "Urine Cortisol (24h)",
+    "category": "Urinalysis",
+    "unit": "mcg/24h",
+    "referenceRangeMaleLow": "10",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "10",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "URVMA",
+    "name": "Urine VMA",
+    "category": "Urinalysis",
+    "unit": "mg/24h",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "7",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "7"
+  },
+  {
+    "code": "UR5HIAA",
+    "name": "Urine 5-HIAA",
+    "category": "Urinalysis",
+    "unit": "mg/24h",
+    "referenceRangeMaleLow": "2",
+    "referenceRangeMaleHigh": "8",
+    "referenceRangeFemaleLow": "2",
+    "referenceRangeFemaleHigh": "8"
+  },
+  {
+    "code": "CA72",
+    "name": "CA 72-4",
+    "category": "Tumour Markers",
+    "unit": "U/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "6.9",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "6.9"
+  },
+  {
+    "code": "CYFRA",
+    "name": "CYFRA 21-1",
+    "category": "Tumour Markers",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "2.08",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "2.08"
+  },
+  {
+    "code": "NSE",
+    "name": "Neuron-Specific Enolase",
+    "category": "Tumour Markers",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "18.3",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "18.3"
+  },
+  {
+    "code": "HE4",
+    "name": "HE4",
+    "category": "Tumour Markers",
+    "unit": "pmol/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "150",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "150"
+  },
+  {
+    "code": "PAP",
+    "name": "PAP",
+    "category": "Tumour Markers",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "2.5",
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "TG_TM",
+    "name": "Thyroglobulin (Tumour Marker)",
+    "category": "Tumour Markers",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "50",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "50"
+  },
+  {
+    "code": "GAST",
+    "name": "Gastrin",
+    "category": "Clinical Biochemistry",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "VIP",
+    "name": "VIP",
+    "category": "Clinical Biochemistry",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "75",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "75"
+  },
+  {
+    "code": "GLUCAG",
+    "name": "Glucagon",
+    "category": "Clinical Biochemistry",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "50",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "50",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "SOMAT",
+    "name": "Somatostatin",
+    "category": "Clinical Biochemistry",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "50",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "50"
+  },
+  {
+    "code": "CHROMO",
+    "name": "Chromogranin A",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "NTPRO",
+    "name": "NT-proBNP",
+    "category": "Clinical Biochemistry",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "125",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "125"
+  },
+  {
+    "code": "MYOG",
+    "name": "Myoglobin",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "28",
+    "referenceRangeMaleHigh": "72",
+    "referenceRangeFemaleLow": "25",
+    "referenceRangeFemaleHigh": "58"
+  },
+  {
+    "code": "HBALB",
+    "name": "Hb-Albumin",
+    "category": "Clinical Biochemistry",
+    "unit": "%",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "1",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "1"
+  },
+  {
+    "code": "FRUC",
+    "name": "Fructosamine",
+    "category": "Clinical Biochemistry",
+    "unit": "µmol/L",
+    "referenceRangeMaleLow": "200",
+    "referenceRangeMaleHigh": "285",
+    "referenceRangeFemaleLow": "200",
+    "referenceRangeFemaleHigh": "285"
+  },
+  {
+    "code": "LIPASE_S",
+    "name": "Lipase (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "160",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "160"
+  },
+  {
+    "code": "AMYL_S",
+    "name": "Amylase (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "28",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "28",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "ELAST",
+    "name": "Elastase (Stool)",
+    "category": "Stool",
+    "unit": "mcg/g",
+    "referenceRangeMaleLow": "200",
+    "referenceRangeMaleHigh": "500",
+    "referenceRangeFemaleLow": "200",
+    "referenceRangeFemaleHigh": "500"
+  },
+  {
+    "code": "FECAL_O",
+    "name": "Fecal Occult Blood",
+    "category": "Stool",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "CALPRO",
+    "name": "Calprotectin (Stool)",
+    "category": "Stool",
+    "unit": "mcg/g",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "50",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "50"
+  },
+  {
+    "code": "LACTO_FECAL",
+    "name": "Lactoferrin (Stool)",
+    "category": "Stool",
+    "unit": "mcg/g",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "7.25",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "7.25"
+  },
+  {
+    "code": "PCT_Q",
+    "name": "Procalcitonin (Quantitative)",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0.15",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0.15"
+  },
+  {
+    "code": "GAD",
+    "name": "Anti-GAD Antibody",
+    "category": "Immunology",
+    "unit": "U/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "IA2",
+    "name": "Anti-IA2 Antibody",
+    "category": "Immunology",
+    "unit": "U/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0.4",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0.4"
+  },
+  {
+    "code": "INSULIN_AB",
+    "name": "Anti-Insulin Antibody",
+    "category": "Immunology",
+    "unit": "U/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0.4",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0.4"
+  },
+  {
+    "code": "ICA",
+    "name": "Islet Cell Antibody",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "TGAB_S",
+    "name": "Anti-Thyroglobulin",
+    "category": "Immunology",
+    "unit": "IU/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "TPO_S",
+    "name": "Anti-TPO",
+    "category": "Immunology",
+    "unit": "IU/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "34",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "34"
+  },
+  {
+    "code": "TSH_REC",
+    "name": "TSH Receptor Antibody",
+    "category": "Immunology",
+    "unit": "IU/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "1.5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "1.5"
+  },
+  {
+    "code": "PARA_PTH",
+    "name": "Parathyroid Hormone",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "15",
+    "referenceRangeMaleHigh": "65",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "65"
+  },
+  {
+    "code": "VITD_B",
+    "name": "Vitamin D Binding Protein",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/L",
+    "referenceRangeMaleLow": "300",
+    "referenceRangeMaleHigh": "600",
+    "referenceRangeFemaleLow": "300",
+    "referenceRangeFemaleHigh": "600"
+  },
+  {
+    "code": "OSTASE",
+    "name": "Bone-Specific Alkaline Phosphatase",
+    "category": "Clinical Biochemistry",
+    "unit": "µg/L",
+    "referenceRangeMaleLow": "6",
+    "referenceRangeMaleHigh": "23",
+    "referenceRangeFemaleLow": "5",
+    "referenceRangeFemaleHigh": "16"
+  },
+  {
+    "code": "CTX",
+    "name": "Beta-Crosslaps",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0.3",
+    "referenceRangeMaleHigh": "0.8",
+    "referenceRangeFemaleLow": "0.3",
+    "referenceRangeFemaleHigh": "0.6"
+  },
+  {
+    "code": "PINP",
+    "name": "PINP",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "15",
+    "referenceRangeMaleHigh": "75",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "75"
+  },
+  {
+    "code": "OSTEOC",
+    "name": "Osteocalcin",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "9",
+    "referenceRangeMaleHigh": "42",
+    "referenceRangeFemaleLow": "7",
+    "referenceRangeFemaleHigh": "35"
+  },
+  {
+    "code": "LDH_S",
+    "name": "LDH (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "140",
+    "referenceRangeMaleHigh": "280",
+    "referenceRangeFemaleLow": "140",
+    "referenceRangeFemaleHigh": "280"
+  },
+  {
+    "code": "ACP",
+    "name": "Acid Phosphatase",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "6.5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "5.5"
+  },
+  {
+    "code": "CKBB",
+    "name": "CK-BB",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "ALDOL",
+    "name": "Aldolase",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "1",
+    "referenceRangeMaleHigh": "7.5",
+    "referenceRangeFemaleLow": "1",
+    "referenceRangeFemaleHigh": "7.5"
+  },
+  {
+    "code": "GAL1P",
+    "name": "Galactose-1-Phosphate",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "AMMONIA",
+    "name": "Blood Ammonia",
+    "category": "Clinical Biochemistry",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "15",
+    "referenceRangeMaleHigh": "45",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "45"
+  },
+  {
+    "code": "LACT_D",
+    "name": "Lactate Dehydrogenase Isoenzymes",
+    "category": "Clinical Biochemistry",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "BILI_I2",
+    "name": "Indirect Bilirubin (Calculated)",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.1",
+    "referenceRangeMaleHigh": "1",
+    "referenceRangeFemaleLow": "0.1",
+    "referenceRangeFemaleHigh": "1"
+  },
+  {
+    "code": "PREALB",
+    "name": "Prealbumin",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "18",
+    "referenceRangeMaleHigh": "35",
+    "referenceRangeFemaleLow": "18",
+    "referenceRangeFemaleHigh": "35"
+  },
+  {
+    "code": "ALP_ISO",
+    "name": "ALP Isoenzymes",
+    "category": "Clinical Biochemistry",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "GST",
+    "name": "Glutathione S-Transferase",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "7",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "7"
+  },
+  {
+    "code": "GAL",
+    "name": "Galactose",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "1,5-AG",
+    "name": "1,5-Anhydroglucitol",
+    "category": "Clinical Biochemistry",
+    "unit": "mcg/mL",
+    "referenceRangeMaleLow": "14",
+    "referenceRangeMaleHigh": "30",
+    "referenceRangeFemaleLow": "14",
+    "referenceRangeFemaleHigh": "30"
+  },
+  {
+    "code": "FRUC_GLY",
+    "name": "Fructosamine (Glycated Protein)",
+    "category": "Clinical Biochemistry",
+    "unit": "µmol/L",
+    "referenceRangeMaleLow": "200",
+    "referenceRangeMaleHigh": "285",
+    "referenceRangeFemaleLow": "200",
+    "referenceRangeFemaleHigh": "285"
+  },
+  {
+    "code": "LIPASE_P",
+    "name": "Pancreatic Lipase",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "160",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "160"
+  },
+  {
+    "code": "PEP",
+    "name": "Peptidase",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "40",
+    "referenceRangeMaleHigh": "240",
+    "referenceRangeFemaleLow": "40",
+    "referenceRangeFemaleHigh": "240"
+  },
+  {
+    "code": "CHOL_EST",
+    "name": "Cholesterol Esters",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "65",
+    "referenceRangeMaleHigh": "75",
+    "referenceRangeFemaleLow": "65",
+    "referenceRangeFemaleHigh": "75"
+  },
+  {
+    "code": "NEFA",
+    "name": "Non-Esterified Fatty Acids",
+    "category": "Clinical Biochemistry",
+    "unit": "mEq/L",
+    "referenceRangeMaleLow": "0.1",
+    "referenceRangeMaleHigh": "0.6",
+    "referenceRangeFemaleLow": "0.1",
+    "referenceRangeFemaleHigh": "0.6"
+  },
+  {
+    "code": "APO_E",
+    "name": "Apolipoprotein E",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "3",
+    "referenceRangeMaleHigh": "7",
+    "referenceRangeFemaleLow": "3",
+    "referenceRangeFemaleHigh": "7"
+  },
+  {
+    "code": "LIPOPHEN",
+    "name": "Lipoprotein Phenotyping",
+    "category": "Clinical Biochemistry",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "SD_LDL",
+    "name": "Small Dense LDL",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "OX_LDL",
+    "name": "Oxidized LDL",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "60",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "60"
+  },
+  {
+    "code": "ADP",
+    "name": "Adiponectin",
+    "category": "Clinical Biochemistry",
+    "unit": "mcg/mL",
+    "referenceRangeMaleLow": "3",
+    "referenceRangeMaleHigh": "18",
+    "referenceRangeFemaleLow": "3",
+    "referenceRangeFemaleHigh": "18"
+  },
+  {
+    "code": "LEPTIN",
+    "name": "Leptin",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "2",
+    "referenceRangeMaleHigh": "6",
+    "referenceRangeFemaleLow": "4",
+    "referenceRangeFemaleHigh": "24"
+  },
+  {
+    "code": "RESISTIN",
+    "name": "Resistin",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "4",
+    "referenceRangeMaleHigh": "12",
+    "referenceRangeFemaleLow": "4",
+    "referenceRangeFemaleHigh": "12"
+  },
+  {
+    "code": "INS_SENS",
+    "name": "Insulin Sensitivity Index",
+    "category": "Clinical Biochemistry",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "HOMA_IR",
+    "name": "HOMA-IR",
+    "category": "Clinical Biochemistry",
+    "unit": null,
+    "referenceRangeMaleLow": "0.5",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "HOMA_B",
+    "name": "HOMA-Beta",
+    "category": "Clinical Biochemistry",
+    "unit": null,
+    "referenceRangeMaleLow": "50",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "50",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "QUICKI",
+    "name": "QUICKI",
+    "category": "Clinical Biochemistry",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "CYS_C",
+    "name": "Cystatin C",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/L",
+    "referenceRangeMaleLow": "0.5",
+    "referenceRangeMaleHigh": "1.2",
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "1.2"
+  },
+  {
+    "code": "B2M_S",
+    "name": "Beta-2 Microglobulin (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/L",
+    "referenceRangeMaleLow": "1",
+    "referenceRangeMaleHigh": "3",
+    "referenceRangeFemaleLow": "1",
+    "referenceRangeFemaleHigh": "3"
+  },
+  {
+    "code": "URIC_C",
+    "name": "Uric Acid Clearance",
+    "category": "Clinical Biochemistry",
+    "unit": "mL/min",
+    "referenceRangeMaleLow": "6",
+    "referenceRangeMaleHigh": "12",
+    "referenceRangeFemaleLow": "6",
+    "referenceRangeFemaleHigh": "12"
+  },
+  {
+    "code": "CREAT_CL",
+    "name": "Creatinine Clearance",
+    "category": "Clinical Biochemistry",
+    "unit": "mL/min",
+    "referenceRangeMaleLow": "90",
+    "referenceRangeMaleHigh": "120",
+    "referenceRangeFemaleLow": "90",
+    "referenceRangeFemaleHigh": "120"
+  },
+  {
+    "code": "OSMO_GAP",
+    "name": "Osmolal Gap (Urine)",
+    "category": "Urinalysis",
+    "unit": "mOsm/kg",
+    "referenceRangeMaleLow": "-10",
+    "referenceRangeMaleHigh": "10",
+    "referenceRangeFemaleLow": "-10",
+    "referenceRangeFemaleHigh": "10"
+  },
+  {
+    "code": "FE_NA",
+    "name": "Fractional Excretion of Sodium",
+    "category": "Urinalysis",
+    "unit": "%",
+    "referenceRangeMaleLow": "0.5",
+    "referenceRangeMaleHigh": "1",
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "1"
+  },
+  {
+    "code": "FE_UA",
+    "name": "Fractional Excretion of Uric Acid",
+    "category": "Urinalysis",
+    "unit": "%",
+    "referenceRangeMaleLow": "5",
+    "referenceRangeMaleHigh": "20",
+    "referenceRangeFemaleLow": "5",
+    "referenceRangeFemaleHigh": "20"
+  },
+  {
+    "code": "FE_PHOS",
+    "name": "Fractional Excretion of Phosphate",
+    "category": "Urinalysis",
+    "unit": "%",
+    "referenceRangeMaleLow": "10",
+    "referenceRangeMaleHigh": "20",
+    "referenceRangeFemaleLow": "10",
+    "referenceRangeFemaleHigh": "20"
+  },
+  {
+    "code": "TTKG",
+    "name": "Transtubular K Gradient",
+    "category": "Urinalysis",
+    "unit": null,
+    "referenceRangeMaleLow": "5",
+    "referenceRangeMaleHigh": "15",
+    "referenceRangeFemaleLow": "5",
+    "referenceRangeFemaleHigh": "15"
+  },
+  {
+    "code": "UR_CORT_R",
+    "name": "Urine Cortisol/Creatinine Ratio",
+    "category": "Urinalysis",
+    "unit": "mcg/g",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "UR_PRO_C",
+    "name": "Urine Protein/Creatinine Ratio",
+    "category": "Urinalysis",
+    "unit": "mg/g",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "UR_ALB_C",
+    "name": "Urine Albumin/Creatinine (Random)",
+    "category": "Urinalysis",
+    "unit": "mg/g",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "30",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "30"
+  },
+  {
+    "code": "UR_CA_24",
+    "name": "Urine Calcium 24h",
+    "category": "Urinalysis",
+    "unit": "mg/24h",
+    "referenceRangeMaleLow": "100",
+    "referenceRangeMaleHigh": "300",
+    "referenceRangeFemaleLow": "100",
+    "referenceRangeFemaleHigh": "300"
+  },
+  {
+    "code": "UR_MAG_24",
+    "name": "Urine Magnesium 24h",
+    "category": "Urinalysis",
+    "unit": "mg/24h",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "UR_CIT_24",
+    "name": "Urine Citrate 24h",
+    "category": "Urinalysis",
+    "unit": "mg/24h",
+    "referenceRangeMaleLow": "320",
+    "referenceRangeMaleHigh": "760",
+    "referenceRangeFemaleLow": "320",
+    "referenceRangeFemaleHigh": "760"
+  },
+  {
+    "code": "UR_CYS_24",
+    "name": "Urine Cystine 24h",
+    "category": "Urinalysis",
+    "unit": "mg/24h",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "CORT_F",
+    "name": "Cortisol (8 AM)",
+    "category": "Endocrinology",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "6",
+    "referenceRangeMaleHigh": "23",
+    "referenceRangeFemaleLow": "6",
+    "referenceRangeFemaleHigh": "23"
+  },
+  {
+    "code": "CORT_PM",
+    "name": "Cortisol (4 PM)",
+    "category": "Endocrinology",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "2",
+    "referenceRangeMaleHigh": "11",
+    "referenceRangeFemaleLow": "2",
+    "referenceRangeFemaleHigh": "11"
+  },
+  {
+    "code": "CORT_MID",
+    "name": "Cortisol (Midnight)",
+    "category": "Endocrinology",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "DEX_SUP",
+    "name": "Dexamethasone Suppression (Low)",
+    "category": "Endocrinology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "DEX_SUP_H",
+    "name": "Dexamethasone Suppression (High)",
+    "category": "Endocrinology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "RENIN",
+    "name": "Plasma Renin Activity",
+    "category": "Endocrinology",
+    "unit": "ng/mL/h",
+    "referenceRangeMaleLow": "0.5",
+    "referenceRangeMaleHigh": "4",
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "4"
+  },
+  {
+    "code": "ALD_REN",
+    "name": "Aldosterone/Renin Ratio",
+    "category": "Endocrinology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "MET_VMA",
+    "name": "Metanephrines (Plasma)",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "90",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "90"
+  },
+  {
+    "code": "NORMET",
+    "name": "Normetanephrine (Plasma)",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "180",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "180"
+  },
+  {
+    "code": "CATECHOL",
+    "name": "Catecholamines (Plasma)",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "VMA_24",
+    "name": "VMA (24h Urine)",
+    "category": "Urinalysis",
+    "unit": "mg/24h",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "7",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "7"
+  },
+  {
+    "code": "MET_24",
+    "name": "Metanephrines (24h Urine)",
+    "category": "Urinalysis",
+    "unit": "mcg/24h",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "400",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "400"
+  },
+  {
+    "code": "TESTO_B",
+    "name": "Testosterone (Bioavailable)",
+    "category": "Endocrinology",
+    "unit": "ng/dL",
+    "referenceRangeMaleLow": "60",
+    "referenceRangeMaleHigh": "270",
+    "referenceRangeFemaleLow": "2",
+    "referenceRangeFemaleHigh": "24"
+  },
+  {
+    "code": "TESTO_F2",
+    "name": "Free Testosterone (Calculated)",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "9",
+    "referenceRangeMaleHigh": "30",
+    "referenceRangeFemaleLow": "0.3",
+    "referenceRangeFemaleHigh": "1.9"
+  },
+  {
+    "code": "DHT",
+    "name": "Dihydrotestosterone",
+    "category": "Endocrinology",
+    "unit": "ng/dL",
+    "referenceRangeMaleLow": "30",
+    "referenceRangeMaleHigh": "85",
+    "referenceRangeFemaleLow": "4",
+    "referenceRangeFemaleHigh": "22"
+  },
+  {
+    "code": "ANDRO",
+    "name": "Androstenedione",
+    "category": "Endocrinology",
+    "unit": "ng/dL",
+    "referenceRangeMaleLow": "60",
+    "referenceRangeMaleHigh": "270",
+    "referenceRangeFemaleLow": "50",
+    "referenceRangeFemaleHigh": "250"
+  },
+  {
+    "code": "DHEA_F",
+    "name": "DHEA (Free)",
+    "category": "Endocrinology",
+    "unit": "ng/dL",
+    "referenceRangeMaleLow": "3",
+    "referenceRangeMaleHigh": "35",
+    "referenceRangeFemaleLow": "0.8",
+    "referenceRangeFemaleHigh": "10"
+  },
+  {
+    "code": "PROG_17",
+    "name": "17-OH Progesterone",
+    "category": "Endocrinology",
+    "unit": "ng/dL",
+    "referenceRangeMaleLow": "30",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "70"
+  },
+  {
+    "code": "ESTRIOL",
+    "name": "Estriol (Unconjugated)",
+    "category": "Endocrinology",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "ESTRONE",
+    "name": "Estrone",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "10",
+    "referenceRangeMaleHigh": "60",
+    "referenceRangeFemaleLow": "30",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "INHB_A",
+    "name": "Inhibin A",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": "10",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "RELAXIN",
+    "name": "Relaxin",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "PLGF",
+    "name": "PlGF",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": "10",
+    "referenceRangeFemaleHigh": "700"
+  },
+  {
+    "code": "PAPP_A",
+    "name": "PAPP-A",
+    "category": "Endocrinology",
+    "unit": "mIU/L",
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "4"
+  },
+  {
+    "code": "INHIB_A",
+    "name": "Inhibin A (Prenatal)",
+    "category": "Endocrinology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": "10",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "TSH_1",
+    "name": "TSH (1st Trimester)",
+    "category": "Endocrinology",
+    "unit": "mIU/L",
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": "0.1",
+    "referenceRangeFemaleHigh": "2.5"
+  },
+  {
+    "code": "FACTOR_V",
+    "name": "Factor V Activity",
+    "category": "Coagulation",
+    "unit": "%",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "150",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "150"
+  },
+  {
+    "code": "FACTOR_VIII",
+    "name": "Factor VIII Activity",
+    "category": "Coagulation",
+    "unit": "%",
+    "referenceRangeMaleLow": "50",
+    "referenceRangeMaleHigh": "150",
+    "referenceRangeFemaleLow": "50",
+    "referenceRangeFemaleHigh": "150"
+  },
+  {
+    "code": "FACTOR_IX",
+    "name": "Factor IX Activity",
+    "category": "Coagulation",
+    "unit": "%",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "120",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "120"
+  },
+  {
+    "code": "FACTOR_X",
+    "name": "Factor X Activity",
+    "category": "Coagulation",
+    "unit": "%",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "150",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "150"
+  },
+  {
+    "code": "FACTOR_XI",
+    "name": "Factor XI Activity",
+    "category": "Coagulation",
+    "unit": "%",
+    "referenceRangeMaleLow": "65",
+    "referenceRangeMaleHigh": "140",
+    "referenceRangeFemaleLow": "65",
+    "referenceRangeFemaleHigh": "140"
+  },
+  {
+    "code": "FACTOR_XII",
+    "name": "Factor XII Activity",
+    "category": "Coagulation",
+    "unit": "%",
+    "referenceRangeMaleLow": "50",
+    "referenceRangeMaleHigh": "150",
+    "referenceRangeFemaleLow": "50",
+    "referenceRangeFemaleHigh": "150"
+  },
+  {
+    "code": "VWF_AG",
+    "name": "von Willebrand Factor Antigen",
+    "category": "Coagulation",
+    "unit": "%",
+    "referenceRangeMaleLow": "50",
+    "referenceRangeMaleHigh": "160",
+    "referenceRangeFemaleLow": "50",
+    "referenceRangeFemaleHigh": "160"
+  },
+  {
+    "code": "VWF_ACT",
+    "name": "von Willebrand Factor Activity",
+    "category": "Coagulation",
+    "unit": "%",
+    "referenceRangeMaleLow": "50",
+    "referenceRangeMaleHigh": "160",
+    "referenceRangeFemaleLow": "50",
+    "referenceRangeFemaleHigh": "160"
+  },
+  {
+    "code": "PROT_C",
+    "name": "Protein C Activity",
+    "category": "Coagulation",
+    "unit": "%",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "140",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "140"
+  },
+  {
+    "code": "PROT_S",
+    "name": "Protein S Activity",
+    "category": "Coagulation",
+    "unit": "%",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "140",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "140"
+  },
+  {
+    "code": "ANTI_THR",
+    "name": "Antithrombin III",
+    "category": "Coagulation",
+    "unit": "%",
+    "referenceRangeMaleLow": "80",
+    "referenceRangeMaleHigh": "120",
+    "referenceRangeFemaleLow": "80",
+    "referenceRangeFemaleHigh": "120"
+  },
+  {
+    "code": "LUPUS_ANT",
+    "name": "Lupus Anticoagulant",
+    "category": "Coagulation",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "ACL_IGG",
+    "name": "Anti-Cardiolipin IgG",
+    "category": "Immunology",
+    "unit": "GPL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "15",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "15"
+  },
+  {
+    "code": "ACL_IGM",
+    "name": "Anti-Cardiolipin IgM",
+    "category": "Immunology",
+    "unit": "MPL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "12.5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "12.5"
+  },
+  {
+    "code": "B2GP_IGG",
+    "name": "Anti-Beta-2 Glycoprotein IgG",
+    "category": "Immunology",
+    "unit": "U/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "20",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "20"
+  },
+  {
+    "code": "B2GP_IGM",
+    "name": "Anti-Beta-2 Glycoprotein IgM",
+    "category": "Immunology",
+    "unit": "U/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "20",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "20"
+  },
+  {
+    "code": "LAC",
+    "name": "Lupus Anticoagulant (DRVVT)",
+    "category": "Coagulation",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "FACTOR_XIII",
+    "name": "Factor XIII",
+    "category": "Coagulation",
+    "unit": "%",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "140",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "140"
+  },
+  {
+    "code": "PLASMIN",
+    "name": "Plasminogen",
+    "category": "Coagulation",
+    "unit": "%",
+    "referenceRangeMaleLow": "80",
+    "referenceRangeMaleHigh": "120",
+    "referenceRangeFemaleLow": "80",
+    "referenceRangeFemaleHigh": "120"
+  },
+  {
+    "code": "FDP",
+    "name": "Fibrin Degradation Products",
+    "category": "Coagulation",
+    "unit": "mcg/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "10",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "10"
+  },
+  {
+    "code": "TCT",
+    "name": "Thrombin Time",
+    "category": "Coagulation",
+    "unit": "sec",
+    "referenceRangeMaleLow": "14",
+    "referenceRangeMaleHigh": "19",
+    "referenceRangeFemaleLow": "14",
+    "referenceRangeFemaleHigh": "19"
+  },
+  {
+    "code": "REPTILASE",
+    "name": "Reptilase Time",
+    "category": "Coagulation",
+    "unit": "sec",
+    "referenceRangeMaleLow": "15",
+    "referenceRangeMaleHigh": "20",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "20"
+  },
+  {
+    "code": "HB_CORR",
+    "name": "Corrected Reticulocyte Count",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0.5",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "HEINZ",
+    "name": "Heinz Bodies",
+    "category": "Haematology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "OSM_FRAG",
+    "name": "Osmotic Fragility",
+    "category": "Haematology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "COOMBS_D",
+    "name": "Direct Antiglobulin Test",
+    "category": "Blood Banking",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "COOMBS_I",
+    "name": "Indirect Antiglobulin Test",
+    "category": "Blood Banking",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "IRREG_AB",
+    "name": "Irregular Antibody Screen",
+    "category": "Blood Banking",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "KLEIHAUER",
+    "name": "Kleihauer-Betke",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0"
+  },
+  {
+    "code": "FETAL_HB",
+    "name": "Fetal Haemoglobin %",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "1",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "1"
+  },
+  {
+    "code": "HB_S",
+    "name": "Haemoglobin S",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0"
+  },
+  {
+    "code": "HB_C",
+    "name": "Haemoglobin C",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0"
+  },
+  {
+    "code": "HB_D",
+    "name": "Haemoglobin D",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0"
+  },
+  {
+    "code": "HB_E",
+    "name": "Haemoglobin E",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0"
+  },
+  {
+    "code": "PLAS_HAEM",
+    "name": "Plasma Haemoglobin",
+    "category": "Haematology",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "APT",
+    "name": "Apt Test",
+    "category": "Haematology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "SCHIST",
+    "name": "Schistocyte Count",
+    "category": "Haematology",
+    "unit": "%",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0.5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0.5"
+  },
+  {
+    "code": "SER_FOL",
+    "name": "Folate (Serum)",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "3",
+    "referenceRangeMaleHigh": "17",
+    "referenceRangeFemaleLow": "3",
+    "referenceRangeFemaleHigh": "17"
+  },
+  {
+    "code": "RBC_FOL",
+    "name": "Folate (RBC)",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "140",
+    "referenceRangeMaleHigh": "960",
+    "referenceRangeFemaleLow": "140",
+    "referenceRangeFemaleHigh": "960"
+  },
+  {
+    "code": "VITB6",
+    "name": "Vitamin B6",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "5",
+    "referenceRangeMaleHigh": "50",
+    "referenceRangeFemaleLow": "5",
+    "referenceRangeFemaleHigh": "50"
+  },
+  {
+    "code": "VITB1",
+    "name": "Thiamine",
+    "category": "Clinical Biochemistry",
+    "unit": "nmol/L",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "180",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "180"
+  },
+  {
+    "code": "VITB2",
+    "name": "Riboflavin",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "4",
+    "referenceRangeMaleHigh": "24",
+    "referenceRangeFemaleLow": "4",
+    "referenceRangeFemaleHigh": "24"
+  },
+  {
+    "code": "BIOTIN",
+    "name": "Biotin",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/L",
+    "referenceRangeMaleLow": "200",
+    "referenceRangeMaleHigh": "500",
+    "referenceRangeFemaleLow": "200",
+    "referenceRangeFemaleHigh": "500"
+  },
+  {
+    "code": "VITK",
+    "name": "Vitamin K",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0.2",
+    "referenceRangeMaleHigh": "3.2",
+    "referenceRangeFemaleLow": "0.2",
+    "referenceRangeFemaleHigh": "3.2"
+  },
+  {
+    "code": "HISTAMINE",
+    "name": "Histamine",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "1",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "1"
+  },
+  {
+    "code": "SEROT",
+    "name": "Serotonin",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "50",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "50",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "TRYPT",
+    "name": "Tryptophan",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.5",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "PHENYL",
+    "name": "Phenylalanine",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.5",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "TYRO",
+    "name": "Tyrosine",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.5",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "HISTID",
+    "name": "Histidine",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.5",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "METH",
+    "name": "Methionine",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.2",
+    "referenceRangeMaleHigh": "0.4",
+    "referenceRangeFemaleLow": "0.2",
+    "referenceRangeFemaleHigh": "0.4"
+  },
+  {
+    "code": "CYST",
+    "name": "Cystine",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0.5",
+    "referenceRangeMaleHigh": "1.5",
+    "referenceRangeFemaleLow": "0.5",
+    "referenceRangeFemaleHigh": "1.5"
+  },
+  {
+    "code": "GAL_1P_U",
+    "name": "Galactose-1-Phosphate Uridyltransferase",
+    "category": "Clinical Biochemistry",
+    "unit": "U/g Hb",
+    "referenceRangeMaleLow": "18",
+    "referenceRangeMaleHigh": "45",
+    "referenceRangeFemaleLow": "18",
+    "referenceRangeFemaleHigh": "45"
+  },
+  {
+    "code": "PHENYL_K",
+    "name": "Phenylalanine (PKU)",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "GUTHRIE",
+    "name": "Guthrie Test (Phenylalanine)",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "T4_TSH_NB",
+    "name": "Neonatal TSH",
+    "category": "Endocrinology",
+    "unit": "mIU/L",
+    "referenceRangeMaleLow": "1",
+    "referenceRangeMaleHigh": "20",
+    "referenceRangeFemaleLow": "1",
+    "referenceRangeFemaleHigh": "20"
+  },
+  {
+    "code": "T4_NB",
+    "name": "Neonatal T4",
+    "category": "Endocrinology",
+    "unit": "mcg/dL",
+    "referenceRangeMaleLow": "6",
+    "referenceRangeMaleHigh": "16",
+    "referenceRangeFemaleLow": "6",
+    "referenceRangeFemaleHigh": "16"
+  },
+  {
+    "code": "17_OHP",
+    "name": "17-Hydroxyprogesterone",
+    "category": "Endocrinology",
+    "unit": "ng/dL",
+    "referenceRangeMaleLow": "30",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "70"
+  },
+  {
+    "code": "CORT_SYN",
+    "name": "Cosyntropin Stimulation",
+    "category": "Endocrinology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "GLUC_STIM",
+    "name": "Glucagon Stimulation (C-Peptide)",
+    "category": "Endocrinology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "C_PEP_F",
+    "name": "C-Peptide (Fasting)",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0.9",
+    "referenceRangeMaleHigh": "7.1",
+    "referenceRangeFemaleLow": "0.9",
+    "referenceRangeFemaleHigh": "7.1"
+  },
+  {
+    "code": "C_PEP_6M",
+    "name": "C-Peptide (6 min post-glucagon)",
+    "category": "Clinical Biochemistry",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "1.5",
+    "referenceRangeMaleHigh": "5",
+    "referenceRangeFemaleLow": "1.5",
+    "referenceRangeFemaleHigh": "5"
+  },
+  {
+    "code": "INS_6M",
+    "name": "Insulin (6 min post-glucagon)",
+    "category": "Clinical Biochemistry",
+    "unit": "microU/mL",
+    "referenceRangeMaleLow": "15",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "S_100",
+    "name": "S-100 Protein",
+    "category": "Tumour Markers",
+    "unit": "mcg/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "0.1",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "0.1"
+  },
+  {
+    "code": "SCC",
+    "name": "Squamous Cell Carcinoma Antigen",
+    "category": "Tumour Markers",
+    "unit": "ng/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "1.5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "1.5"
+  },
+  {
+    "code": "TPS",
+    "name": "Tissue Polypeptide Antigen",
+    "category": "Tumour Markers",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "95",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "95"
+  },
+  {
+    "code": "TK1",
+    "name": "Thymidine Kinase 1",
+    "category": "Tumour Markers",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "2",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "2"
+  },
+  {
+    "code": "TRACP",
+    "name": "TRACP-5b",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "1.5",
+    "referenceRangeMaleHigh": "4.5",
+    "referenceRangeFemaleLow": "1.2",
+    "referenceRangeFemaleHigh": "3.5"
+  },
+  {
+    "code": "PYRILINKS",
+    "name": "Pyridinoline",
+    "category": "Clinical Biochemistry",
+    "unit": "nM/nM creat",
+    "referenceRangeMaleLow": "20",
+    "referenceRangeMaleHigh": "60",
+    "referenceRangeFemaleLow": "20",
+    "referenceRangeFemaleHigh": "60"
+  },
+  {
+    "code": "DPD",
+    "name": "Deoxypyridinoline",
+    "category": "Clinical Biochemistry",
+    "unit": "nM/nM creat",
+    "referenceRangeMaleLow": "3",
+    "referenceRangeMaleHigh": "7",
+    "referenceRangeFemaleLow": "3",
+    "referenceRangeFemaleHigh": "7"
+  },
+  {
+    "code": "BAP",
+    "name": "Bone Alkaline Phosphatase",
+    "category": "Clinical Biochemistry",
+    "unit": "µg/L",
+    "referenceRangeMaleLow": "6",
+    "referenceRangeMaleHigh": "23",
+    "referenceRangeFemaleLow": "5",
+    "referenceRangeFemaleHigh": "16"
+  },
+  {
+    "code": "HYP_UR",
+    "name": "Hydroxyproline (Urine)",
+    "category": "Urinalysis",
+    "unit": "mg/24h",
+    "referenceRangeMaleLow": "15",
+    "referenceRangeMaleHigh": "50",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "50"
+  },
+  {
+    "code": "CSF_PRO",
+    "name": "CSF Protein",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "15",
+    "referenceRangeMaleHigh": "45",
+    "referenceRangeFemaleLow": "15",
+    "referenceRangeFemaleHigh": "45"
+  },
+  {
+    "code": "CSF_GLU",
+    "name": "CSF Glucose",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "50",
+    "referenceRangeMaleHigh": "80",
+    "referenceRangeFemaleLow": "50",
+    "referenceRangeFemaleHigh": "80"
+  },
+  {
+    "code": "CSF_CL",
+    "name": "CSF Chloride",
+    "category": "Clinical Biochemistry",
+    "unit": "mEq/L",
+    "referenceRangeMaleLow": "118",
+    "referenceRangeMaleHigh": "132",
+    "referenceRangeFemaleLow": "118",
+    "referenceRangeFemaleHigh": "132"
+  },
+  {
+    "code": "PERICARD_PRO",
+    "name": "Pericardial Fluid Protein",
+    "category": "Clinical Biochemistry",
+    "unit": "g/dL",
+    "referenceRangeMaleLow": "1",
+    "referenceRangeMaleHigh": "3",
+    "referenceRangeFemaleLow": "1",
+    "referenceRangeFemaleHigh": "3"
+  },
+  {
+    "code": "PERICARD_GLU",
+    "name": "Pericardial Fluid Glucose",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "70",
+    "referenceRangeMaleHigh": "100",
+    "referenceRangeFemaleLow": "70",
+    "referenceRangeFemaleHigh": "100"
+  },
+  {
+    "code": "ASC_PRO",
+    "name": "Ascitic Fluid Protein",
+    "category": "Clinical Biochemistry",
+    "unit": "g/dL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "2.5",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "2.5"
+  },
+  {
+    "code": "SAAG",
+    "name": "Serum-Ascites Albumin Gradient",
+    "category": "Clinical Biochemistry",
+    "unit": "g/dL",
+    "referenceRangeMaleLow": "1.1",
+    "referenceRangeMaleHigh": "2.5",
+    "referenceRangeFemaleLow": "1.1",
+    "referenceRangeFemaleHigh": "2.5"
+  },
+  {
+    "code": "PLEURAL_PRO",
+    "name": "Pleural Fluid Protein",
+    "category": "Clinical Biochemistry",
+    "unit": "g/dL",
+    "referenceRangeMaleLow": "1",
+    "referenceRangeMaleHigh": "3",
+    "referenceRangeFemaleLow": "1",
+    "referenceRangeFemaleHigh": "3"
+  },
+  {
+    "code": "ADA",
+    "name": "Adenosine Deaminase",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "40",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "40"
+  },
+  {
+    "code": "SYN_FLUID",
+    "name": "Synovial Fluid Analysis",
+    "category": "Clinical Biochemistry",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "PERICARD_LDH",
+    "name": "Pericardial Fluid LDH",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "ASC_LDH",
+    "name": "Ascitic Fluid LDH",
+    "category": "Clinical Biochemistry",
+    "unit": "U/L",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "200",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "200"
+  },
+  {
+    "code": "FLUID_GLU",
+    "name": "Body Fluid Glucose",
+    "category": "Clinical Biochemistry",
+    "unit": "mg/dL",
+    "referenceRangeMaleLow": "50",
+    "referenceRangeMaleHigh": "80",
+    "referenceRangeFemaleLow": "50",
+    "referenceRangeFemaleHigh": "80"
+  },
+  {
+    "code": "FLUID_PH",
+    "name": "Body Fluid pH",
+    "category": "Clinical Biochemistry",
+    "unit": null,
+    "referenceRangeMaleLow": "7.35",
+    "referenceRangeMaleHigh": "7.45",
+    "referenceRangeFemaleLow": "7.35",
+    "referenceRangeFemaleHigh": "7.45"
+  },
+  {
+    "code": "CHLAM_IGG",
+    "name": "Chlamydia IgG",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "CHLAM_IGM",
+    "name": "Chlamydia IgM",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "MYCO_IGG",
+    "name": "Mycoplasma IgG",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "MYCO_IGM",
+    "name": "Mycoplasma IgM",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "LEGION_AG",
+    "name": "Legionella Antigen (Urine)",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "PNEUMO_AG",
+    "name": "Pneumococcal Antigen (Urine)",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "MENINGO_AG",
+    "name": "Meningococcal Antigen",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "CRAG",
+    "name": "Cryptococcal Antigen",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "ASPER_AG",
+    "name": "Aspergillus Antigen",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "CANDIDA_AG",
+    "name": "Candida Antigen",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "BETA_D",
+    "name": "Beta-D-Glucan",
+    "category": "Serology",
+    "unit": "pg/mL",
+    "referenceRangeMaleLow": "0",
+    "referenceRangeMaleHigh": "80",
+    "referenceRangeFemaleLow": "0",
+    "referenceRangeFemaleHigh": "80"
+  },
+  {
+    "code": "GALACTO",
+    "name": "Galactomannan",
+    "category": "Serology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "QPCR_TB",
+    "name": "TB PCR",
+    "category": "Microbiology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "GENE_XP",
+    "name": "GeneXpert MTB/RIF",
+    "category": "Microbiology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "TB_IGRA",
+    "name": "TB IGRA (Quantiferon)",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "TB_SPOT",
+    "name": "T-SPOT.TB",
+    "category": "Immunology",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "C_DIFF_AG",
+    "name": "Clostridium difficile Antigen",
+    "category": "Stool",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "C_DIFF_TOX",
+    "name": "C. difficile Toxin",
+    "category": "Stool",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  },
+  {
+    "code": "HELICO_AG",
+    "name": "H. pylori Stool Antigen",
+    "category": "Stool",
+    "unit": null,
+    "referenceRangeMaleLow": null,
+    "referenceRangeMaleHigh": null,
+    "referenceRangeFemaleLow": null,
+    "referenceRangeFemaleHigh": null
+  }
+]

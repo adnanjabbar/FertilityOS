@@ -44,8 +44,18 @@ export default function PatientsClient() {
     country: "",
     postalCode: "",
     gender: "",
+    genderIdentity: "",
+    relationshipStatus: "",
+    coupleType: "",
+    spouseFirstName: "",
+    spouseLastName: "",
+    spouseDateOfBirth: "",
+    spouseEmail: "",
+    spousePhone: "",
     notes: "",
   });
+  const showSpouse = form.relationshipStatus === "partnered" || form.relationshipStatus === "married";
+  const showCoupleType = showSpouse;
 
   const fetchList = useCallback(async () => {
     try {
@@ -87,6 +97,14 @@ export default function PatientsClient() {
           country: form.country.trim() || undefined,
           postalCode: form.postalCode.trim() || undefined,
           gender: form.gender.trim() || undefined,
+          genderIdentity: form.genderIdentity.trim() || undefined,
+          relationshipStatus: form.relationshipStatus.trim() || undefined,
+          coupleType: form.coupleType.trim() || undefined,
+          spouseFirstName: form.spouseFirstName.trim() || undefined,
+          spouseLastName: form.spouseLastName.trim() || undefined,
+          spouseDateOfBirth: form.spouseDateOfBirth || undefined,
+          spouseEmail: form.spouseEmail.trim() || undefined,
+          spousePhone: form.spousePhone.trim() || undefined,
           notes: form.notes.trim() || undefined,
         }),
       });
@@ -108,6 +126,14 @@ export default function PatientsClient() {
         country: "",
         postalCode: "",
         gender: "",
+        genderIdentity: "",
+        relationshipStatus: "",
+        coupleType: "",
+        spouseFirstName: "",
+        spouseLastName: "",
+        spouseDateOfBirth: "",
+        spouseEmail: "",
+        spousePhone: "",
         notes: "",
       });
       router.push(`/app/patients/${data.id}`);
@@ -229,9 +255,82 @@ export default function PatientsClient() {
               </div>
             </div>
             <div>
-              <label htmlFor="gender" className={labelClass}>Gender</label>
-              <input id="gender" className={inputClass} placeholder="Optional" value={form.gender} onChange={(e) => setForm((f) => ({ ...f, gender: e.target.value }))} />
+              <label htmlFor="genderIdentity" className={labelClass}>Gender identity</label>
+              <select
+                id="genderIdentity"
+                className={inputClass}
+                value={form.genderIdentity}
+                onChange={(e) => setForm((f) => ({ ...f, genderIdentity: e.target.value, gender: e.target.value }))}
+              >
+                <option value="">Select (optional)</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="non_binary">Non-binary</option>
+                <option value="self_describe">Prefer to self-describe</option>
+                <option value="prefer_not_say">Prefer not to say</option>
+              </select>
             </div>
+            <div>
+              <label htmlFor="relationshipStatus" className={labelClass}>Relationship status</label>
+              <select
+                id="relationshipStatus"
+                className={inputClass}
+                value={form.relationshipStatus}
+                onChange={(e) => setForm((f) => ({ ...f, relationshipStatus: e.target.value }))}
+              >
+                <option value="">Select (optional)</option>
+                <option value="single">Single</option>
+                <option value="partnered">Partnered</option>
+                <option value="married">Married</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            {showCoupleType && (
+              <div>
+                <label htmlFor="coupleType" className={labelClass}>Couple type</label>
+                <select
+                  id="coupleType"
+                  className={inputClass}
+                  value={form.coupleType}
+                  onChange={(e) => setForm((f) => ({ ...f, coupleType: e.target.value }))}
+                >
+                  <option value="">Select (optional)</option>
+                  <option value="heterosexual">Heterosexual couple</option>
+                  <option value="same_sex_male">Same-sex couple (male)</option>
+                  <option value="same_sex_female">Same-sex couple (female)</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            )}
+            {showSpouse && (
+              <div className="space-y-4 rounded-xl border border-slate-200 bg-slate-50/50 p-4">
+                <h3 className="font-semibold text-slate-800">Spouse / partner information</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="spouseFirstName" className={labelClass}>Partner first name</label>
+                    <input id="spouseFirstName" className={inputClass} value={form.spouseFirstName} onChange={(e) => setForm((f) => ({ ...f, spouseFirstName: e.target.value }))} />
+                  </div>
+                  <div>
+                    <label htmlFor="spouseLastName" className={labelClass}>Partner last name</label>
+                    <input id="spouseLastName" className={inputClass} value={form.spouseLastName} onChange={(e) => setForm((f) => ({ ...f, spouseLastName: e.target.value }))} />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="spouseDateOfBirth" className={labelClass}>Partner date of birth</label>
+                    <input id="spouseDateOfBirth" type="date" className={inputClass} value={form.spouseDateOfBirth} onChange={(e) => setForm((f) => ({ ...f, spouseDateOfBirth: e.target.value }))} />
+                  </div>
+                  <div>
+                    <label htmlFor="spouseEmail" className={labelClass}>Partner email</label>
+                    <input id="spouseEmail" type="email" className={inputClass} value={form.spouseEmail} onChange={(e) => setForm((f) => ({ ...f, spouseEmail: e.target.value }))} />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="spousePhone" className={labelClass}>Partner phone</label>
+                  <input id="spousePhone" type="tel" className={inputClass} value={form.spousePhone} onChange={(e) => setForm((f) => ({ ...f, spousePhone: e.target.value }))} />
+                </div>
+              </div>
+            )}
             <div>
               <label htmlFor="notes" className={labelClass}>Notes</label>
               <textarea

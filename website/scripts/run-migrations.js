@@ -58,6 +58,7 @@ const migrations = [
   "0028_lab_connectors.sql",
   "0029_locations_multi_location.sql",
   "0030_native_lis.sql",
+  "0031_lab_catalog_patient_spouse_reports.sql",
 ];
 
 async function main() {

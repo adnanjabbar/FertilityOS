@@ -196,6 +196,14 @@ export const patients = pgTable(
     country: varchar("country", { length: 2 }),
     postalCode: varchar("postal_code", { length: 32 }),
     gender: varchar("gender", { length: 32 }),
+    genderIdentity: varchar("gender_identity", { length: 64 }),
+    relationshipStatus: varchar("relationship_status", { length: 32 }),
+    coupleType: varchar("couple_type", { length: 32 }),
+    spouseFirstName: varchar("spouse_first_name", { length: 255 }),
+    spouseLastName: varchar("spouse_last_name", { length: 255 }),
+    spouseDateOfBirth: timestamp("spouse_date_of_birth", { withTimezone: true }),
+    spouseEmail: varchar("spouse_email", { length: 255 }),
+    spousePhone: varchar("spouse_phone", { length: 64 }),
     notes: text("notes"),
     nationalIdType: varchar("national_id_type", { length: 32 }),
     nationalIdValue: varchar("national_id_value", { length: 255 }),
@@ -920,9 +928,14 @@ export const labTests = pgTable(
       .references(() => tenants.id, { onDelete: "cascade" }),
     code: varchar("code", { length: 64 }).notNull(),
     name: varchar("name", { length: 255 }).notNull(),
+    category: varchar("category", { length: 128 }),
     unit: varchar("unit", { length: 32 }),
     referenceRangeLow: varchar("reference_range_low", { length: 64 }),
     referenceRangeHigh: varchar("reference_range_high", { length: 64 }),
+    referenceRangeMaleLow: varchar("reference_range_male_low", { length: 64 }),
+    referenceRangeMaleHigh: varchar("reference_range_male_high", { length: 64 }),
+    referenceRangeFemaleLow: varchar("reference_range_female_low", { length: 64 }),
+    referenceRangeFemaleHigh: varchar("reference_range_female_high", { length: 64 }),
     referenceRangeText: text("reference_range_text"),
     isPanel: boolean("is_panel").notNull().default(false),
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
@@ -931,6 +944,31 @@ export const labTests = pgTable(
   (table) => [
     uniqueIndex("lab_tests_tenant_code_idx").on(table.tenantId, table.code),
     index("lab_tests_tenant_idx").on(table.tenantId),
+  ]
+);
+
+export const labReportDocuments = pgTable(
+  "lab_report_documents",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    tenantId: uuid("tenant_id")
+      .notNull()
+      .references(() => tenants.id, { onDelete: "cascade" }),
+    patientId: uuid("patient_id")
+      .notNull()
+      .references(() => patients.id, { onDelete: "cascade" }),
+    labName: varchar("lab_name", { length: 255 }),
+    labLocation: varchar("lab_location", { length: 255 }),
+    mrNumberOnReport: varchar("mr_number_on_report", { length: 64 }),
+    fileKey: varchar("file_key", { length: 512 }),
+    notes: text("notes"),
+    reportedAt: timestamp("reported_at", { withTimezone: true }),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    index("lab_report_documents_tenant_idx").on(table.tenantId),
+    index("lab_report_documents_patient_idx").on(table.patientId),
   ]
 );
 
