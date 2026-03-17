@@ -117,8 +117,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
         let email = String(credentials.email).trim().toLowerCase();
-        if (email === "demo" || email === "demo@example") {
-          email = "demo@example.com";
+        if (email === "demo" || email === "demo@example" || email === "demo@example.com") {
+          email = "demo@thefertilityos.com";
         }
         const password = String(credentials.password);
 
@@ -130,7 +130,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
 
         let tenantSlug = hdrs.get("x-tenant-slug");
-        if (!tenantSlug && email === "demo@example.com") {
+        if (!tenantSlug && email === "demo@thefertilityos.com") {
           tenantSlug = "demo-clinic";
         }
         const conditions = [eq(users.email, email)];

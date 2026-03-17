@@ -31,7 +31,7 @@ if (!DATABASE_URL) {
   process.exit(1);
 }
 
-const DEMO_EMAIL = "demo@example.com";
+const DEMO_EMAIL = "demo@thefertilityos.com";
 const DEMO_PASSWORD = "demo";
 const DEMO_TENANT_SLUG = "demo-clinic";
 const DEMO_TENANT_NAME = "Demo Clinic";
@@ -62,25 +62,25 @@ async function main() {
       console.log("Tenant already exists:", DEMO_TENANT_NAME);
     }
 
-    const userRes = await client.query(
-      "SELECT id FROM users WHERE tenant_id = $1 AND (email = $2 OR email = 'demo') LIMIT 1",
+    // Delete old demo user sessions and users (clean slate)
+    const oldDemoIds = await client.query(
+      "SELECT id FROM users WHERE tenant_id = $1 AND (email = $2 OR email = 'demo' OR email LIKE 'demo@%')",
       [tenantId, DEMO_EMAIL]
     );
-    const passwordHash = await bcrypt.hash(DEMO_PASSWORD, 12);
-    if (userRes.rows.length === 0) {
-      await client.query(
-        `INSERT INTO users (tenant_id, email, password_hash, full_name, role_slug)
-         VALUES ($1, $2, $3, $4, 'admin')`,
-        [tenantId, DEMO_EMAIL, passwordHash, "Demo User"]
-      );
-      console.log("Created demo user:", DEMO_EMAIL);
-    } else {
-      await client.query(
-        "UPDATE users SET email = $1, password_hash = $2, full_name = $3 WHERE id = $4",
-        [DEMO_EMAIL, passwordHash, "Demo User", userRes.rows[0].id]
-      );
-      console.log("Updated demo user:", DEMO_EMAIL);
+    if (oldDemoIds.rows.length > 0) {
+      const ids = oldDemoIds.rows.map((r) => r.id);
+      await client.query("DELETE FROM user_sessions WHERE user_id = ANY($1::uuid[])", [ids]);
+      await client.query("DELETE FROM users WHERE id = ANY($1::uuid[])", [ids]);
+      console.log("Removed", oldDemoIds.rows.length, "old demo user(s) and their sessions.");
     }
+
+    const passwordHash = await bcrypt.hash(DEMO_PASSWORD, 12);
+    await client.query(
+      `INSERT INTO users (tenant_id, email, password_hash, full_name, role_slug)
+       VALUES ($1, $2, $3, $4, 'admin')`,
+      [tenantId, DEMO_EMAIL, passwordHash, "Demo User"]
+    );
+    console.log("Created demo user:", DEMO_EMAIL);
 
     console.log("\nDemo login: " + DEMO_EMAIL + " / " + DEMO_PASSWORD + "\n(Sign in at /login or demo-clinic subdomain)");
   } catch (e) {

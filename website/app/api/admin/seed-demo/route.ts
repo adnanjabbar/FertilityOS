@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { db } from "@/db";
-import { tenants, users } from "@/db/schema";
-import { and, eq, inArray } from "drizzle-orm";
+import { tenants, users, userSessions } from "@/db/schema";
+import { and, eq, inArray, like, or } from "drizzle-orm";
 
-const DEMO_EMAIL = "demo@example.com";
+const DEMO_EMAIL = "demo@thefertilityos.com";
 const DEMO_PASSWORD = "demo";
 const DEMO_TENANT_SLUG = "demo-clinic";
 const DEMO_TENANT_NAME = "Demo Clinic";
@@ -36,32 +36,33 @@ async function runSeed() {
     tenantId = existingTenant.id;
   }
 
-  const passwordHash = await bcrypt.hash(DEMO_PASSWORD, 12);
-  const [existingUser] = await db
+  const oldDemoUsers = await db
     .select({ id: users.id })
     .from(users)
     .where(
       and(
         eq(users.tenantId, tenantId),
-        inArray(users.email, [DEMO_EMAIL, "demo"])
+        or(
+          eq(users.email, "demo"),
+          eq(users.email, DEMO_EMAIL),
+          like(users.email, "demo@%")
+        )
       )
-    )
-    .limit(1);
-
-  if (!existingUser) {
-    await db.insert(users).values({
-      tenantId,
-      email: DEMO_EMAIL,
-      passwordHash,
-      fullName: "Demo User",
-      roleSlug: "admin",
-    });
-  } else {
-    await db
-      .update(users)
-      .set({ email: DEMO_EMAIL, passwordHash, fullName: "Demo User" })
-      .where(eq(users.id, existingUser.id));
+    );
+  if (oldDemoUsers.length > 0) {
+    const ids = oldDemoUsers.map((u) => u.id);
+    await db.delete(userSessions).where(inArray(userSessions.userId, ids));
+    await db.delete(users).where(inArray(users.id, ids));
   }
+
+  const passwordHash = await bcrypt.hash(DEMO_PASSWORD, 12);
+  await db.insert(users).values({
+    tenantId,
+    email: DEMO_EMAIL,
+    passwordHash,
+    fullName: "Demo User",
+    roleSlug: "admin",
+  });
 }
 
 /**
@@ -88,7 +89,7 @@ export async function GET(request: Request) {
       ? `${request.headers.get("x-forwarded-proto")}://${request.headers.get("host")}`
       : "https://www.thefertilityos.com";
     return new NextResponse(
-      `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Demo ready</title></head><body style="font-family:sans-serif;max-width:480px;margin:3rem auto;padding:1rem;"><h1>Demo account ready</h1><p>You can now sign in with:</p><p><strong>Email:</strong> demo@example.com<br><strong>Password:</strong> demo</p><p><a href="${base}/login" style="display:inline-block;background:#2563eb;color:white;padding:0.5rem 1rem;text-decoration:none;border-radius:0.5rem;">Go to Sign in</a></p></body></html>`,
+      `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Demo ready</title></head><body style="font-family:sans-serif;max-width:480px;margin:3rem auto;padding:1rem;"><h1>Demo account ready</h1><p>You can now sign in with:</p><p><strong>Email:</strong> demo@thefertilityos.com<br><strong>Password:</strong> demo</p><p><a href="${base}/login" style="display:inline-block;background:#2563eb;color:white;padding:0.5rem 1rem;text-decoration:none;border-radius:0.5rem;">Go to Sign in</a></p></body></html>`,
       { headers: { "Content-Type": "text/html" } }
     );
   } catch (e) {
@@ -114,7 +115,7 @@ export async function POST(request: Request) {
     await runSeed();
     return NextResponse.json({
       success: true,
-      message: "Demo account ready. Login: demo@example.com / demo",
+      message: "Demo account ready. Login: demo@thefertilityos.com / demo",
     });
   } catch (e) {
     console.error("seed-demo error:", e);

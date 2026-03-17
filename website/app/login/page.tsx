@@ -96,7 +96,7 @@ function LoginForm() {
               id="email"
               type="text"
               autoComplete="username"
-              placeholder="e.g. demo@example.com (password: demo)"
+              placeholder="e.g. demo@thefertilityos.com (password: demo)"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={inputClass}
@@ -160,7 +160,7 @@ function LoginForm() {
         </form>
 
         <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-center text-sm text-slate-600">
-          <span className="font-medium text-slate-700">Demo:</span> demo@example.com / demo
+          <span className="font-medium text-slate-700">Demo:</span> demo@thefertilityos.com / demo
           <span className="block mt-1 text-xs text-slate-500">(Run npm run db:seed-demo if this account does not exist.)</span>
         </div>
         <p className="text-center text-slate-600 mt-4">

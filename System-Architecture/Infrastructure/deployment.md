@@ -53,9 +53,9 @@ Add `AUTH_TRUST_HOST=true` and `AUTH_URL=https://www.thefertilityos.com` (or you
 - **Demo account (optional):**  
   - **CLI:** From `website/` run `npm run db:seed-demo` (with `DATABASE_URL` set).  
   - **API (e.g. production):** Set `SEED_DEMO_SECRET` in env, then `POST /api/admin/seed-demo?secret=YOUR_SEED_DEMO_SECRET` (or header `x-seed-secret`).  
-  **Login:** `demo` / `demo`.
+  **Login:** `demo@thefertilityos.com` / `demo`.
 
-- **Super Admin (platform owner dashboard):** Run migrations including `0003_super_admin.sql`, then from `website/` run `npm run db:seed-super-admin`. Login: `super@fertilityos.com` / `superadmin` (or set `SUPER_ADMIN_PASSWORD` in .env). Access **Super Dashboard** at `/app/super` for platform-wide stats (clinics, users, invitations, module status).
+- **Super Admin (platform owner dashboard):** Run migrations including `0003_super_admin.sql`, then from `website/` run `npm run db:seed-super-admin`. Login: `super@thefertilityos.com` / `superadmin` (or set `SUPER_ADMIN_PASSWORD` in .env). Access **Super Dashboard** at `/app/super` for platform-wide stats (clinics, users, invitations, module status).
 
 ## For development and agents
 
