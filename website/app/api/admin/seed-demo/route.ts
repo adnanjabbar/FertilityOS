@@ -4,7 +4,7 @@ import { db } from "@/db";
 import { tenants, users, userSessions } from "@/db/schema";
 import { and, eq, inArray, like, or } from "drizzle-orm";
 
-const DEMO_EMAIL = "demo@thefertilityos.com";
+const DEMO_EMAIL = "thefertilityos@gmail.com";
 const DEMO_PASSWORD = "demo";
 const DEMO_TENANT_SLUG = "demo-clinic";
 const DEMO_TENANT_NAME = "Demo Clinic";
@@ -44,6 +44,7 @@ async function runSeed() {
         eq(users.tenantId, tenantId),
         or(
           eq(users.email, "demo"),
+          eq(users.email, "demo@thefertilityos.com"),
           eq(users.email, DEMO_EMAIL),
           like(users.email, "demo@%")
         )
@@ -115,7 +116,7 @@ export async function POST(request: Request) {
     await runSeed();
     return NextResponse.json({
       success: true,
-      message: "Demo account ready. Login: demo@thefertilityos.com / demo",
+      message: "Demo account ready. Login: thefertilityos@gmail.com / demo",
     });
   } catch (e) {
     console.error("seed-demo error:", e);

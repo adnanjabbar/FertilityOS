@@ -32,12 +32,27 @@ Set these in the App’s **Settings → App-Level Environment Variables** (or co
 | `NEXTAUTH_URL` | `https://www.thefertilityos.com` | Canonical app URL |
 | **`AUTH_URL`** | `https://www.thefertilityos.com` | Same as NEXTAUTH_URL; required for Auth.js v5 |
 | **`AUTH_TRUST_HOST`** | `true` | **Required** to avoid 503 UntrustedHost on non-Vercel hosts |
+| **`RESEND_API_KEY`** | `re_...` | **Required for email:** confirmation links, password reset, reminders. From [Resend](https://resend.com); add domain and DNS (SPF/DKIM). See **`Infrastructure/email-and-domain.md`**. |
 | **`NPM_CONFIG_LEGACY_PEER_DEPS`** | `true` | Optional: set if the build fails with npm peer dependency conflict (repo also has `.npmrc` with `legacy-peer-deps=true`) |
 
 Without `AUTH_TRUST_HOST=true` and `AUTH_URL`, the site can return **503** when calling `/api/auth/session` or signing in. If the **build** fails with "upstream dependency conflict" or "eresolve", add `NPM_CONFIG_LEGACY_PEER_DEPS=true` and redeploy.
 
 **If you see 503 or "UntrustedHost" in logs:**  
 Add `AUTH_TRUST_HOST=true` and `AUTH_URL=https://www.thefertilityos.com` (or your live URL) to the app’s environment variables, then trigger a new deploy (e.g. redeploy from the DO dashboard or push a small commit).
+
+### Chunk 404 / ChunkLoadError (e.g. `fa6ccc9066ff7830.js` Not Found)
+
+If the site shows login or other errors and the browser console reports **404** on `/_next/static/chunks/XXXXX.js` or **ChunkLoadError**, the server is serving HTML that references a JS chunk from a different or incomplete build than the files actually deployed.
+
+**Fix: force a full clean rebuild on DigitalOcean**
+
+1. In [DigitalOcean](https://cloud.digitalocean.com) → your app → **fertilityos-website** (or the web component).
+2. Open the **Deployments** tab (or **Settings** if the option is there).
+3. Use **"Clear build cache and deploy"** or **"Redeploy"** so the next build does not reuse old cache. If you only see **Redeploy**, use it; that still triggers a fresh build from the current branch.
+4. Wait for the new deployment to finish (build + deploy).
+5. In the browser, do a **hard refresh** (Ctrl+Shift+R) or open the site in an **incognito window** so you don’t use cached HTML that points to old chunk hashes.
+
+After a successful clean deploy, all `_next/static/chunks/*.js` files from that build will be present and login should work (assuming the demo user is seeded).
 
 ## Database (PostgreSQL)
 
@@ -53,9 +68,9 @@ Add `AUTH_TRUST_HOST=true` and `AUTH_URL=https://www.thefertilityos.com` (or you
 - **Demo account (optional):**  
   - **CLI:** From `website/` run `npm run db:seed-demo` (with `DATABASE_URL` set).  
   - **API (e.g. production):** Set `SEED_DEMO_SECRET` in env, then open **GET** `https://www.thefertilityos.com/api/admin/seed-demo?secret=YOUR_SEED_DEMO_SECRET` in the browser (or `POST` with the same query or header `x-seed-secret`). This creates the demo user in the **production** database so login at www.thefertilityos.com works.  
-  **Login:** `demo@thefertilityos.com` / `demo`.
+  **Login:** `thefertilityos@gmail.com` / `demo`.
 
-- **Super Admin (platform owner dashboard):** Run migrations including `0003_super_admin.sql`, then from `website/` run `npm run db:seed-super-admin` (with `DATABASE_URL` set; use production URL to seed production). Login: `super@thefertilityos.com` / `superadmin` (or set `SUPER_ADMIN_PASSWORD` in .env). Access **Super Dashboard** at `/app/super`.
+- **Super Admin (platform owner dashboard):** Run migrations including `0003_super_admin.sql`, then from `website/` run `npm run db:seed-super-admin` (with `DATABASE_URL` set; use production URL to seed production). Login: `dradnanjabbar@gmail.com` / `superadmin` (or set `SUPER_ADMIN_PASSWORD` in .env). Access **Super Dashboard** at `/app/super`.
 
 ## For development and agents
 

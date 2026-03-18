@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
@@ -16,10 +16,13 @@ function LoginForm() {
   const callbackUrl = searchParams.get("callbackUrl") || "/app/dashboard";
   const registered = searchParams.get("registered") === "1";
 
+  const [mounted, setMounted] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => setMounted(true), []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,7 +99,7 @@ function LoginForm() {
               id="email"
               type="text"
               autoComplete="username"
-              placeholder="e.g. demo@thefertilityos.com (password: demo)"
+              placeholder="e.g. your@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className={inputClass}
@@ -125,7 +128,7 @@ function LoginForm() {
             {loading ? "Signing in…" : "Sign in"}
           </button>
 
-          {(process.env.NEXT_PUBLIC_OAUTH_GOOGLE === "1" || process.env.NEXT_PUBLIC_OAUTH_MICROSOFT === "1") && (
+          {mounted && (process.env.NEXT_PUBLIC_OAUTH_GOOGLE === "1" || process.env.NEXT_PUBLIC_OAUTH_MICROSOFT === "1") && (
             <>
               <div className="relative my-4">
                 <div className="absolute inset-0 flex items-center">
@@ -160,8 +163,8 @@ function LoginForm() {
         </form>
 
         <div className="mt-6 rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-center text-sm text-slate-600">
-          <span className="font-medium text-slate-700">Demo:</span> demo@thefertilityos.com / demo
-          <span className="block mt-1 text-xs text-slate-500">(Run npm run db:seed-demo if this account does not exist.)</span>
+          <span className="font-medium text-slate-700">Demo:</span> thefertilityos@gmail.com / demo
+          <span className="block mt-1 text-xs text-slate-500">(Run seed-demo API or npm run db:seed-demo if this account does not exist.)</span>
         </div>
         <p className="text-center text-slate-600 mt-4">
           Don’t have an account?{" "}

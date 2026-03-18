@@ -18,6 +18,12 @@ export default function AccountSecurityClient() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [revoking, setRevoking] = useState<"current" | "others" | null>(null);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordSuccess, setPasswordSuccess] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [passwordLoading, setPasswordLoading] = useState(false);
 
   const loadSessions = async () => {
     setLoading(true);
@@ -75,6 +81,42 @@ export default function AccountSecurityClient() {
     }
   };
 
+  const handleChangePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setPasswordError(null);
+    setPasswordSuccess(null);
+    if (newPassword !== confirmPassword) {
+      setPasswordError("New password and confirmation do not match.");
+      return;
+    }
+    if (newPassword.length < 8) {
+      setPasswordError("New password must be at least 8 characters.");
+      return;
+    }
+    setPasswordLoading(true);
+    try {
+      const res = await fetch("/api/app/account/change-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          currentPassword: currentPassword.trim(),
+          newPassword: newPassword.trim(),
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setPasswordError(data.error || "Failed to change password.");
+        return;
+      }
+      setPasswordSuccess("Password updated. Use your new password next time you sign in.");
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    } finally {
+      setPasswordLoading(false);
+    }
+  };
+
   const formatDateTime = (value: string | null) => {
     if (!value) return "—";
     return new Date(value).toLocaleString(undefined, {
@@ -94,6 +136,72 @@ export default function AccountSecurityClient() {
         <p className="text-sm text-slate-500">
           Review where your account is signed in and sign out from devices you no longer use.
         </p>
+      </div>
+
+      <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+        <h2 className="font-semibold text-slate-900">Change password</h2>
+        <p className="text-xs text-slate-500">
+          Update your sign-in password. You can change it again anytime from this page.
+        </p>
+        <form onSubmit={handleChangePassword} className="space-y-3 max-w-md">
+          <div>
+            <label htmlFor="current-password" className="block text-sm font-medium text-slate-700 mb-1">
+              Current password
+            </label>
+            <input
+              id="current-password"
+              type="password"
+              autoComplete="current-password"
+              value={currentPassword}
+              onChange={(e) => setCurrentPassword(e.target.value)}
+              className="w-full px-3 py-2 rounded-xl border border-slate-200 text-slate-900 text-sm"
+              required
+            />
+          </div>
+          <div>
+            <label htmlFor="new-password" className="block text-sm font-medium text-slate-700 mb-1">
+              New password
+            </label>
+            <input
+              id="new-password"
+              type="password"
+              autoComplete="new-password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className="w-full px-3 py-2 rounded-xl border border-slate-200 text-slate-900 text-sm"
+              required
+              minLength={8}
+            />
+          </div>
+          <div>
+            <label htmlFor="confirm-password" className="block text-sm font-medium text-slate-700 mb-1">
+              Confirm new password
+            </label>
+            <input
+              id="confirm-password"
+              type="password"
+              autoComplete="new-password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full px-3 py-2 rounded-xl border border-slate-200 text-slate-900 text-sm"
+              required
+              minLength={8}
+            />
+          </div>
+          {passwordError && (
+            <p className="text-sm text-red-600">{passwordError}</p>
+          )}
+          {passwordSuccess && (
+            <p className="text-sm text-emerald-600">{passwordSuccess}</p>
+          )}
+          <button
+            type="submit"
+            disabled={passwordLoading}
+            className="px-4 py-2 rounded-xl bg-slate-900 text-white text-sm font-medium hover:bg-slate-800 disabled:opacity-60"
+          >
+            {passwordLoading ? "Updating…" : "Update password"}
+          </button>
+        </form>
       </div>
 
       <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">

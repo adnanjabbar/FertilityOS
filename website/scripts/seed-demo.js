@@ -31,7 +31,7 @@ if (!DATABASE_URL) {
   process.exit(1);
 }
 
-const DEMO_EMAIL = "demo@thefertilityos.com";
+const DEMO_EMAIL = "thefertilityos@gmail.com";
 const DEMO_PASSWORD = "demo";
 const DEMO_TENANT_SLUG = "demo-clinic";
 const DEMO_TENANT_NAME = "Demo Clinic";
@@ -64,7 +64,7 @@ async function main() {
 
     // Delete old demo user sessions and users (clean slate)
     const oldDemoIds = await client.query(
-      "SELECT id FROM users WHERE tenant_id = $1 AND (email = $2 OR email = 'demo' OR email LIKE 'demo@%')",
+      "SELECT id FROM users WHERE tenant_id = $1 AND (email = $2 OR email = 'demo' OR email = 'demo@thefertilityos.com' OR email LIKE 'demo@%')",
       [tenantId, DEMO_EMAIL]
     );
     if (oldDemoIds.rows.length > 0) {

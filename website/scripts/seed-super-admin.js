@@ -1,6 +1,6 @@
 /**
  * Seed the Super Admin user (platform owner dashboard).
- * Login: super@thefertilityos.com / superadmin (or set SUPER_ADMIN_PASSWORD in .env)
+ * Login: dradnanjabbar@gmail.com / superadmin (or set SUPER_ADMIN_PASSWORD in .env)
  *
  * Run migrations first (including 0003_super_admin.sql). Then from website/:
  *   node scripts/seed-super-admin.js
@@ -30,7 +30,7 @@ if (!DATABASE_URL) {
   process.exit(1);
 }
 
-const SUPER_EMAIL = "super@thefertilityos.com";
+const SUPER_EMAIL = "dradnanjabbar@gmail.com";
 const SUPER_PASSWORD = process.env.SUPER_ADMIN_PASSWORD || "superadmin";
 const SYSTEM_TENANT_SLUG = "system";
 
@@ -55,7 +55,7 @@ async function main() {
 
     // Delete old super admin sessions and users (clean slate)
     const oldSuperIds = await client.query(
-      "SELECT id FROM users WHERE tenant_id = $1 AND (email = $2 OR email = 'super@fertilityos.com')",
+      "SELECT id FROM users WHERE tenant_id = $1 AND (email = $2 OR email = 'super@thefertilityos.com' OR email = 'super@fertilityos.com')",
       [tenantId, SUPER_EMAIL]
     );
     if (oldSuperIds.rows.length > 0) {

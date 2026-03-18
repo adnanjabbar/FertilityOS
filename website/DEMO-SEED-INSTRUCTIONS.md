@@ -35,7 +35,7 @@ After the app has finished redeploying:
 4. You should see a page saying **“Demo account ready”** and a **“Go to Sign in”** button.
 5. Click **Go to Sign in** (or go to https://www.thefertilityos.com/login).
 6. Sign in with:
-   - **Username:** `demo`
+   - **Email:** `thefertilityos@gmail.com`
    - **Password:** `demo`
 
 ---
