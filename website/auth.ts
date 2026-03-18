@@ -42,7 +42,7 @@ const OAUTH_PROVIDERS = ["google", "azure-ad"] as const;
 async function upsertUserSessionFromToken(token: import("@auth/core/jwt").JWT) {
   if (!token.id || !token.tenantId || !token.sessionId) return;
 
-  const hdrs = headers();
+  const hdrs = await headers();
   const userAgent = hdrs.get("user-agent") ?? undefined;
   const forwardedFor = hdrs.get("x-forwarded-for");
   const ipAddress = forwardedFor?.split(",")[0]?.trim() || hdrs.get("x-real-ip") || undefined;
