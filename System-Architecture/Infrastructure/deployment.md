@@ -72,6 +72,8 @@ After a successful clean deploy, all `_next/static/chunks/*.js` files from that 
 
 - **Super Admin (platform owner dashboard):** Run migrations including `0003_super_admin.sql`, then from `website/` run `npm run db:seed-super-admin` (with `DATABASE_URL` set; use production URL to seed production). Login: `dradnanjabbar@gmail.com` / `superadmin` (or set `SUPER_ADMIN_PASSWORD` in .env). Access **Super Dashboard** at `/app/super`.
 
+- **Remove seeded accounts to register fresh:** Open **GET** `https://www.thefertilityos.com/api/admin/reset-seeded-accounts?secret=YOUR_SEED_DEMO_SECRET`. This deletes the demo user (thefertilityos@gmail.com) and super-admin user (dradnanjabbar@gmail.com) and their sessions. Then use **Register** at `/register` with your email. Requires **RESEND_API_KEY** (and domain verification in Resend) for the 6-digit email verification code to be sent.
+
 ## For development and agents
 
 - **Local:** Run `website/` with `npm run dev` (Next.js default port 3000).

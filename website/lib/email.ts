@@ -44,9 +44,12 @@ export async function sendEmail(options: SendEmailOptions): Promise<{ ok: boolea
     }
   }
 
-  // No API key: log only (e.g. local dev or cron without email configured)
+  // No API key: fail so verification/password-reset flows show an error instead of silently not sending
   console.log("[email] (no RESEND_API_KEY) Would send:", { to: to.trim(), subject });
-  return { ok: true };
+  return {
+    ok: false,
+    error: "Email is not configured. Set RESEND_API_KEY in the app environment and add your domain in Resend.",
+  };
 }
 
 export function appointmentReminderContent(params: {

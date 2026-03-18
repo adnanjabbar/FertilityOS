@@ -100,3 +100,5 @@ If you want **real email addresses** at your domain (e.g. `support@thefertilityo
 **Postfix on “our server”:** Not possible on App Platform (no OS access). On a Droplet, DO blocks SMTP by default and discourages self-hosted mail; use Resend + Cloudflare or a small email host instead.
 
 For the “email confirmation link” flow in the app, **only the Resend setup in §1 is required**. For receiving at your domain, use **Cloudflare Email Routing** (free) or a provider like Migadu/Zoho.
+
+**Registration 6-digit code:** Clinic registration sends a 6-digit verification code by email. If you don’t receive it, the app cannot send email: set **RESEND_API_KEY** in DigitalOcean, add and verify your domain in [Resend](https://resend.com) (Domains → add thefertilityos.com → add the DNS records they show). Until then, the “Send verification code” step will return an error instead of silently failing.
