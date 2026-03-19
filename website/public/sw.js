@@ -2,7 +2,8 @@
  * FertilityOS PWA Service Worker
  * Caches app shell and dashboard for offline use. Update cache version when deploying.
  */
-const CACHE_NAME = "fertilityos-v1";
+// Bump cache version whenever we change sw.js behavior.
+const CACHE_NAME = "fertilityos-v2";
 const OFFLINE_URL = "/app/dashboard";
 
 const PRECACHE_URLS = [
@@ -36,22 +37,32 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
 
-  event.respondWith(
-    caches.open(CACHE_NAME).then((cache) =>
-      cache.match(event.request).then((cached) => {
-        const fetchPromise = fetch(event.request).then((response) => {
-          if (response.ok && url.pathname.startsWith("/app") && !url.pathname.includes("/api/")) {
-            cache.put(event.request, response.clone());
-          }
-          return response;
-        }).catch(() => {
-          if (url.pathname.startsWith("/app")) {
-            return caches.match(OFFLINE_URL).then((r) => r || new Response("Offline", { status: 503, statusText: "Service Unavailable" }));
-          }
-          return null;
-        });
-        return cached || fetchPromise;
-      })
-    )
-  );
+  // Always return a real Response from respondWith.
+  // Previously, some failures returned `null`, which causes:
+  // "TypeError: Failed to convert value to 'Response'".
+  event.respondWith((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    const cached = await cache.match(event.request);
+
+    try {
+      const response = await fetch(event.request);
+      if (
+        response &&
+        response.ok &&
+        url.pathname.startsWith("/app") &&
+        !url.pathname.includes("/api/")
+      ) {
+        cache.put(event.request, response.clone());
+      }
+      return response;
+    } catch (e) {
+      // App routes can fall back to offline page.
+      if (url.pathname.startsWith("/app")) {
+        const offline = await caches.match(OFFLINE_URL);
+        return offline || new Response("Offline", { status: 503, statusText: "Service Unavailable" });
+      }
+      // Non-app (e.g. auth session calls) should not break the app UI.
+      return cached || new Response("Network error", { status: 504, statusText: "Gateway Timeout" });
+    }
+  })());
 });
