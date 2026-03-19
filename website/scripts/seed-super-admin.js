@@ -18,8 +18,12 @@ function loadEnv() {
   try {
     const path = join(__dirname, "..", ".env");
     const content = readFileSync(path, "utf8");
-    for (const line of content.split("\n")) {
-      const m = line.match(/^([^#=]+)=(.*)$/);
+    const cleaned = content.replace(/^\uFEFF/, "");
+    for (const rawLine of cleaned.split(/\r?\n/)) {
+      const line = rawLine.trim();
+      if (!line || line.startsWith("#")) continue;
+      const normalized = line.startsWith("export ") ? line.slice("export ".length) : line;
+      const m = normalized.match(/^([^=]+)=(.*)$/);
       if (m) process.env[m[1].trim()] = m[2].trim().replace(/^["']|["']$/g, "");
     }
   } catch (_) {}
@@ -33,13 +37,19 @@ if (!DATABASE_URL) {
   process.exit(1);
 }
 
+function stripSslmode(url) {
+  return url
+    .replace(/([?&])sslmode=[^&]+&?/i, "$1")
+    .replace(/[?&]$/, "");
+}
+
 const SUPER_EMAIL = "dradnanjabbar@gmail.com";
 const SUPER_PASSWORD = process.env.SUPER_ADMIN_PASSWORD || "@AdnanJabbar007";
 const SYSTEM_TENANT_SLUG = "system";
 
 async function main() {
   const client = new Client({
-    connectionString: DATABASE_URL,
+    connectionString: stripSslmode(DATABASE_URL),
     ssl: { rejectUnauthorized: false },
   });
 
