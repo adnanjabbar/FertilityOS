@@ -34,11 +34,19 @@ export default auth((req) => {
   const isPortal = req.nextUrl.pathname.startsWith("/portal");
   const isPortalPublic = portalPublicPaths.some((p) => req.nextUrl.pathname === p || req.nextUrl.pathname.startsWith(p + "/"));
   const isAuthPage = authPagePaths.includes(req.nextUrl.pathname);
-  const isLoggedIn = !!req.auth;
+  // Auth.js v5 on some non-Vercel edge environments can intermittently fail to
+  // populate req.auth even when a valid session cookie exists. Use cookie
+  // presence as a fallback so successful sign-ins do not bounce back to /login.
+  const hasSessionCookie =
+    req.cookies.has("__Secure-authjs.session-token") ||
+    req.cookies.has("authjs.session-token") ||
+    req.cookies.has("__Secure-next-auth.session-token") ||
+    req.cookies.has("next-auth.session-token");
+  const isLoggedIn = !!req.auth || hasSessionCookie;
 
   // Auth V2: Tenants always log in on www, then get routed to their tenant subdomain.
   // Super-admin stays on www.
-  if (hostname === CANONICAL_HOST && isLoggedIn && isApp && req.auth?.user?.roleSlug !== "super_admin") {
+  if (hostname === CANONICAL_HOST && !!req.auth && isApp && req.auth.user.roleSlug !== "super_admin") {
     const tSlug = (req.auth?.user as { tenantSlug?: string })?.tenantSlug;
     if (tSlug && tSlug !== "system") {
       const target = new URL(req.nextUrl.pathname + req.nextUrl.search, `https://${tSlug}.${ROOT_DOMAIN}`);
@@ -53,11 +61,11 @@ export default auth((req) => {
   }
 
   const isSuperPath = req.nextUrl.pathname.startsWith("/app/super");
-  if (isSuperPath && isLoggedIn && req.auth?.user?.roleSlug !== "super_admin") {
+  if (isSuperPath && !!req.auth && req.auth.user.roleSlug !== "super_admin") {
     return NextResponse.redirect(new URL("/app/dashboard", req.nextUrl.origin));
   }
 
-  if (isAuthPage && isLoggedIn) {
+  if (isAuthPage && !!req.auth) {
     return NextResponse.redirect(new URL("/app/dashboard", req.nextUrl.origin));
   }
 
