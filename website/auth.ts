@@ -16,6 +16,7 @@ declare module "next-auth" {
     email: string;
     name: string;
     tenantId: string;
+    tenantSlug?: string;
     roleSlug: string;
     tenantName?: string;
     patientId?: string;
@@ -30,6 +31,7 @@ declare module "@auth/core/jwt" {
   interface JWT {
     id: string;
     tenantId: string;
+    tenantSlug?: string;
     roleSlug: string;
     tenantName?: string;
     patientId?: string;
@@ -204,6 +206,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           email: matched.email,
           name: matched.fullName,
           tenantId: matched.tenantId,
+          tenantSlug: matched.tenantSlug,
           roleSlug: matched.roleSlug,
           tenantName: matched.tenantName ?? undefined,
         };
@@ -347,6 +350,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.email = user.email ?? "";
         token.name = user.name ?? "";
         token.tenantId = user.tenantId;
+        token.tenantSlug = (user as { tenantSlug?: string }).tenantSlug;
         token.roleSlug = user.roleSlug;
         token.tenantName = (user as { tenantName?: string }).tenantName;
         token.patientId = (user as { patientId?: string }).patientId;
@@ -371,6 +375,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.email = token.email ?? "";
         session.user.name = token.name ?? "";
         session.user.tenantId = token.tenantId ?? "";
+        session.user.tenantSlug = token.tenantSlug ?? undefined;
         session.user.roleSlug = token.roleSlug ?? "staff";
         session.user.tenantName = token.tenantName ?? undefined;
         session.user.patientId = token.patientId ?? undefined;

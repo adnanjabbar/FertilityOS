@@ -36,6 +36,16 @@ export default auth((req) => {
   const isAuthPage = authPagePaths.includes(req.nextUrl.pathname);
   const isLoggedIn = !!req.auth;
 
+  // Auth V2: Tenants always log in on www, then get routed to their tenant subdomain.
+  // Super-admin stays on www.
+  if (hostname === CANONICAL_HOST && isLoggedIn && isApp && req.auth?.user?.roleSlug !== "super_admin") {
+    const tSlug = (req.auth?.user as { tenantSlug?: string })?.tenantSlug;
+    if (tSlug && tSlug !== "system") {
+      const target = new URL(req.nextUrl.pathname + req.nextUrl.search, `https://${tSlug}.${ROOT_DOMAIN}`);
+      return NextResponse.redirect(target, 307);
+    }
+  }
+
   if (isApp && !isLoggedIn) {
     const login = new URL("/login", req.nextUrl.origin);
     login.searchParams.set("callbackUrl", req.nextUrl.pathname);
