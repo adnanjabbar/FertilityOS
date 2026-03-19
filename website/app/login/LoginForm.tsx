@@ -50,6 +50,12 @@ export default function LoginForm({
         password,
         redirect: false,
       });
+      if (res?.status === 503) {
+        setError(
+          "Server temporarily unavailable. If this persists, ensure AUTH_TRUST_HOST=true and AUTH_URL are set in production (see deployment docs), then try again."
+        );
+        return;
+      }
       if (res?.error) {
         setError(
           res.error === "Too many sign-in attempts. Try again in 15 minutes."

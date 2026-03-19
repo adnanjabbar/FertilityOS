@@ -3,7 +3,7 @@
  * Caches app shell and dashboard for offline use. Update cache version when deploying.
  */
 // Bump cache version whenever we change sw.js behavior.
-const CACHE_NAME = "fertilityos-v5";
+const CACHE_NAME = "fertilityos-v6";
 const OFFLINE_URL = "/app/dashboard";
 
 const PRECACHE_URLS = [
@@ -47,11 +47,11 @@ self.addEventListener("fetch", (event) => {
   // Never serve cached /login HTML; it can cause React hydration mismatch (#418)
   // if the browser has an older cached HTML shell.
   if (url.pathname === "/login") {
-    // IMPORTANT: do not fall back to cache here.
-    // If the network fails, return a hard 503 so we don't serve stale HTML that can mismatch.
+    // Do not fall back to cache. Use 504 (not 503) so auth 503 from server (e.g. UntrustedHost)
+    // remains distinguishable for debugging.
     event.respondWith(
       fetch(event.request).catch(
-        () => new Response("Service Unavailable", { status: 503, statusText: "Service Unavailable" })
+        () => new Response("Network error", { status: 504, statusText: "Gateway Timeout" })
       )
     );
     return;
@@ -76,10 +76,10 @@ self.addEventListener("fetch", (event) => {
       }
       return response;
     } catch (e) {
-      // App routes can fall back to offline page.
+      // App routes can fall back to offline page. Use 504 so server 503 (e.g. auth) is distinguishable.
       if (url.pathname.startsWith("/app")) {
         const offline = await caches.match(OFFLINE_URL);
-        return offline || new Response("Offline", { status: 503, statusText: "Service Unavailable" });
+        return offline || new Response("Network error", { status: 504, statusText: "Gateway Timeout" });
       }
       // Non-app (e.g. auth session calls) should not break the app UI.
       return cached || new Response("Network error", { status: 504, statusText: "Gateway Timeout" });
