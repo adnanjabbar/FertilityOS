@@ -15,7 +15,8 @@
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
     "db:seed-demo": "node scripts/seed-demo.js",
-    "db:seed-super-admin": "node scripts/seed-super-admin.js"
+    "db:seed-super-admin": "node scripts/seed-super-admin.js",
+    "db:reset-users-and-tenants": "node scripts/reset-users-and-tenants.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.2.0",

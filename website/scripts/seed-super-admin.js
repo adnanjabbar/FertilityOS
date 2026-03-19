@@ -1,9 +1,12 @@
 /**
  * Seed the Super Admin user (platform owner dashboard).
- * Login: dradnanjabbar@gmail.com / superadmin (or set SUPER_ADMIN_PASSWORD in .env)
+ * Login: dradnanjabbar@gmail.com / @AdnanJabbar007 (or set SUPER_ADMIN_PASSWORD in .env)
  *
  * Run migrations first (including 0003_super_admin.sql). Then from website/:
  *   node scripts/seed-super-admin.js
+ *
+ * For full reset (delete all users/tenants and recreate only Super Admin):
+ *   node scripts/reset-users-and-tenants.js
  */
 
 const { readFileSync } = require("fs");
@@ -31,7 +34,7 @@ if (!DATABASE_URL) {
 }
 
 const SUPER_EMAIL = "dradnanjabbar@gmail.com";
-const SUPER_PASSWORD = process.env.SUPER_ADMIN_PASSWORD || "superadmin";
+const SUPER_PASSWORD = process.env.SUPER_ADMIN_PASSWORD || "@AdnanJabbar007";
 const SYSTEM_TENANT_SLUG = "system";
 
 async function main() {

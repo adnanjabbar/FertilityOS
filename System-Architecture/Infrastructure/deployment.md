@@ -40,6 +40,9 @@ Without `AUTH_TRUST_HOST=true` and `AUTH_URL`, the site can return **503** when 
 **If you see 503 or "UntrustedHost" in logs:**  
 Add `AUTH_TRUST_HOST=true` and `AUTH_URL=https://www.thefertilityos.com` (or your live URL) to the app’s environment variables, then trigger a new deploy (e.g. redeploy from the DO dashboard or push a small commit).
 
+**If login shows 504 (Gateway Timeout) or stays on the login screen:**  
+The server or database is not responding in time (e.g. cold start, DB connection slow). Check: (1) App Platform app is running and not sleeping; (2) `DATABASE_URL` is correct and the DB is in the same region; (3) In DO app Settings → Resources, ensure the web service has enough memory/CPU. After changing env or scaling, redeploy. Users can retry after a few seconds.
+
 ### Chunk 404 / ChunkLoadError (e.g. `fa6ccc9066ff7830.js` Not Found)
 
 If the site shows login or other errors and the browser console reports **404** on `/_next/static/chunks/XXXXX.js` or **ChunkLoadError**, the server is serving HTML that references a JS chunk from a different or incomplete build than the files actually deployed.
@@ -73,8 +76,10 @@ After a successful clean deploy, all `_next/static/chunks/*.js` files from that 
 - **Super Admin (platform owner dashboard):** There is no API to create the super-admin; use the script from your machine:
   1. Ensure migrations have run (including `0003_super_admin.sql`), which creates the `system` tenant and `super_admin` role.
   2. In `website/.env`, set **`DATABASE_URL`** to your **production** PostgreSQL URL (same as in DigitalOcean).
-  3. From the repo root run: `cd website && node scripts/seed-super-admin.js`
-  4. Log in at **https://www.thefertilityos.com/login** with **dradnanjabbar@gmail.com** / **superadmin** (or the password you set in `SUPER_ADMIN_PASSWORD` in .env). Then open **Super Dashboard** at **https://www.thefertilityos.com/app/super**.
+  3. From the repo root run: `cd website && node scripts/seed-super-admin.js` (or `npm run db:seed-super-admin`).
+  4. Log in at **https://www.thefertilityos.com/login** with **dradnanjabbar@gmail.com** / **@AdnanJabbar007** (or the password you set in `SUPER_ADMIN_PASSWORD` in .env). Then open **Super Dashboard** at **https://www.thefertilityos.com/app/super**.
+
+- **Full reset (delete all users and tenants, recreate only Super Admin):** From `website/` run `npm run db:reset-users-and-tenants` (or `node scripts/reset-users-and-tenants.js`) with `DATABASE_URL` set. This removes all tenants except `system`, deletes all users, and creates only the Super Admin above. Admin/clinic accounts are then created via **Register** at `/register`; Super Admin approves them (when the approval flow is in place).
 
 - **Remove seeded accounts to register fresh:** Open **GET** `https://www.thefertilityos.com/api/admin/reset-seeded-accounts?secret=YOUR_SEED_DEMO_SECRET`. This deletes the demo user (thefertilityos@gmail.com) and super-admin user (dradnanjabbar@gmail.com) and their sessions. Then use **Register** at `/register` with your email. Requires **RESEND_API_KEY** (and domain verification in Resend) for the 6-digit email verification code to be sent.
 
