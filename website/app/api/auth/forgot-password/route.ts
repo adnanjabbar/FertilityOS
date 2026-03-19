@@ -5,6 +5,7 @@ import { users, userPasswordTokens } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { sendEmail, staffPasswordResetContent } from "@/lib/email";
 import { rateLimitAuth } from "@/lib/rate-limit";
+import { renderPlatformEmailTemplate } from "@/lib/platform-email-templates";
 
 const RESET_TOKEN_EXPIRY_HOURS = 1;
 
@@ -54,10 +55,21 @@ export async function POST(req: Request) {
       const origin = baseUrl.startsWith("http") ? baseUrl : `https://${baseUrl}`;
       const resetUrl = `${origin}/reset-password?token=${encodeURIComponent(token)}`;
 
-      const { subject, html, text } = staffPasswordResetContent({
-        resetUrl,
-        staffName: user.fullName ?? undefined,
+      const platformRendered = await renderPlatformEmailTemplate({
+        key: "staff_forgot_password",
+        vars: {
+          brandName: "TheFertilityOS",
+          resetUrl,
+          name: user.fullName ?? "there",
+        },
       });
+
+      const { subject, html, text } = platformRendered.ok
+        ? platformRendered
+        : staffPasswordResetContent({
+            resetUrl,
+            staffName: user.fullName ?? undefined,
+          });
 
       await sendEmail({
         to: user.email,

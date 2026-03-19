@@ -617,6 +617,21 @@ export const userPasswordTokens = pgTable(
   ]
 );
 
+export const platformEmailTemplates = pgTable(
+  "platform_email_templates",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    templateKey: varchar("template_key", { length: 64 }).notNull(),
+    name: varchar("name", { length: 128 }).notNull(),
+    subject: varchar("subject", { length: 255 }).notNull(),
+    html: text("html").notNull(),
+    text: text("text"),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [uniqueIndex("platform_email_templates_key_idx").on(table.templateKey)]
+);
+
 export const patientDataRequests = pgTable(
   "patient_data_requests",
   {
