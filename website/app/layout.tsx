@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
-import Providers from "./components/Providers";
+import RootProviders from "./components/RootProviders";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-geist-sans" });
@@ -42,11 +42,11 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="antialiased">
-        <Providers>
+        <RootProviders>
           <NextIntlClientProvider messages={messages} locale={locale}>
             {children}
           </NextIntlClientProvider>
-        </Providers>
+        </RootProviders>
       </body>
     </html>
   );
