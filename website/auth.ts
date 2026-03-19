@@ -134,62 +134,24 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const isDemoEmail = email === "thefertilityos@gmail.com";
 
         // Demo user: single lookup by email only (same as seed-demo check) so login always finds them
-        const candidates = isDemoEmail
-          ? await db
-              .select({
-                id: users.id,
-                email: users.email,
-                fullName: users.fullName,
-                passwordHash: users.passwordHash,
-                tenantId: users.tenantId,
-                roleSlug: users.roleSlug,
-                tenantName: tenants.name,
-              })
-              .from(users)
-              .innerJoin(tenants, eq(users.tenantId, tenants.id))
-              .where(eq(users.email, email))
-              .limit(1)
-          : tenantSlug
-            ? await (async () => {
-                const [tenant] = await db
-                  .select({ id: tenants.id })
-                  .from(tenants)
-                  .where(eq(tenants.slug, tenantSlug))
-                  .limit(1);
-                if (!tenant) return [];
-                return db
-                  .select({
-                    id: users.id,
-                    email: users.email,
-                    fullName: users.fullName,
-                    passwordHash: users.passwordHash,
-                    tenantId: users.tenantId,
-                    roleSlug: users.roleSlug,
-                    tenantName: tenants.name,
-                  })
-                  .from(users)
-                  .innerJoin(tenants, eq(users.tenantId, tenants.id))
-                  .where(and(eq(users.email, email), eq(users.tenantId, tenant.id)))
-                  .limit(1);
-              })()
-            : await db
-                .select({
-                  id: users.id,
-                  email: users.email,
-                  fullName: users.fullName,
-                  passwordHash: users.passwordHash,
-                  tenantId: users.tenantId,
-                  roleSlug: users.roleSlug,
-                  tenantName: tenants.name,
-                })
-                .from(users)
-                .innerJoin(tenants, eq(users.tenantId, tenants.id))
-                .where(eq(users.email, email))
-                // If the same email exists across multiple clinic tenants, we need to
-                // try password compare against all candidates when x-tenant-slug is absent.
-                .limit(20);
-
-        const candidateRows = candidates as Array<{
+        // Fetch candidates by email across tenants and then bcrypt-compare.
+        // This avoids failures when the same email exists across multiple tenant rows,
+        // and when x-tenant-slug is missing or incorrect (e.g. logging in from `www`).
+        const candidateRows = (await db
+          .select({
+            id: users.id,
+            email: users.email,
+            fullName: users.fullName,
+            passwordHash: users.passwordHash,
+            tenantId: users.tenantId,
+            roleSlug: users.roleSlug,
+            tenantName: tenants.name,
+            tenantSlug: tenants.slug,
+          })
+          .from(users)
+          .innerJoin(tenants, eq(users.tenantId, tenants.id))
+          .where(eq(users.email, email))
+          .limit(50)) as Array<{
           id: string;
           email: string;
           fullName: string;
@@ -197,10 +159,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           tenantId: string;
           roleSlug: string;
           tenantName: string | null;
+          tenantSlug: string;
         }>;
 
+        const orderedCandidates = tenantSlug
+          ? [
+              ...candidateRows.filter((c) => c.tenantSlug === tenantSlug),
+              ...candidateRows.filter((c) => c.tenantSlug !== tenantSlug),
+            ]
+          : candidateRows;
+
         let matched: (typeof candidateRows)[number] | null = null;
-        for (const c of candidateRows) {
+        for (const c of orderedCandidates) {
           if (!c.passwordHash) continue;
           const ok = await bcrypt.compare(password, c.passwordHash);
           if (isDemoEmail) {
@@ -214,20 +184,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         }
 
         if (!matched) {
-          // When tenantSlug is present (or this is the single demo candidate), we can record a precise failure.
-          // When tenantSlug is absent (multi-tenant candidates), logging the "wrong" tenant would be misleading.
-          if (tenantSlug || isDemoEmail) {
-            const first = candidateRows[0];
-            if (first?.tenantId) {
-              void logAudit({
-                tenantId: first.tenantId,
-                userId: first.id,
-                action: "auth.sign_in_failed",
-                entityType: "user",
-                entityId: first.id,
-                details: { email: first.email },
-              }).catch(() => {});
-            }
+          // Record a failure against the first candidate if we have any.
+          const first = candidateRows[0];
+          if (first?.tenantId) {
+            void logAudit({
+              tenantId: first.tenantId,
+              userId: first.id,
+              action: "auth.sign_in_failed",
+              entityType: "user",
+              entityId: first.id,
+              details: { email: first.email },
+            }).catch(() => {});
           }
           return null;
         }
