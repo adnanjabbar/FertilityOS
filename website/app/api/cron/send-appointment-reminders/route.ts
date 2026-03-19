@@ -11,6 +11,7 @@ import { and, eq, gte, lte, or, isNull } from "drizzle-orm";
 import { sendEmail, appointmentReminderContent } from "@/lib/email";
 import { sendSms, appointmentReminderSmsBody } from "@/lib/sms";
 import { sendWhatsApp, appointmentReminderWhatsAppBody } from "@/lib/whatsapp";
+import { renderTenantEmailTemplate } from "@/lib/tenant-email-templates";
 
 const WINDOW_HOURS = 24; // Remind for appointments in the next 24 hours
 const BUFFER_MINUTES = 30; // Don't send if appointment is in the past (e.g. 24h window already passed)
@@ -95,21 +96,40 @@ async function runReminders(request: Request) {
       if (!email) {
         emailResults.push({ appointmentId: row.appointmentId, email: "", ok: false, error: "No patient email" });
       } else {
-        const { subject, html, text } = appointmentReminderContent({
+        const fallback = appointmentReminderContent({
           patientFirstName: row.patientFirstName,
           patientLastName: row.patientLastName,
           startAt: row.startAt,
           type: row.type,
           clinicName: row.tenantName ?? undefined,
         });
-        const sendResult = await sendEmail({ to: email, subject, html, text });
-        if (sendResult.ok) {
-          await db
-            .update(appointments)
-            .set({ reminderSentAt: now, updatedAt: now })
-            .where(eq(appointments.id, row.appointmentId));
+        const rendered = await renderTenantEmailTemplate({
+          tenantId: row.tenantId,
+          key: "appointment_reminder",
+          vars: {
+            patientName: [row.patientFirstName, row.patientLastName].filter(Boolean).join(" ") || "there",
+            clinicName: row.tenantName ?? "",
+            appointmentType: row.type ?? "Appointment",
+            appointmentDate: row.startAt.toLocaleString(),
+            brandName: "TheFertilityOS",
+            magicLinkUrl: "",
+            resetUrl: "",
+            setPasswordUrl: "",
+          },
+          fallback,
+        });
+        if (!rendered.ok) {
+          emailResults.push({ appointmentId: row.appointmentId, email, ok: false, error: rendered.error });
+        } else {
+          const sendResult = await sendEmail({ to: email, subject: rendered.subject, html: rendered.html, text: rendered.text });
+          if (sendResult.ok) {
+            await db
+              .update(appointments)
+              .set({ reminderSentAt: now, updatedAt: now })
+              .where(eq(appointments.id, row.appointmentId));
+          }
+          emailResults.push({ appointmentId: row.appointmentId, email, ok: sendResult.ok, error: sendResult.error });
         }
-        emailResults.push({ appointmentId: row.appointmentId, email, ok: sendResult.ok, error: sendResult.error });
       }
     }
 

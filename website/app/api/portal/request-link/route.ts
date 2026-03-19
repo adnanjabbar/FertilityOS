@@ -4,6 +4,7 @@ import { patients, patientPortalTokens } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { randomBytes } from "crypto";
 import { sendEmail, patientPortalMagicLinkContent } from "@/lib/email";
+import { renderTenantEmailTemplate } from "@/lib/tenant-email-templates";
 
 const TOKEN_EXPIRY_HOURS = 24;
 
@@ -16,7 +17,7 @@ export async function POST(req: Request) {
     }
 
     const [patient] = await db
-      .select({ id: patients.id, firstName: patients.firstName, email: patients.email })
+      .select({ id: patients.id, tenantId: patients.tenantId, firstName: patients.firstName, email: patients.email })
       .from(patients)
       .where(eq(patients.email, email))
       .limit(1);
@@ -41,16 +42,31 @@ export async function POST(req: Request) {
     const origin = baseUrl.startsWith("http") ? baseUrl : `https://${baseUrl}`;
     const magicLinkUrl = `${origin}/portal/verify?token=${encodeURIComponent(token)}`;
 
-    const { subject, html, text } = patientPortalMagicLinkContent({
+    const fallback = patientPortalMagicLinkContent({
       magicLinkUrl,
       patientFirstName: patient.firstName ?? undefined,
     });
 
+    const rendered = await renderTenantEmailTemplate({
+      tenantId: patient.tenantId,
+      key: "patient_magic_link",
+      vars: {
+        patientName: patient.firstName ?? "there",
+        magicLinkUrl,
+        clinicName: "",
+        brandName: "TheFertilityOS",
+      },
+      fallback,
+    });
+    if (!rendered.ok) {
+      return NextResponse.json({ error: rendered.error }, { status: 500 });
+    }
+
     await sendEmail({
       to: patient.email ?? email,
-      subject,
-      html,
-      text,
+      subject: rendered.subject,
+      html: rendered.html,
+      text: rendered.text,
     });
 
     return NextResponse.json({

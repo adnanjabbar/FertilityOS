@@ -5,6 +5,7 @@ import { patients, patientPasswordTokens } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { randomBytes } from "crypto";
 import { sendEmail, patientPortalSetPasswordContent } from "@/lib/email";
+import { renderTenantEmailTemplate } from "@/lib/tenant-email-templates";
 
 const SET_PASSWORD_TOKEN_EXPIRY_HOURS = 24;
 
@@ -40,16 +41,31 @@ export async function POST() {
   const origin = baseUrl.startsWith("http") ? baseUrl : `https://${baseUrl}`;
   const setPasswordUrl = `${origin}/portal/set-password?token=${encodeURIComponent(token)}`;
 
-  const { subject, html, text } = patientPortalSetPasswordContent({
+  const fallback = patientPortalSetPasswordContent({
     setPasswordUrl,
     patientFirstName: patient.firstName ?? undefined,
   });
 
+  const rendered = await renderTenantEmailTemplate({
+    tenantId: patient.tenantId,
+    key: "patient_set_password",
+    vars: {
+      patientName: patient.firstName ?? "there",
+      setPasswordUrl,
+      clinicName: "",
+      brandName: "TheFertilityOS",
+    },
+    fallback,
+  });
+  if (!rendered.ok) {
+    return NextResponse.json({ error: rendered.error ?? "Could not render email" }, { status: 500 });
+  }
+
   await sendEmail({
     to: patient.email,
-    subject,
-    html,
-    text,
+    subject: rendered.subject,
+    html: rendered.html,
+    text: rendered.text,
   });
 
   return NextResponse.json({

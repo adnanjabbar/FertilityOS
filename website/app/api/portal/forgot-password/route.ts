@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm";
 import { randomBytes } from "crypto";
 import { sendEmail, patientPortalPasswordResetContent } from "@/lib/email";
 import { rateLimitAuth } from "@/lib/rate-limit";
+import { renderTenantEmailTemplate } from "@/lib/tenant-email-templates";
 
 const RESET_TOKEN_EXPIRY_HOURS = 1;
 
@@ -53,16 +54,31 @@ export async function POST(req: Request) {
     const origin = baseUrl.startsWith("http") ? baseUrl : `https://${baseUrl}`;
     const resetUrl = `${origin}/portal/reset-password?token=${encodeURIComponent(token)}`;
 
-    const { subject, html, text } = patientPortalPasswordResetContent({
+    const fallback = patientPortalPasswordResetContent({
       resetUrl,
       patientFirstName: patient.firstName ?? undefined,
     });
 
+    const rendered = await renderTenantEmailTemplate({
+      tenantId: patient.tenantId,
+      key: "patient_reset_password",
+      vars: {
+        patientName: patient.firstName ?? "there",
+        resetUrl,
+        clinicName: "",
+        brandName: "TheFertilityOS",
+      },
+      fallback,
+    });
+    if (!rendered.ok) {
+      return NextResponse.json({ error: rendered.error ?? "Could not render email" }, { status: 500 });
+    }
+
     await sendEmail({
       to: patient.email ?? email,
-      subject,
-      html,
-      text,
+      subject: rendered.subject,
+      html: rendered.html,
+      text: rendered.text,
     });
 
     return NextResponse.json({

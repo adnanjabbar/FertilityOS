@@ -632,6 +632,26 @@ export const platformEmailTemplates = pgTable(
   (table) => [uniqueIndex("platform_email_templates_key_idx").on(table.templateKey)]
 );
 
+export const tenantEmailTemplates = pgTable(
+  "tenant_email_templates",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    tenantId: uuid("tenant_id")
+      .notNull()
+      .references(() => tenants.id, { onDelete: "cascade" }),
+    templateKey: varchar("template_key", { length: 64 }).notNull(),
+    name: varchar("name", { length: 128 }).notNull(),
+    subject: varchar("subject", { length: 255 }).notNull(),
+    html: text("html").notNull(),
+    text: text("text"),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (table) => [
+    uniqueIndex("tenant_email_templates_tenant_key_idx").on(table.tenantId, table.templateKey),
+  ]
+);
+
 export const patientDataRequests = pgTable(
   "patient_data_requests",
   {
