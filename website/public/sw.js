@@ -3,7 +3,7 @@
  * Caches app shell and dashboard for offline use. Update cache version when deploying.
  */
 // Bump cache version whenever we change sw.js behavior.
-const CACHE_NAME = "fertilityos-v4";
+const CACHE_NAME = "fertilityos-v5";
 const OFFLINE_URL = "/app/dashboard";
 
 const PRECACHE_URLS = [
@@ -47,15 +47,13 @@ self.addEventListener("fetch", (event) => {
   // Never serve cached /login HTML; it can cause React hydration mismatch (#418)
   // if the browser has an older cached HTML shell.
   if (url.pathname === "/login") {
-    event.respondWith((async () => {
-      try {
-        return await fetch(event.request);
-      } catch {
-        const cached = await caches.match(event.request);
-        // IMPORTANT: never return `undefined` (would cause "Failed to convert value to 'Response'").
-        return cached || new Response("Offline", { status: 503, statusText: "Service Unavailable" });
-      }
-    })());
+    // IMPORTANT: do not fall back to cache here.
+    // If the network fails, return a hard 503 so we don't serve stale HTML that can mismatch.
+    event.respondWith(
+      fetch(event.request).catch(
+        () => new Response("Service Unavailable", { status: 503, statusText: "Service Unavailable" })
+      )
+    );
     return;
   }
 
