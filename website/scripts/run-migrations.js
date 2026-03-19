@@ -70,6 +70,9 @@ const migrations = [
   "0040_whitelabel_branding.sql",
   "0041_patient_password.sql",
   "0042_patient_data_requests.sql",
+  "0043_user_password_reset.sql",
+  "0044_platform_email_templates.sql",
+  "0045_tenant_email_templates.sql",
 ];
 
 async function main() {
