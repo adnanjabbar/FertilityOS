@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   Building2,
   Users,
@@ -13,6 +14,8 @@ import {
   Package,
   Server,
   TrendingUp,
+  Globe2,
+  DollarSign,
 } from "lucide-react";
 
 type Overview = {
@@ -24,9 +27,26 @@ type Overview = {
   ivfCyclesSupported: number;
 };
 
+type PlatformKpis = {
+  countriesServed: number;
+  adminUsersCount: number;
+  clinicsByCountry: { country: string; clinicCount: number }[];
+  subscriptionsByStatus: Record<string, number>;
+  activeSubscriptionsApprox: number;
+  estimatedPlatformMrrUsd: number | null;
+  invoiceTotalsByCurrency: {
+    currency: string;
+    paidTotal: string;
+    outstandingTotal: string;
+    paidCount: number;
+    outstandingCount: number;
+  }[];
+};
+
 type Stats = {
   overview: Overview;
   invoicesCount?: number;
+  platformKpis?: PlatformKpis;
   usersByRole: { role: string; count: number }[];
   recentTenants: {
     id: string;
@@ -194,6 +214,137 @@ export default function SuperDashboardClient() {
         </div>
       </section>
 
+      {stats.platformKpis && (
+        <section className="space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <Globe2 className="w-5 h-5 text-slate-600" />
+              Platform KPIs (Phase 1)
+            </h2>
+            <Link
+              href="/app/super/clinics"
+              className="inline-flex items-center justify-center px-4 py-2 rounded-xl bg-blue-700 text-white text-sm font-bold hover:bg-blue-800 transition"
+            >
+              Browse all clinics →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+              <p className="text-sm font-medium text-slate-600">Countries served</p>
+              <p className="text-2xl font-bold text-slate-900 mt-1">
+                {stats.platformKpis.countriesServed}
+              </p>
+            </div>
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+              <p className="text-sm font-medium text-slate-600">Clinic admins</p>
+              <p className="text-2xl font-bold text-slate-900 mt-1">
+                {stats.platformKpis.adminUsersCount}
+              </p>
+            </div>
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+              <p className="text-sm font-medium text-slate-600">Active-like subscriptions</p>
+              <p className="text-2xl font-bold text-slate-900 mt-1">
+                {stats.platformKpis.activeSubscriptionsApprox}
+              </p>
+              <p className="text-xs text-slate-500 mt-1">active + trialing + past_due</p>
+            </div>
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+              <p className="text-sm font-medium text-slate-600 flex items-center gap-1">
+                <DollarSign className="w-4 h-4" />
+                Est. platform MRR (USD)
+              </p>
+              <p className="text-2xl font-bold text-slate-900 mt-1">
+                {stats.platformKpis.estimatedPlatformMrrUsd != null
+                  ? `$${stats.platformKpis.estimatedPlatformMrrUsd.toLocaleString()}`
+                  : "—"}
+              </p>
+              <p className="text-xs text-slate-500 mt-1">
+                Set SUPER_ADMIN_ESTIMATED_MRR_USD_PER_ACTIVE_SUB to approximate
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+              <h3 className="text-sm font-bold text-slate-800 mb-3">Clinics by country</h3>
+              <div className="max-h-56 overflow-y-auto space-y-1 text-sm">
+                {stats.platformKpis.clinicsByCountry.length === 0 ? (
+                  <p className="text-slate-500">No clinics yet.</p>
+                ) : (
+                  stats.platformKpis.clinicsByCountry.map((c) => (
+                    <div
+                      key={c.country}
+                      className="flex justify-between py-1 border-b border-slate-100 last:border-0"
+                    >
+                      <span className="font-mono text-slate-700">{c.country}</span>
+                      <span className="font-semibold text-slate-900">{c.clinicCount}</span>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+              <h3 className="text-sm font-bold text-slate-800 mb-3">Subscriptions by status</h3>
+              <div className="flex flex-wrap gap-2">
+                {Object.entries(stats.platformKpis.subscriptionsByStatus).length === 0 ? (
+                  <p className="text-slate-500 text-sm">No subscription rows.</p>
+                ) : (
+                  Object.entries(stats.platformKpis.subscriptionsByStatus).map(([st, n]) => (
+                    <span
+                      key={st}
+                      className="px-3 py-1.5 rounded-xl bg-slate-100 text-slate-800 text-sm font-medium"
+                    >
+                      {st}: {n}
+                    </span>
+                  ))
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 overflow-x-auto">
+            <h3 className="text-sm font-bold text-slate-800 mb-3">Invoice rollups by currency</h3>
+            <p className="text-xs text-slate-500 mb-3">
+              Paid = status <code className="bg-slate-100 px-1 rounded">paid</code>. Outstanding ={" "}
+              <code className="bg-slate-100 px-1 rounded">sent</code>,{" "}
+              <code className="bg-slate-100 px-1 rounded">overdue</code>,{" "}
+              <code className="bg-slate-100 px-1 rounded">draft</code>.
+            </p>
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b text-left text-slate-600">
+                  <th className="pb-2 pr-4">Currency</th>
+                  <th className="pb-2 pr-4">Paid total</th>
+                  <th className="pb-2 pr-4">Outstanding</th>
+                  <th className="pb-2 pr-4">Paid #</th>
+                  <th className="pb-2">Outstanding #</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stats.platformKpis.invoiceTotalsByCurrency.length === 0 ? (
+                  <tr>
+                    <td colSpan={5} className="py-4 text-slate-500">
+                      No invoice data.
+                    </td>
+                  </tr>
+                ) : (
+                  stats.platformKpis.invoiceTotalsByCurrency.map((r) => (
+                    <tr key={r.currency} className="border-b border-slate-100">
+                      <td className="py-2 pr-4 font-medium">{r.currency}</td>
+                      <td className="py-2 pr-4">{r.paidTotal}</td>
+                      <td className="py-2 pr-4">{r.outstandingTotal}</td>
+                      <td className="py-2 pr-4">{r.paidCount}</td>
+                      <td className="py-2">{r.outstandingCount}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
       <section className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
         <h2 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
           <Users className="w-5 h-5 text-slate-600" />
@@ -222,7 +373,8 @@ export default function SuperDashboardClient() {
                 <th className="pb-3 pr-4">Slug</th>
                 <th className="pb-3 pr-4">Country</th>
                 <th className="pb-3 pr-4">Users</th>
-                <th className="pb-3">Joined</th>
+                <th className="pb-3 pr-4">Joined</th>
+                <th className="pb-3 text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -232,7 +384,15 @@ export default function SuperDashboardClient() {
                   <td className="py-3 pr-4 text-slate-600">{t.slug}</td>
                   <td className="py-3 pr-4 text-slate-600">{t.country}</td>
                   <td className="py-3 pr-4 text-slate-600">{userCountByTenant[t.id] ?? 0}</td>
-                  <td className="py-3 text-slate-500">{formatDate(t.createdAt)}</td>
+                  <td className="py-3 pr-4 text-slate-500">{formatDate(t.createdAt)}</td>
+                  <td className="py-3 text-right">
+                    <Link
+                      href={`/app/super/tenants/${t.id}`}
+                      className="text-blue-700 font-semibold hover:underline text-sm"
+                    >
+                      View
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>

@@ -11,6 +11,13 @@ import {
   invoices,
 } from "@/db/schema";
 import { eq, sql, desc, isNull, ne } from "drizzle-orm";
+import {
+  getAdminUsersCount,
+  getClinicsByCountry,
+  getCountriesServedCount,
+  getInvoiceTotalsByCurrency,
+  getSubscriptionsByStatus,
+} from "@/lib/super-admin-queries";
 
 /**
  * GET /api/app/super/stats
@@ -119,6 +126,38 @@ export async function GET() {
       .where(ne(tenants.slug, systemTenantSlug));
     const invoicesCount = invoicesCountRow?.count ?? 0;
 
+    const [
+      countriesServed,
+      clinicsByCountry,
+      adminUsersCount,
+      subscriptionsByStatus,
+      invoiceTotalsByCurrency,
+    ] = await Promise.all([
+      getCountriesServedCount(),
+      getClinicsByCountry(),
+      getAdminUsersCount(),
+      getSubscriptionsByStatus(),
+      getInvoiceTotalsByCurrency(),
+    ]);
+
+    const activeLikeStatuses = new Set([
+      "active",
+      "trialing",
+      "past_due",
+    ]);
+    let activeSubscriptionsApprox = 0;
+    for (const [st, n] of Object.entries(subscriptionsByStatus)) {
+      if (activeLikeStatuses.has(st)) activeSubscriptionsApprox += n;
+    }
+
+    const mrrUsdPerActive = Number(
+      process.env.SUPER_ADMIN_ESTIMATED_MRR_USD_PER_ACTIVE_SUB ?? "0"
+    );
+    const estimatedPlatformMrrUsd =
+      Number.isFinite(mrrUsdPerActive) && mrrUsdPerActive > 0
+        ? activeSubscriptionsApprox * mrrUsdPerActive
+        : null;
+
     return NextResponse.json({
       overview: {
         clinicsOnboarded: tenantsCount?.count ?? 0,
@@ -127,6 +166,17 @@ export async function GET() {
         patientsServed: patientsCount,
         appointmentsCount,
         ivfCyclesSupported: ivfCyclesCount,
+      },
+      /** Phase 1: platform-wide KPIs for super dashboard & future map/financials UI */
+      platformKpis: {
+        countriesServed,
+        adminUsersCount,
+        clinicsByCountry,
+        subscriptionsByStatus,
+        activeSubscriptionsApprox,
+        /** Set SUPER_ADMIN_ESTIMATED_MRR_USD_PER_ACTIVE_SUB in env for a rough MRR line until Stripe amounts are synced to DB */
+        estimatedPlatformMrrUsd,
+        invoiceTotalsByCurrency,
       },
       usersByRole: usersByRole.map((r) => ({ role: r.roleSlug, count: r.count })),
       recentTenants,

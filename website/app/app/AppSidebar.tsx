@@ -32,6 +32,7 @@ import {
   faChevronDown,
   faChevronRight,
   faCog,
+  faBuilding,
   type IconDefinition,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
@@ -60,6 +61,7 @@ const iconMap: Record<string, IconDefinition> = {
   integrations: faPlug,
   labIntegration: faVial,
   superDashboard: faCrown,
+  superClinics: faBuilding,
   settings: faCog,
 };
 

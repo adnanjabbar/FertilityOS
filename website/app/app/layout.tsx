@@ -117,7 +117,8 @@ export default async function AppLayout({
         {
           labelKey: "groupPlatform",
           items: [
-            { href: "/app/super", labelKey: "superDashboard", iconKey: "superDashboard" },
+            { href: "/app/super", labelKey: "superOverview", iconKey: "superDashboard" },
+            { href: "/app/super/clinics", labelKey: "superClinics", iconKey: "superClinics" },
             { href: "/app/super/email-templates", labelKey: "emailTemplates", iconKey: "emailCampaigns" },
             { href: "/app/account/security", labelKey: "accountSecurity", iconKey: "compliance" },
           ],
@@ -181,6 +182,8 @@ export default async function AppLayout({
     dataRequests: t("dataRequests"),
     securityReport: t("securityReport"),
     superDashboard: t("superDashboard"),
+    superOverview: t("superOverview"),
+    superClinics: t("superClinics"),
     settings: t("settings"),
     logOut: t("logOut"),
     groupMain: t("groupMain"),
@@ -204,7 +207,10 @@ export default async function AppLayout({
           showPoweredBy={branding.showPoweredBy}
         />
         <main className="flex-1 min-w-0 relative pt-14 lg:pt-14">
-          <AppTopBar userName={session.user.name ?? "User"} tenantName={session.user.tenantName ?? null} />
+          <AppTopBar
+            userName={session.user.name ?? "User"}
+            tenantName={isSuperAdmin ? "TheFertilityOS" : session.user.tenantName ?? null}
+          />
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8">
             {children}
           </div>
