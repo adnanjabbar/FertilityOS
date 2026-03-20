@@ -16,8 +16,9 @@
 | **Patient list API** | Paginated `{ patients, total, page, limit, totalPages }`; dropdowns use `loadAllPatientOptionsForSelect()`. |
 | **Super rate limits** | In-memory: patient search (80/15m), delete tenant (15/15m) per super user. |
 | **Stripe webhook audit** | `stripe_subscription_sync` rows on system tenant + `audit_logs` mirror (no PHI). |
+| **Reports CSV export** | `GET /api/app/reports/export` — same period/location as dashboard; UTF-8 BOM for Excel; `report.csv_export` audit. |
 
 ## Suggested next (finish line)
 
-- Export reports (CSV) for the selected period.
+- **Done:** Export reports (CSV) — `GET /api/app/reports/export` + **Download CSV** on `/app/reports` (audited as `report.csv_export`).
 - Redis-backed rate limits for multi-instance DO.

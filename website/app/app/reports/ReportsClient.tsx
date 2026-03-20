@@ -10,6 +10,7 @@ import {
   Loader2,
   CircleDollarSign,
   FileWarning,
+  Download,
 } from "lucide-react";
 
 type Overview = {
@@ -29,6 +30,7 @@ export default function ReportsClient() {
   const [locations, setLocations] = useState<{ id: string; name: string }[]>([]);
   const [locationFilter, setLocationFilter] = useState("");
   const [loading, setLoading] = useState(true);
+  const [exporting, setExporting] = useState(false);
   const [from, setFrom] = useState(() => {
     const d = new Date();
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-01`;
@@ -59,6 +61,25 @@ export default function ReportsClient() {
   useEffect(() => {
     fetchReport();
   }, [fetchReport]);
+
+  const handleExportCsv = async () => {
+    setExporting(true);
+    try {
+      const params = new URLSearchParams({ from, to });
+      if (locationFilter) params.set("locationId", locationFilter);
+      const res = await fetch(`/api/app/reports/export?${params}`);
+      if (!res.ok) return;
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `fertilityos-report-${from}-to-${to}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } finally {
+      setExporting(false);
+    }
+  };
 
   const maxAppointments = data?.appointmentsByDay?.length
     ? Math.max(...data.appointmentsByDay.map((d) => d.count), 1)
@@ -101,6 +122,15 @@ export default function ReportsClient() {
             </select>
           </label>
         )}
+        <button
+          type="button"
+          disabled={loading || exporting || !data}
+          onClick={() => void handleExportCsv()}
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-800 hover:bg-slate-50 disabled:opacity-50"
+        >
+          <Download className="w-4 h-4" />
+          {exporting ? "Exporting…" : "Download CSV"}
+        </button>
       </div>
 
       {loading ? (

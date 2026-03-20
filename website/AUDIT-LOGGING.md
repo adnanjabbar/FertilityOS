@@ -20,6 +20,7 @@ The following actions are instrumented:
 | `patient.update` | patient     | A patient is updated (PATCH /api/app/patients/[id]). |
 | `invoice.create` | invoice     | A new invoice is created (POST /api/app/invoices). |
 | `user.invite`    | invitation  | An invitation is created (POST /api/app/invitations). |
+| `report.csv_export` | report   | User downloads the clinic report CSV (GET /api/app/reports/export). Details: date range, optional location filter. |
 
 - **User:** The acting user’s ID (and name in the UI) when available. Sign-in and invite are always tied to a user; other actions use the session user.
 - **Details:** Optional JSON or text (e.g. `{ "firstName", "lastName" }` for patient create/update, `{ "invoiceNumber", "patientId" }` for invoice create, `{ "email", "roleSlug" }` for invite).
