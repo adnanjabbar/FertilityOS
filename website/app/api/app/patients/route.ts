@@ -3,6 +3,7 @@ import { auth } from "@/auth";
 import { db } from "@/db";
 import { patients } from "@/db/schema";
 import { eq, desc, or, ilike, and } from "drizzle-orm";
+import { sanitizeIlikePattern } from "@/lib/ilike-sanitize";
 import { z } from "zod";
 import { logAudit, getClientIp } from "@/lib/audit";
 import { generateNextMrNumber } from "@/lib/mr";
@@ -66,15 +67,19 @@ export async function GET(request: Request) {
   try {
     const url = new URL(request.url);
     const q = url.searchParams.get("q")?.trim() || "";
+    const limitRaw = parseInt(url.searchParams.get("limit") ?? "100", 10);
+    const limit = Number.isFinite(limitRaw) ? Math.min(500, Math.max(1, limitRaw)) : 100;
 
     const conditions = [eq(patients.tenantId, session.user.tenantId)];
     if (q.length > 0) {
-      const pattern = `%${q}%`;
+      const pattern = sanitizeIlikePattern(q);
       conditions.push(
         or(
           ilike(patients.firstName, pattern),
           ilike(patients.lastName, pattern),
-          ilike(patients.email, pattern)
+          ilike(patients.email, pattern),
+          ilike(patients.mrNumber, pattern),
+          ilike(patients.phone, pattern)
         )!
       );
     }
@@ -84,6 +89,7 @@ export async function GET(request: Request) {
         id: patients.id,
         firstName: patients.firstName,
         lastName: patients.lastName,
+        mrNumber: patients.mrNumber,
         dateOfBirth: patients.dateOfBirth,
         email: patients.email,
         phone: patients.phone,
@@ -91,7 +97,8 @@ export async function GET(request: Request) {
       })
       .from(patients)
       .where(conditions.length > 1 ? and(...conditions) : conditions[0])
-      .orderBy(desc(patients.createdAt));
+      .orderBy(desc(patients.createdAt))
+      .limit(limit);
 
     if (list.length > 50) {
       void logAudit({

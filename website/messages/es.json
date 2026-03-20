@@ -344,6 +344,7 @@
       "superOverview": "Resumen",
       "superClinics": "Todas las clínicas",
       "superComplianceLog": "Registro de cumplimiento (plataforma)",
+      "superPatientSearch": "Búsqueda de pacientes (todas las clínicas)",
       "logOut": "Cerrar sesión",
       "brand": "FertilityOS",
       "clinic": "Clínica",

@@ -2,12 +2,14 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink, Search } from "lucide-react";
 
 type TenantRow = {
   id: string;
   name: string;
   slug: string;
+  address: string | null;
+  postalCode: string | null;
   country: string;
   city: string | null;
   state: string | null;
@@ -15,6 +17,12 @@ type TenantRow = {
   subscriptionStatus: string | null;
   billingPlan: string | null;
 };
+
+function mapsSearchUrl(t: TenantRow): string | null {
+  const parts = [t.address, t.city, t.state, t.country, t.postalCode].filter(Boolean);
+  if (parts.length === 0) return null;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(parts.join(", "))}`;
+}
 
 export default function SuperClinicsDirectory() {
   const [page, setPage] = useState(1);
@@ -97,24 +105,27 @@ export default function SuperClinicsDirectory() {
               <th className="px-4 py-3">Plan</th>
               <th className="px-4 py-3">Subscription</th>
               <th className="px-4 py-3">Joined</th>
+              <th className="px-4 py-3 text-center">Map</th>
               <th className="px-4 py-3 text-right">Actions</th>
             </tr>
           </thead>
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={7} className="px-4 py-10 text-center text-slate-500">
+                <td colSpan={8} className="px-4 py-10 text-center text-slate-500">
                   Loading…
                 </td>
               </tr>
             ) : rows.length === 0 ? (
               <tr>
-                <td colSpan={7} className="px-4 py-10 text-center text-slate-500">
+                <td colSpan={8} className="px-4 py-10 text-center text-slate-500">
                   No clinics match your search.
                 </td>
               </tr>
             ) : (
-              rows.map((t) => (
+              rows.map((t) => {
+                const mapUrl = mapsSearchUrl(t);
+                return (
                 <tr key={t.id} className="border-b border-slate-100 hover:bg-slate-50/80">
                   <td className="px-4 py-3 font-medium text-slate-900">{t.name}</td>
                   <td className="px-4 py-3 text-slate-600">{t.slug}</td>
@@ -142,6 +153,20 @@ export default function SuperClinicsDirectory() {
                   <td className="px-4 py-3 text-slate-500">
                     {new Date(t.createdAt).toLocaleDateString()}
                   </td>
+                  <td className="px-4 py-3 text-center">
+                    {mapUrl ? (
+                      <a
+                        href={mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 text-teal-700 font-semibold text-xs hover:underline"
+                      >
+                        Open <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    ) : (
+                      <span className="text-slate-400 text-xs">—</span>
+                    )}
+                  </td>
                   <td className="px-4 py-3 text-right">
                     <Link
                       href={`/app/super/tenants/${t.id}`}
@@ -151,7 +176,8 @@ export default function SuperClinicsDirectory() {
                     </Link>
                   </td>
                 </tr>
-              ))
+              );
+              })
             )}
           </tbody>
         </table>

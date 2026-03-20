@@ -56,6 +56,8 @@
 
 **Phase 10 (10.1 + 10.2) completed:** Patient portal password and GDPR-style export/delete request flow. 10.1: patients can set a password (link from Profile or email) and sign in with email + password; "Forgot password" sends a reset link. 10.2: "Export my data" and "Request account deletion" in the portal; admin handling of delete requests. See `website/PATIENT-PORTAL-PASSWORD.md`, `website/SECURITY-AND-COMPLIANCE.md`, `System-Architecture/Planning/phase-10-handoff.md`.
 
+**Phase 11 (polish sprint):** Stronger tenant patient search (MR#, phone, limits); super-admin cross-clinic patient search with audit; reports outstanding/unpaid invoice KPIs; super clinics table map links; registration step indicator. See `System-Architecture/Planning/phase-11-polish-sprint.md`.
+
 ---
 
 ## Implementation notes

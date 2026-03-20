@@ -11,6 +11,7 @@ type PatientRow = {
   id: string;
   firstName: string;
   lastName: string;
+  mrNumber: string | null;
   dateOfBirth: string | null;
   email: string | null;
   phone: string | null;
@@ -205,7 +206,7 @@ export default function PatientsClient() {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
-            placeholder="Search by name or email..."
+            placeholder="Search name, email, MR#, or phone…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className={inputClass + " pl-10"}
@@ -469,6 +470,7 @@ export default function PatientsClient() {
             <thead>
               <tr className="border-b border-slate-200 bg-slate-50 text-left text-slate-600 font-medium">
                 <th className="px-4 py-3">Name</th>
+                <th className="px-4 py-3">MR#</th>
                 <th className="px-4 py-3">Email</th>
                 <th className="px-4 py-3">Phone</th>
                 <th className="px-4 py-3">DOB</th>
@@ -486,6 +488,9 @@ export default function PatientsClient() {
                       {p.firstName} {p.lastName}
                     </Link>
                   </td>
+                  <td className="px-4 py-3 text-slate-600 font-mono text-xs">
+                    {p.mrNumber ?? "—"}
+                  </td>
                   <td className="px-4 py-3 text-slate-600">{p.email ?? "—"}</td>
                   <td className="px-4 py-3 text-slate-600">{p.phone ?? "—"}</td>
                   <td className="px-4 py-3 text-slate-600">{formatDate(p.dateOfBirth)}</td>
@@ -494,6 +499,11 @@ export default function PatientsClient() {
               ))}
             </tbody>
           </table>
+        )}
+        {!loading && list.length >= 100 && (
+          <p className="px-4 py-3 text-xs text-slate-500 border-t border-slate-100 bg-slate-50/80">
+            Showing the 100 most recently added matches. Narrow your search to find a specific patient.
+          </p>
         )}
       </div>
     </div>

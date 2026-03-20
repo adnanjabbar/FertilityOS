@@ -8,6 +8,8 @@ import {
   DollarSign,
   TrendingUp,
   Loader2,
+  CircleDollarSign,
+  FileWarning,
 } from "lucide-react";
 
 type Overview = {
@@ -17,6 +19,8 @@ type Overview = {
   newPatients: number;
   ivfCycles: number;
   revenuePaid: number;
+  revenueOutstanding?: number;
+  unpaidInvoicesInPeriod?: number;
   appointmentsByDay: { date: string; count: number }[];
 };
 
@@ -106,7 +110,7 @@ export default function ReportsClient() {
         </div>
       ) : data ? (
         <>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
             <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-slate-600">Appointments</span>
@@ -136,6 +140,26 @@ export default function ReportsClient() {
               <p className="text-2xl font-bold text-slate-900 mt-2">
                 ${data.revenuePaid.toLocaleString("en-US", { minimumFractionDigits: 2 })}
               </p>
+            </div>
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-slate-600">Outstanding (period)</span>
+                <CircleDollarSign className="w-8 h-8 text-amber-600" />
+              </div>
+              <p className="text-2xl font-bold text-slate-900 mt-2">
+                ${(data.revenueOutstanding ?? 0).toLocaleString("en-US", { minimumFractionDigits: 2 })}
+              </p>
+              <p className="text-xs text-slate-500 mt-1">Unpaid invoices created in range</p>
+            </div>
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-slate-600">Unpaid invoices</span>
+                <FileWarning className="w-8 h-8 text-orange-600" />
+              </div>
+              <p className="text-2xl font-bold text-slate-900 mt-2">
+                {data.unpaidInvoicesInPeriod ?? 0}
+              </p>
+              <p className="text-xs text-slate-500 mt-1">Count in selected period</p>
             </div>
           </div>
 

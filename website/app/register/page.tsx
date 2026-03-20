@@ -272,9 +272,40 @@ export default function RegisterPage() {
         <h1 className="text-3xl font-extrabold text-slate-900 mb-2">
           Register your clinic
         </h1>
-        <p className="text-slate-600 mb-8">
+        <p className="text-slate-600 mb-4">
           {stepDescription(step)}
         </p>
+
+        <nav aria-label="Registration steps" className="mb-8">
+          <ol className="flex flex-wrap gap-2">
+            {(
+              [
+                { id: "email" as const, label: "Verify email", n: 1 },
+                { id: "clinic" as const, label: "Clinic details", n: 2 },
+                { id: "admin" as const, label: "Admin account", n: 3 },
+              ] as const
+            ).map(({ id, label, n }) => {
+              const active = step === id;
+              const done =
+                (id === "email" && (step === "clinic" || step === "admin")) ||
+                (id === "clinic" && step === "admin");
+              return (
+                <li
+                  key={id}
+                  className={`rounded-full border px-3 py-1.5 text-xs font-bold transition-colors ${
+                    active
+                      ? "border-blue-600 bg-blue-50 text-blue-900"
+                      : done
+                        ? "border-teal-300 bg-teal-50 text-teal-800"
+                        : "border-slate-200 bg-white text-slate-500"
+                  }`}
+                >
+                  <span className="opacity-70 tabular-nums">{n}.</span> {label}
+                </li>
+              );
+            })}
+          </ol>
+        </nav>
 
         {error && (
           <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-800 text-sm">

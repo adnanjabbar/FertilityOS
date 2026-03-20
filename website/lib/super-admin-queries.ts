@@ -13,10 +13,7 @@ import {
   ivfCycles,
 } from "@/db/schema";
 import { eq, ne, and, inArray, sql, or, ilike, desc } from "drizzle-orm";
-
-function sanitizeIlikePattern(raw: string): string {
-  return `%${raw.replace(/[%_\\]/g, "")}%`;
-}
+import { sanitizeIlikePattern } from "@/lib/ilike-sanitize";
 
 export const SYSTEM_TENANT_SLUG = "system";
 
@@ -166,6 +163,8 @@ export type TenantListRow = {
   id: string;
   name: string;
   slug: string;
+  address: string | null;
+  postalCode: string | null;
   country: string;
   city: string | null;
   state: string | null;
@@ -202,6 +201,8 @@ export async function listClinicTenants(params: {
       id: tenants.id,
       name: tenants.name,
       slug: tenants.slug,
+      address: tenants.address,
+      postalCode: tenants.postalCode,
       country: tenants.country,
       city: tenants.city,
       state: tenants.state,
@@ -224,6 +225,8 @@ export async function listClinicTenants(params: {
       id: r.id,
       name: r.name,
       slug: r.slug,
+      address: r.address,
+      postalCode: r.postalCode,
       country: r.country,
       city: r.city,
       state: r.state,

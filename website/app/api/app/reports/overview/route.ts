@@ -7,7 +7,7 @@ import {
   ivfCycles,
   invoices,
 } from "@/db/schema";
-import { eq, and, gte, lte, sql, count } from "drizzle-orm";
+import { eq, ne, and, gte, lte, sql, count } from "drizzle-orm";
 
 /**
  * GET /api/app/reports/overview?from=YYYY-MM-DD&to=YYYY-MM-DD
@@ -100,6 +100,25 @@ export async function GET(request: Request) {
 
   const revenue = revenueResult[0]?.total ?? "0";
 
+  /** Invoices issued in range that are not yet paid (clinic financial snapshot). */
+  const outstandingResult = await db
+    .select({
+      total: sql<string>`COALESCE(SUM(CAST(${invoices.totalAmount} AS NUMERIC)), 0)`,
+      cnt: count(),
+    })
+    .from(invoices)
+    .where(
+      and(
+        eq(invoices.tenantId, tenantId),
+        ne(invoices.status, "paid"),
+        gte(invoices.createdAt, fromTs),
+        lte(invoices.createdAt, toTs)
+      )
+    );
+
+  const outstandingTotal = outstandingResult[0]?.total ?? "0";
+  const outstandingCount = outstandingResult[0]?.cnt ?? 0;
+
   let appointmentsByDay: { date: string; count: number }[] = [];
   if (includeChart) {
     const byDay = await db
@@ -121,6 +140,8 @@ export async function GET(request: Request) {
     newPatients: patientsCount?.count ?? 0,
     ivfCycles: cyclesCount?.count ?? 0,
     revenuePaid: parseFloat(revenue),
+    revenueOutstanding: parseFloat(outstandingTotal),
+    unpaidInvoicesInPeriod: Number(outstandingCount),
     appointmentsByDay,
   });
 }
