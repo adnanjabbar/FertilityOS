@@ -72,3 +72,32 @@ export function rateLimitOtp(identifier: string): { allowed: boolean; remaining:
   }
   return { allowed: true, remaining: maxOtp - entry.count };
 }
+
+const superWindowMs = 15 * 60 * 1000;
+
+/**
+ * Rate limit super-admin–only APIs per user (in-memory; use Redis for multi-instance).
+ */
+export function rateLimitSuperApi(
+  userId: string,
+  prefix: string,
+  maxInWindow: number
+): { allowed: boolean } {
+  prune();
+  const key = getKey(userId, `super-${prefix}`);
+  const now = Date.now();
+  const entry = store.get(key);
+  if (!entry) {
+    store.set(key, { count: 1, resetAt: now + superWindowMs });
+    return { allowed: true };
+  }
+  if (entry.resetAt < now) {
+    store.set(key, { count: 1, resetAt: now + superWindowMs });
+    return { allowed: true };
+  }
+  entry.count += 1;
+  if (entry.count > maxInWindow) {
+    return { allowed: false };
+  }
+  return { allowed: true };
+}

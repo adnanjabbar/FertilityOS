@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { UserPlus, Search, Users } from "lucide-react";
+import { ChevronLeft, ChevronRight, UserPlus, Search, Users } from "lucide-react";
 import { PhoneInputWithCountry } from "@/app/components/PhoneInputWithCountry";
 import { SearchableGeoSelect, type GeoOption } from "@/app/components/SearchableGeoSelect";
 
@@ -27,11 +27,17 @@ function formatDate(s: string | null) {
   return new Date(s).toLocaleString(undefined, { dateStyle: "medium" });
 }
 
+const PAGE_SIZE = 50;
+
 export default function PatientsClient() {
   const router = useRouter();
   const [list, setList] = useState<PatientRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const [debouncedQ, setDebouncedQ] = useState("");
   const [showAddForm, setShowAddForm] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
   const [addError, setAddError] = useState<string | null>(null);
@@ -103,20 +109,37 @@ export default function PatientsClient() {
       .finally(() => setGeoLoading((g) => ({ ...g, cities: false })));
   }, [form.countryCode, form.stateCode]);
 
-  const fetchList = useCallback(async () => {
-    try {
-      const q = search.trim() ? `?q=${encodeURIComponent(search.trim())}` : "";
-      const res = await fetch(`/api/app/patients${q}`);
-      if (res.ok) setList(await res.json());
-    } finally {
-      setLoading(false);
-    }
+  useEffect(() => {
+    const t = setTimeout(() => setDebouncedQ(search.trim()), 300);
+    return () => clearTimeout(t);
   }, [search]);
 
   useEffect(() => {
+    setPage(1);
+  }, [debouncedQ]);
+
+  const fetchList = useCallback(async () => {
+    try {
+      const sp = new URLSearchParams({
+        page: String(page),
+        limit: String(PAGE_SIZE),
+      });
+      if (debouncedQ) sp.set("q", debouncedQ);
+      const res = await fetch(`/api/app/patients?${sp}`);
+      if (res.ok) {
+        const data = await res.json();
+        setList(data.patients ?? []);
+        setTotalPages(Math.max(1, data.totalPages ?? 1));
+        setTotalCount(typeof data.total === "number" ? data.total : 0);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }, [debouncedQ, page]);
+
+  useEffect(() => {
     setLoading(true);
-    const t = setTimeout(fetchList, 300);
-    return () => clearTimeout(t);
+    void fetchList();
   }, [fetchList]);
 
   const handleAddSubmit = async (e: React.FormEvent) => {
@@ -500,10 +523,32 @@ export default function PatientsClient() {
             </tbody>
           </table>
         )}
-        {!loading && list.length >= 100 && (
-          <p className="px-4 py-3 text-xs text-slate-500 border-t border-slate-100 bg-slate-50/80">
-            Showing the 100 most recently added matches. Narrow your search to find a specific patient.
-          </p>
+        {!loading && totalCount > PAGE_SIZE && (
+          <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 text-xs text-slate-600 border-t border-slate-100 bg-slate-50/80">
+            <span>
+              {totalCount} patient{totalCount !== 1 ? "s" : ""} match this filter — page {page} of {totalPages}
+            </span>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                disabled={page <= 1 || loading}
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 font-semibold text-slate-700 hover:bg-white disabled:opacity-40"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                Prev
+              </button>
+              <button
+                type="button"
+                disabled={page >= totalPages || loading}
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-slate-200 font-semibold text-slate-700 hover:bg-white disabled:opacity-40"
+              >
+                Next
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         )}
       </div>
     </div>

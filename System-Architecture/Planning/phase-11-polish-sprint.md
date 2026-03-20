@@ -12,10 +12,12 @@
 | **Super clinic map link** | All clinics table includes **Open** link to Google Maps from address + city + state + country + postal. |
 | **Registration UX** | Visual 3-step progress on `/register`. |
 | **Shared ILIKE helper** | `lib/ilike-sanitize.ts` used by super queries and patient list API. |
+| **Super delete clinic** | `DELETE /api/app/super/tenants/:id` with JSON `{ confirmName }` (must match clinic name). Audited as `tenant_permanently_deleted` on **system** tenant. Stripe subscription canceled when configured. UI: **Delete** on All clinics table. |
+| **Patient list API** | Paginated `{ patients, total, page, limit, totalPages }`; dropdowns use `loadAllPatientOptionsForSelect()`. |
+| **Super rate limits** | In-memory: patient search (80/15m), delete tenant (15/15m) per super user. |
+| **Stripe webhook audit** | `stripe_subscription_sync` rows on system tenant + `audit_logs` mirror (no PHI). |
 
 ## Suggested next (finish line)
 
-- Stripe webhook → `platform_admin_audit_log` for automated billing changes (optional).
-- Patient list pagination (cursor) if any tenant exceeds ~500 active patients.
-- Super “global” search: optional rate limit per IP / per user.
 - Export reports (CSV) for the selected period.
+- Redis-backed rate limits for multi-instance DO.

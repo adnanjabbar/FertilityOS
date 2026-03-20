@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { getStripe } from "@/lib/stripe";
 import { db } from "@/db";
-import { tenantSubscriptions } from "@/db/schema";
+import { tenantSubscriptions, tenants } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { logStripeSubscriptionSync } from "@/lib/platform-admin-audit";
 
 export async function POST(request: Request) {
   const stripe = getStripe();
@@ -35,6 +36,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: message }, { status: 400 });
   }
 
+  const [systemRow] = await db
+    .select({ id: tenants.id })
+    .from(tenants)
+    .where(eq(tenants.slug, "system"))
+    .limit(1);
+  const systemTenantId = systemRow?.id ?? null;
+
   try {
     switch (event.type) {
       case "checkout.session.completed": {
@@ -50,6 +58,11 @@ export async function POST(request: Request) {
           .limit(1);
 
         if (subscriptionId && existing) {
+          const prev = {
+            status: existing.status,
+            stripeSubscriptionId: existing.stripeSubscriptionId,
+            stripePriceId: existing.stripePriceId,
+          };
           const sub = await stripe.subscriptions.retrieve(subscriptionId) as { status: string; current_period_end?: number; items: { data: Array<{ price?: { id?: string } }> } };
           const periodEnd = sub.current_period_end != null ? new Date(sub.current_period_end * 1000) : null;
           await db
@@ -62,6 +75,20 @@ export async function POST(request: Request) {
               updatedAt: new Date(),
             })
             .where(eq(tenantSubscriptions.tenantId, tenantId));
+          if (systemTenantId) {
+            void logStripeSubscriptionSync({
+              systemTenantId,
+              affectedTenantId: tenantId,
+              eventType: event.type,
+              stripeEventId: event.id,
+              previousState: prev,
+              newState: {
+                status: sub.status,
+                stripeSubscriptionId: subscriptionId,
+                stripePriceId: (sub.items.data[0]?.price as { id?: string } | undefined)?.id ?? null,
+              },
+            }).catch(() => {});
+          }
         }
         break;
       }
@@ -83,6 +110,13 @@ export async function POST(request: Request) {
               ? "canceled"
               : subscription.status;
 
+          const prev = {
+            status: existing.status,
+            stripeSubscriptionId: existing.stripeSubscriptionId,
+            currentPeriodEnd: existing.currentPeriodEnd?.toISOString() ?? null,
+            stripePriceId: existing.stripePriceId,
+          };
+
           await db
             .update(tenantSubscriptions)
             .set({
@@ -96,6 +130,25 @@ export async function POST(request: Request) {
               updatedAt: new Date(),
             })
             .where(eq(tenantSubscriptions.tenantId, existing.tenantId));
+
+          if (systemTenantId) {
+            void logStripeSubscriptionSync({
+              systemTenantId,
+              affectedTenantId: existing.tenantId,
+              eventType: event.type,
+              stripeEventId: event.id,
+              previousState: prev,
+              newState: {
+                status,
+                stripeSubscriptionId: subscription.id,
+                currentPeriodEnd:
+                  subscription.current_period_end != null
+                    ? new Date((subscription.current_period_end as number) * 1000).toISOString()
+                    : null,
+                stripePriceId: subscription.items.data[0]?.price?.id ?? null,
+              },
+            }).catch(() => {});
+          }
         }
         break;
       }

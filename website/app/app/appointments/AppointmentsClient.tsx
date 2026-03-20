@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { CalendarPlus, Search, Calendar } from "lucide-react";
+import { loadAllPatientOptionsForSelect } from "@/lib/patient-select-options";
 
 type AppointmentRow = {
   id: string;
@@ -66,10 +67,11 @@ export default function AppointmentsClient() {
   });
 
   const fetchPatients = useCallback(async () => {
-    const res = await fetch("/api/app/patients");
-    if (res.ok) {
-      const data = await res.json();
-      setPatients(data.map((p: { id: string; firstName: string; lastName: string }) => ({ id: p.id, firstName: p.firstName, lastName: p.lastName })));
+    try {
+      const opts = await loadAllPatientOptionsForSelect();
+      setPatients(opts);
+    } catch {
+      setPatients([]);
     }
   }, []);
 

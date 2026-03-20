@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { loadAllPatientOptionsForSelect } from "@/lib/patient-select-options";
 
 type CaseDetail = {
   id: string;
@@ -79,18 +80,9 @@ export default function SurrogacyCaseDetailClient({ caseId }: { caseId: string }
   }, [caseId]);
 
   useEffect(() => {
-    fetch("/api/app/patients")
-      .then((res) => (res.ok ? res.json() : []))
-      .then((data: { id: string; firstName: string; lastName: string }[]) =>
-        setPatients(
-          data.map((p) => ({
-            id: p.id,
-            firstName: p.firstName,
-            lastName: p.lastName,
-          }))
-        )
-      )
-      .catch(() => {});
+    loadAllPatientOptionsForSelect()
+      .then(setPatients)
+      .catch(() => setPatients([]));
   }, []);
 
   const handleSave = async (e: React.FormEvent) => {

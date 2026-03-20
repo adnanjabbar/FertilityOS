@@ -6,6 +6,7 @@ import { and, eq, ilike, ne, or, desc } from "drizzle-orm";
 import { sanitizeIlikePattern } from "@/lib/ilike-sanitize";
 import { SYSTEM_TENANT_SLUG } from "@/lib/super-admin-queries";
 import { logAudit, getClientIp } from "@/lib/audit";
+import { rateLimitSuperApi } from "@/lib/rate-limit";
 
 const MAX_RESULTS = 40;
 const MIN_QUERY_LEN = 2;
@@ -19,6 +20,13 @@ export async function GET(request: Request) {
   const session = await auth();
   if (!session?.user || session.user.roleSlug !== "super_admin") {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  }
+
+  if (!rateLimitSuperApi(session.user.id, "patient-search", 80).allowed) {
+    return NextResponse.json(
+      { error: "Too many searches. Try again in a few minutes.", results: [] },
+      { status: 429 }
+    );
   }
 
   const q = new URL(request.url).searchParams.get("q")?.trim() ?? "";

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight, ExternalLink, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink, Search, Trash2 } from "lucide-react";
 
 type TenantRow = {
   id: string;
@@ -34,6 +34,10 @@ export default function SuperClinicsDirectory() {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<TenantRow | null>(null);
+  const [deleteConfirmName, setDeleteConfirmName] = useState("");
+  const [deleteBusy, setDeleteBusy] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   useEffect(() => {
     const t = setTimeout(() => setDebouncedQ(q.trim()), 350);
@@ -71,6 +75,33 @@ export default function SuperClinicsDirectory() {
     void load();
   }, [load]);
 
+  const nameMatchesDelete =
+    deleteTarget &&
+    deleteConfirmName.trim().toLowerCase() === deleteTarget.name.trim().toLowerCase();
+
+  const handleDeleteClinic = async () => {
+    if (!deleteTarget || !nameMatchesDelete) return;
+    setDeleteBusy(true);
+    setDeleteError(null);
+    try {
+      const res = await fetch(`/api/app/super/tenants/${deleteTarget.id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ confirmName: deleteConfirmName.trim() }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setDeleteError(data.error || "Delete failed.");
+        return;
+      }
+      setDeleteTarget(null);
+      setDeleteConfirmName("");
+      await load();
+    } finally {
+      setDeleteBusy(false);
+    }
+  };
+
   return (
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center gap-3">
@@ -107,18 +138,19 @@ export default function SuperClinicsDirectory() {
               <th className="px-4 py-3">Joined</th>
               <th className="px-4 py-3 text-center">Map</th>
               <th className="px-4 py-3 text-right">Actions</th>
+              <th className="px-4 py-3 text-right">Danger</th>
             </tr>
           </thead>
           <tbody>
             {loading ? (
               <tr>
-                <td colSpan={8} className="px-4 py-10 text-center text-slate-500">
+                <td colSpan={9} className="px-4 py-10 text-center text-slate-500">
                   Loading…
                 </td>
               </tr>
             ) : rows.length === 0 ? (
               <tr>
-                <td colSpan={8} className="px-4 py-10 text-center text-slate-500">
+                <td colSpan={9} className="px-4 py-10 text-center text-slate-500">
                   No clinics match your search.
                 </td>
               </tr>
@@ -175,6 +207,20 @@ export default function SuperClinicsDirectory() {
                       View
                     </Link>
                   </td>
+                  <td className="px-4 py-3 text-right">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setDeleteTarget(t);
+                        setDeleteConfirmName("");
+                        setDeleteError(null);
+                      }}
+                      className="inline-flex items-center gap-1 text-xs font-semibold text-red-700 hover:text-red-900 hover:underline"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               );
               })
@@ -182,6 +228,67 @@ export default function SuperClinicsDirectory() {
           </tbody>
         </table>
       </div>
+
+      {deleteTarget && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="delete-clinic-title"
+        >
+          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4 border border-slate-200">
+            <h2 id="delete-clinic-title" className="text-lg font-bold text-slate-900">
+              Delete clinic permanently?
+            </h2>
+            <p className="text-sm text-slate-600">
+              This removes <strong>{deleteTarget.name}</strong> ({deleteTarget.slug}) and{" "}
+              <strong>all</strong> patients, appointments, invoices, lab data, and other records for
+              this clinic. This cannot be undone. A compliance audit entry is written on the platform
+              log.
+            </p>
+            {deleteError && (
+              <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+                {deleteError}
+              </p>
+            )}
+            <div>
+              <label htmlFor="delete-confirm-name" className="block text-sm font-semibold text-slate-700 mb-1">
+                Type the clinic name to confirm
+              </label>
+              <input
+                id="delete-confirm-name"
+                className="w-full px-3 py-2 rounded-xl border border-slate-200 text-sm"
+                placeholder={deleteTarget.name}
+                value={deleteConfirmName}
+                onChange={(e) => setDeleteConfirmName(e.target.value)}
+                autoComplete="off"
+              />
+            </div>
+            <div className="flex gap-3 justify-end pt-2">
+              <button
+                type="button"
+                disabled={deleteBusy}
+                onClick={() => {
+                  setDeleteTarget(null);
+                  setDeleteConfirmName("");
+                  setDeleteError(null);
+                }}
+                className="px-4 py-2 rounded-xl border border-slate-200 text-sm font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                disabled={deleteBusy || !nameMatchesDelete}
+                onClick={() => void handleDeleteClinic()}
+                className="px-4 py-2 rounded-xl bg-red-700 text-white text-sm font-bold hover:bg-red-800 disabled:opacity-40"
+              >
+                {deleteBusy ? "Deleting…" : "Delete forever"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {totalPages > 1 && (
         <div className="flex items-center justify-between gap-4">

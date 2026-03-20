@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { Baby, Plus } from "lucide-react";
+import { loadAllPatientOptionsForSelect } from "@/lib/patient-select-options";
 
 type SurrogacyCaseRow = {
   id: string;
@@ -56,16 +57,10 @@ export default function SurrogacyClient() {
   });
 
   const fetchPatients = useCallback(async () => {
-    const res = await fetch("/api/app/patients");
-    if (res.ok) {
-      const data = await res.json();
-      setPatients(
-        data.map((p: { id: string; firstName: string; lastName: string }) => ({
-          id: p.id,
-          firstName: p.firstName,
-          lastName: p.lastName,
-        }))
-      );
+    try {
+      setPatients(await loadAllPatientOptionsForSelect());
+    } catch {
+      setPatients([]);
     }
   }, []);
 

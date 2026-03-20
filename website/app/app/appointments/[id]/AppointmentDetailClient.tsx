@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, Pencil, Save, X, Video } from "lucide-react";
+import { loadAllPatientOptionsForSelect } from "@/lib/patient-select-options";
 
 type Appointment = {
   id: string;
@@ -82,9 +83,9 @@ export default function AppointmentDetailClient({ appointmentId }: { appointment
       .catch(() => setError("Appointment not found"))
       .finally(() => setLoading(false));
 
-    fetch("/api/app/patients")
-      .then((res) => res.ok ? res.json() : [])
-      .then((data) => setPatients(data.map((p: { id: string; firstName: string; lastName: string }) => ({ id: p.id, firstName: p.firstName, lastName: p.lastName }))));
+    loadAllPatientOptionsForSelect()
+      .then(setPatients)
+      .catch(() => setPatients([]));
     fetch("/api/app/locations")
       .then((res) => res.ok ? res.json() : [])
       .then((data) => setLocations(data.map((l: { id: string; name: string }) => ({ id: l.id, name: l.name }))));

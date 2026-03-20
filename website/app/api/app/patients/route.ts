@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { db } from "@/db";
 import { patients } from "@/db/schema";
-import { eq, desc, or, ilike, and } from "drizzle-orm";
+import { eq, desc, or, ilike, and, count } from "drizzle-orm";
 import { sanitizeIlikePattern } from "@/lib/ilike-sanitize";
 import { z } from "zod";
 import { logAudit, getClientIp } from "@/lib/audit";
@@ -67,8 +67,11 @@ export async function GET(request: Request) {
   try {
     const url = new URL(request.url);
     const q = url.searchParams.get("q")?.trim() || "";
-    const limitRaw = parseInt(url.searchParams.get("limit") ?? "100", 10);
-    const limit = Number.isFinite(limitRaw) ? Math.min(500, Math.max(1, limitRaw)) : 100;
+    const limitRaw = parseInt(url.searchParams.get("limit") ?? "50", 10);
+    const limit = Number.isFinite(limitRaw) ? Math.min(200, Math.max(1, limitRaw)) : 50;
+    const pageRaw = parseInt(url.searchParams.get("page") ?? "1", 10);
+    const page = Number.isFinite(pageRaw) ? Math.max(1, pageRaw) : 1;
+    const offset = (page - 1) * limit;
 
     const conditions = [eq(patients.tenantId, session.user.tenantId)];
     if (q.length > 0) {
@@ -84,6 +87,16 @@ export async function GET(request: Request) {
       );
     }
 
+    const whereClause = conditions.length > 1 ? and(...conditions) : conditions[0];
+
+    const [countRow] = await db
+      .select({ n: count() })
+      .from(patients)
+      .where(whereClause);
+
+    const total = Number(countRow?.n ?? 0);
+    const totalPages = Math.max(1, Math.ceil(total / limit));
+
     const list = await db
       .select({
         id: patients.id,
@@ -96,26 +109,40 @@ export async function GET(request: Request) {
         createdAt: patients.createdAt,
       })
       .from(patients)
-      .where(conditions.length > 1 ? and(...conditions) : conditions[0])
+      .where(whereClause)
       .orderBy(desc(patients.createdAt))
-      .limit(limit);
+      .limit(limit)
+      .offset(offset);
 
-    if (list.length > 50) {
+    if (total > 50 && page === 1) {
       void logAudit({
         tenantId: session.user.tenantId,
         userId: session.user.id,
         action: "patient_list_view",
         entityType: "patient",
         entityId: null,
-        details: { count: list.length, query: q || null },
+        details: { total, page, limit, query: q || null },
         ipAddress: getClientIp(request),
       }).catch(() => {});
     }
 
-    return NextResponse.json(list);
+    return NextResponse.json({
+      patients: list.map((row) => ({
+        ...row,
+        dateOfBirth: row.dateOfBirth ? row.dateOfBirth.toISOString() : null,
+        createdAt: row.createdAt.toISOString(),
+      })),
+      total,
+      page,
+      limit,
+      totalPages,
+    });
   } catch (err) {
     console.error("GET /api/app/patients error:", err);
-    return NextResponse.json([]);
+    return NextResponse.json(
+      { error: "Failed to load patients", patients: [], total: 0, page: 1, limit: 50, totalPages: 1 },
+      { status: 500 }
+    );
   }
 }
 

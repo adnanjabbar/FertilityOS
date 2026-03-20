@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { loadAllPatientOptionsForSelect } from "@/lib/patient-select-options";
 
 type Patient = { id: string; firstName: string; lastName: string };
 type LabTest = {
@@ -208,10 +209,10 @@ export default function NewLabOrderClient() {
 
   useEffect(() => {
     Promise.all([
-      fetch("/api/app/patients").then((r) => (r.ok ? r.json() : [])),
+      loadAllPatientOptionsForSelect(),
       fetch("/api/app/lab/tests").then((r) => (r.ok ? r.json() : [])),
     ]).then(([pList, tList]) => {
-      setPatients(Array.isArray(pList) ? pList : []);
+      setPatients(pList);
       setTests(Array.isArray(tList) ? tList : []);
       setLoading(false);
     });
