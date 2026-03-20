@@ -25,9 +25,7 @@ export default function LanguageSwitcher({
   className = "",
 }: LanguageSwitcherProps) {
   const locale = useLocale() as Locale;
-  const t = useTranslations("locale");
   const router = useRouter();
-  const pathname = usePathname();
   const [isPending, startTransition] = useTransition();
 
   const switchLocale = (newLocale: Locale) => {
